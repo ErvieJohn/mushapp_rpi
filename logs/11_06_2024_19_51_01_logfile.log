@@ -1,0 +1,376 @@
+INFO:root:Forecasting Job Started...
+DEBUG:root:mushapp method started...
+INFO:root:06-11-2024 19:51:01 Connecting to Arduino Serial Port...
+INFO:root:06-11-2024 19:51:01 Connected to Arduino Serial Port.
+INFO:root:06-11-2024 19:51:01 Connecting to Firebase Realtime Database...
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+INFO:root:06-11-2024 19:51:01 Connected to Firebase Realtime Database.
+ERROR:root:06-11-2024 19:51:06 Error: Failed to read data from sensor
+ERROR:root:06-11-2024 19:51:12 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:33:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:33:50 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:33:55 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:45 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:50 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:34:55 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:31 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:36 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:41 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:35:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:16 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:21 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:26 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:31 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:36 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:41 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:36:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:07 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:12 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:17 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:22 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:42 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:47 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:52 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:37:57 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:02 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:07 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:12 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:17 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:22 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:43 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:48 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:53 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:38:58 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:03 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:08 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:13 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:18 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:23 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:28 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:33 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:38 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:43 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:48 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:53 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:39:58 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:03 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:08 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:13 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:18 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:24 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:29 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:40:59 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:04 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:09 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:14 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:19 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:24 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:29 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:41:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:45 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:50 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:42:55 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:36 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:41 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:43:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:16 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:21 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:26 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:31 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:36 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:41 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:44:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:17 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:22 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:42 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:47 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:52 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:45:57 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:02 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:07 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:12 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:17 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:22 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:42 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:47 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:53 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:46:58 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:03 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:08 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:13 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:18 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:23 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:28 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:33 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:38 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:43 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:48 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:53 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:47:58 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:03 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:08 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:13 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:18 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:23 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:28 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:48:59 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:04 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:09 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:14 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:19 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:24 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:29 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:49:59 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:04 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:45 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:50 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:50:55 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:51:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:16 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:21 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:26 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:31 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:36 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:41 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:52:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:16 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:21 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:42 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:47 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:52 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:53:57 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:02 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:07 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:12 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:17 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:22 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:27 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:32 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:37 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:42 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:54:47 Error: Failed to read data from sensor
+INFO:root:06-14-2024 16:54:53 Data Collected: {'temperature': 26.1, 'humidity': 78, 'waterLevel': 0, 'co2ppm': 213}
+INFO:root:06-14-2024 16:54:53 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:06-14-2024 16:54:54 Connected to Internet.
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): mushapp-c0311-default-rtdb.firebaseio.com:443
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:06-14-2024 16:55:06 Data has been sent to firebase realtime database.
+INFO:root:06-14-2024 16:55:07 Data Collected: {'temperature': 26.1, 'humidity': 78, 'waterLevel': 0, 'co2ppm': 212}
+INFO:root:06-14-2024 16:55:07 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:06-14-2024 16:55:08 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:06-14-2024 16:55:09 Data has been sent to firebase realtime database.
+INFO:root:06-14-2024 16:55:10 Data Collected: {'temperature': 26.1, 'humidity': 78, 'waterLevel': 0, 'co2ppm': 217}
+INFO:root:06-14-2024 16:55:10 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:06-14-2024 16:55:10 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:06-14-2024 16:55:11 Data has been sent to firebase realtime database.
+INFO:root:06-14-2024 16:55:12 Data Collected: {'temperature': 26.1, 'humidity': 78, 'waterLevel': 0, 'co2ppm': 214}
+INFO:root:06-14-2024 16:55:12 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:06-14-2024 16:55:13 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:06-14-2024 16:55:14 Data has been sent to firebase realtime database.
+INFO:root:06-14-2024 16:55:18 Data Collected: {'temperature': 26.1, 'humidity': 78, 'waterLevel': 0, 'co2ppm': 210}
+INFO:root:06-14-2024 16:55:18 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:06-14-2024 16:55:18 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:06-14-2024 16:55:19 Data has been sent to firebase realtime database.
+ERROR:root:06-14-2024 16:55:23 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:28 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:33 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:38 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:43 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:48 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:53 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:55:58 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:03 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:08 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:13 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:18 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:23 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:28 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:56:59 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:04 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:09 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:14 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:19 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:24 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:29 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:34 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:39 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:44 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:49 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:54 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:57:59 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:04 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:45 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:50 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:58:55 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:00 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:05 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:10 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:15 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:20 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:25 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:30 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:35 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:40 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:46 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:51 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 16:59:56 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:01 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:06 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:11 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:16 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:21 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:26 Error: Failed to read data from sensor
+ERROR:root:06-14-2024 17:00:31 Error: Failed to read data from sensor

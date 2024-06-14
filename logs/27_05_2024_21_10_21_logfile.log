@@ -1,0 +1,181 @@
+INFO:root:Forecasting Job Started...
+DEBUG:root:mushapp method started...
+INFO:root:05-27-2024 21:10:21 Connecting to Arduino Serial Port...
+INFO:root:05-27-2024 21:10:21 Connected to Arduino Serial Port.
+INFO:root:05-27-2024 21:10:21 Connecting to Firebase Realtime Database...
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+INFO:root:05-27-2024 21:10:21 Connected to Firebase Realtime Database.
+INFO:root:05-27-2024 21:10:28 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 420}
+INFO:root:05-27-2024 21:10:28 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:28 Connected to Internet.
+DEBUG:google.auth.transport.requests:Making request: POST https://oauth2.googleapis.com/token
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): oauth2.googleapis.com:443
+DEBUG:urllib3.connectionpool:https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): mushapp-c0311-default-rtdb.firebaseio.com:443
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:10:30 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:10:34 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 396}
+INFO:root:05-27-2024 21:10:34 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:35 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:10:35 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:10:40 Data Collected: {'temperature': 31.6, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 400}
+INFO:root:05-27-2024 21:10:40 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:41 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:10:42 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:10:46 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 397}
+INFO:root:05-27-2024 21:10:46 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:47 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:10:48 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:10:52 Data Collected: {'temperature': 31.6, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 394}
+INFO:root:05-27-2024 21:10:52 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:53 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:10:55 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:10:59 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 401}
+INFO:root:05-27-2024 21:10:59 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:10:59 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:01 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:05 Data Collected: {'temperature': 31.6, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 392}
+INFO:root:05-27-2024 21:11:05 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:05 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:06 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:11 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 399}
+INFO:root:05-27-2024 21:11:11 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:11 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:12 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:17 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 401}
+INFO:root:05-27-2024 21:11:17 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:17 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:18 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:23 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 400}
+INFO:root:05-27-2024 21:11:23 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:23 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:24 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:29 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 400}
+INFO:root:05-27-2024 21:11:29 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:29 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:30 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:35 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 396}
+INFO:root:05-27-2024 21:11:35 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:35 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:36 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:41 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 399}
+INFO:root:05-27-2024 21:11:41 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:41 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:42 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:47 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 401}
+INFO:root:05-27-2024 21:11:47 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:47 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:48 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:53 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 394}
+INFO:root:05-27-2024 21:11:53 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:11:53 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:11:54 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:11:59 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 402}
+INFO:root:05-27-2024 21:11:59 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:12:00 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:12:00 Data has been sent to firebase realtime database.
+INFO:root:05-27-2024 21:12:05 Data Collected: {'temperature': 31.7, 'humidity': 94, 'waterLevel': 0, 'co2ppm': 395}
+INFO:root:05-27-2024 21:12:05 Sending data to firebase realtime database...
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): www.google.com:443
+DEBUG:urllib3.connectionpool:https://www.google.com:443 "GET / HTTP/1.1" 200 None
+INFO:root:05-27-2024 21:12:06 Connected to Internet.
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+DEBUG:urllib3.connectionpool:https://mushapp-c0311-default-rtdb.firebaseio.com:443 "PATCH /.json?print=silent HTTP/1.1" 204 0
+INFO:root:05-27-2024 21:12:07 Data has been sent to firebase realtime database.

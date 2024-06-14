@@ -1,0 +1,19 @@
+INFO:root:Forecasting Job Started...
+DEBUG:root:mushapp method started...
+INFO:root:05-27-2024 22:06:38 Connecting to Arduino Serial Port...
+INFO:root:05-27-2024 22:06:38 Connected to Arduino Serial Port.
+INFO:root:05-27-2024 22:06:38 Connecting to Firebase Realtime Database...
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+INFO:root:05-27-2024 22:06:38 Connected to Firebase Realtime Database.
+ERROR:root:05-27-2024 22:06:44 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:06:54 Error: Fae oeddt rmsnoieto read data from sensor
+ERROR:root:05-27-2024 22:06:59 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:04 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:09 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:14 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:19 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:24 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:29 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:34 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:39 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 22:07:44 Error: Failed to read data from sensor

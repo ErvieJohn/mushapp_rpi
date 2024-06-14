@@ -1,0 +1,70 @@
+INFO:root:Forecasting Job Started...
+DEBUG:root:mushapp method started...
+INFO:root:05-27-2024 23:17:03 Connecting to Arduino Serial Port...
+INFO:root:05-27-2024 23:17:03 Connected to Arduino Serial Port.
+INFO:root:05-27-2024 23:17:03 Connecting to Firebase Realtime Database...
+DEBUG:urllib3.util.retry:Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+INFO:root:05-27-2024 23:17:03 Connected to Firebase Realtime Database.
+ERROR:root:05-27-2024 23:17:09 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:14 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:19 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:24 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:30 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:35 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:40 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:45 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:50 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:17:55 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:00 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:05 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:10 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:15 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:20 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:25 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:30 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:35 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:40 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:46 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:51 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:18:56 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:01 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:06 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:11 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:16 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:21 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:26 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:31 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:36 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:41 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:46 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:51 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:19:56 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:01 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:06 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:11 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:16 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:21 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:27 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:32 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:37 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:42 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:47 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:52 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:20:57 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:02 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:07 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:12 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:17 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:22 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:27 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:32 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:37 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:42 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:47 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:52 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:21:57 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:22:03 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:22:08 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:22:13 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:22:18 Error: Failed to read data from sensor
+ERROR:root:05-27-2024 23:22:23 Error: Failed to read data from sensor
