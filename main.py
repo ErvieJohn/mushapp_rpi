@@ -8,6 +8,8 @@ from firebase_admin import db
 import requests # for checking the internet
 import logging
 from datetime import datetime
+import sys
+import serial.tools.list_ports
 
 LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_%H_%M_%S_logfile.log')
 
@@ -19,10 +21,26 @@ logging.debug('mushapp method started...')
 
 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Arduino Serial Port...'))
 print("Connecting to Arduino Serial Port...")
+
+def find_available_port():
+    # List all available ports
+    serial_port = list(serial.tools.list_ports.comports())
+    for port in serial_port:
+        # You can add criteria to select a specific port if needed
+        print(f"Found port: {port.device}")
+        return port.device
+    return None
+
 # Define the serial port
 # serial_port = '/dev/ttyUSB0'  # Change this to match your Arduino's serial port
-serial_port = '/dev/ttyACM0'
+#serial_port = '/dev/ttyACM0'
 #serial_port = '/dev/ttyAMA0'
+
+serial_port = find_available_port()
+if (serial_port is None):
+    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: No Serial Port Available.'))
+    print("Error: No Serial Port Available.")
+    sys.exit("No Serial Port Available.")
 
 
 # Define the baud rate
