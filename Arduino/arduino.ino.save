@@ -85,22 +85,22 @@ void loop()
 
   delay(1000);
 
-  Serial.print("Temperature: ");
-  Serial.print(temperature);
-  Serial.print("Humidity: ");
-  Serial.print(humidity);
-  Serial.print("Water Levell: ");
-  Serial.println(waterLevel);
-  Serial.print("LVL: ");
-
-  Serial.print("Peltier: ");
-  Serial.println((temperature > 30) ? "ON" : "OFF");
-
-  Serial.print("Humidifier: ");
-  Serial.println((humidity < 80) ? "ON" : "OFF");
-
-  Serial.print("Water Pump: ");
-  Serial.println((waterLevel <= 30) ? "ON" : (waterLevel >= 95) ? "OFF" : "N/A");
+//  Serial.print("Temperature: ");
+//  Serial.print(temperature);
+//  Serial.print("Humidity: ");
+//  Serial.print(humidity);
+//  Serial.print("Water Levell: ");
+//  Serial.println(waterLevel);
+//  Serial.print("LVL: ");
+//
+//  Serial.print("Peltier: ");
+//  Serial.println((temperature > 30) ? "ON" : "OFF");
+//
+//  Serial.print("Humidifier: ");
+//  Serial.println((humidity < 80) ? "ON" : "OFF");
+//
+//  Serial.print("Water Pump: ");
+//  Serial.println((waterLevel <= 30) ? "ON" : (waterLevel >= 95) ? "OFF" : "N/A");
 
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["temperature"] = temperature;
@@ -139,4 +139,3 @@ void sendToFirebase(String data)
 
   client.stop();
 }
-

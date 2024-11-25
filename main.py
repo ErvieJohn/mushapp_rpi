@@ -11,7 +11,7 @@ from datetime import datetime
 import sys
 import serial.tools.list_ports
 
-LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_%H_%M_%S_logfile.log')
+LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_logfile.log') # %H_%M_%S_logfile.log')
 
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
