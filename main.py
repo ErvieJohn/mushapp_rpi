@@ -81,6 +81,28 @@ try:
     oldFanState = oldData["fan"]
     oldHeaterState = oldData["heater"]
     
+    # First Run change current state
+    # Change arduino relay fan state
+    if(oldFanState):
+        # Fan ON
+        ser.write(("fanH" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
+        # print("turning on FAN!")
+    else:
+        # Fan OFF
+        ser.write(("fanL" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
+
+    # Change arduino relay heater state
+    if(oldHeaterState):
+        # Heater ON
+        ser.write(('heaterH' + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+    else:
+        # Heater OFF
+        ser.write(('heaterL' + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+    
     while True:
         # Get the data
         currData = ref.get()
