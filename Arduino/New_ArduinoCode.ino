@@ -12,6 +12,7 @@
 #define ULTRASONIC_ECHO_PIN 6
 #define WATER_PUMP_PIN 7
 #define EXHAUST_PIN 8
+#define HEATER_PIN 9
 #define RELAY A5
 
 #define MQ135_PIN A0 // mq135
@@ -94,7 +95,26 @@ bool isMQ135Connected() {
 
 void loop()
 {
-  delay(2000);
+//  delay(2000);
+  // Change State of Fan and Heater
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n'); // Read command string until newline
+//    Serial.println("command: " + command);
+    if (command == "fanH") { // If command is 'H', set pin HIGH
+      digitalWrite(EXHAUST_PIN, HIGH);
+//      Serial.println("FAN ON");
+    } else if (command == "fanL") { // If command is 'L', set pin LOW
+      digitalWrite(EXHAUST_PIN, LOW);
+//      Serial.println("FAN OFF");
+    } else if (command == "heaterH") { // If command is 'H', set pin HIGH
+      digitalWrite(HEATER_PIN, HIGH);
+//      Serial.println("Heater ON");
+    } else if (command == "heaterL") { // If command is 'L', set pin LOW
+      digitalWrite(HEATER_PIN, LOW);
+//      Serial.println("Heater OFF");
+    }
+  }
+
 
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
