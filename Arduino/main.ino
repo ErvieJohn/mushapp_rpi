@@ -56,6 +56,7 @@ void setup()
   pinMode(EXHAUST_PIN, OUTPUT);
   pinMode(EXHAUST_PIN2, OUTPUT);
   pinMode(WATER_PUMP_PIN, OUTPUT);
+  pinMode(HEATER_PIN, OUTPUT);
   //pinMode(fanPin, OUTPUT);
   //digitalWrite(fanPin, HIGH);
 
