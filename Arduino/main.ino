@@ -206,9 +206,9 @@ void loop(){
 
     // Waterpump
     // Lvl 13 is the lowest, Lvl 1 is the highest
-    if(waterLevel>=5){
+    if(waterLevel>=8){
       digitalWrite(WATER_PUMP_PIN, HIGH);
-    } else if(waterLevel<=2){
+    } else if(waterLevel<=12){
       digitalWrite(WATER_PUMP_PIN, LOW);
     }
   }
