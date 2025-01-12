@@ -96,6 +96,8 @@ try:
     oldData = ref.get()
     oldFanState = oldData["fan"]
     oldHeaterState = oldData["heater"]
+
+    oldDateTime = datetime.now()
     
     # First Run change current state
     # Change arduino relay fan state
@@ -183,22 +185,29 @@ try:
                     print("Data has been sent to firebase realtime database.")
 
                     ###### Saving to local database #######
-                    insert_query = """
-                        INSERT INTO data (co2, humidity, temperature, water_lvl)
-                        VALUES (%s, %s, %s, %s)
-                    """
-                    data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
-                    
-                    try:
-                        cursor.execute(insert_query, data)
-                        connection.commit()  # Commit changes to the database
-                        # print(f"Inserted {cursor.rowcount} row(s) successfully.")
+                    timeDiff = datetime.now() - oldDateTime
 
-                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
-                        print("Data has been saved to local database.")
-                    except pymysql.MySQLError as err:
-                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
-                        print(f"Database Error: {err}")
+                    # saved only per minute
+                    if(timeDiff.total_seconds() > 60):
+                        insert_query = """
+                            INSERT INTO data (co2, humidity, temperature, water_lvl)
+                            VALUES (%s, %s, %s, %s)
+                        """
+                        data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
+                        
+                        try:
+                            cursor.execute(insert_query, data)
+                            connection.commit()  # Commit changes to the database
+                            # print(f"Inserted {cursor.rowcount} row(s) successfully.")
+
+                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
+                            print("Data has been saved to local database.")
+
+                            oldDateTime = datetime.now()
+
+                        except pymysql.MySQLError as err:
+                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
+                            print(f"Database Error: {err}")
                     ####################################
 
 
