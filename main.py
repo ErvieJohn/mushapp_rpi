@@ -184,7 +184,7 @@ try:
 
                     ###### Saving to local database #######
                     insert_query = """
-                        INSERT INTO mushapp_db (co2, humidity, temperature, water_lvl)
+                        INSERT INTO data (co2, humidity, temperature, water_lvl)
                         VALUES (%s, %s, %s, %s)
                     """
                     data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
