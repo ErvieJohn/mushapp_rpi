@@ -11,6 +11,22 @@ from datetime import datetime
 import sys
 import serial.tools.list_ports
 
+########### Database Connect #############
+import pymysql
+
+connection = pymysql.connect(
+    host="localhost",         # Replace with your host, e.g., "127.0.0.1" or server IP
+    user="admin",     # Replace with your MariaDB username
+    password="admin", # Replace with your MariaDB password
+    database="mushapp_db", # Replace with your database name
+    charset="utf8mb4",        # Character set for encoding
+    cursorclass=pymysql.cursors.DictCursor  # Optional: Use dictionary cursor for better usability
+)
+
+cursor = connection.cursor()
+##########################################
+
+
 LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_logfile.log') # %H_%M_%S_logfile.log')
 
 for handler in logging.root.handlers[:]:
@@ -165,7 +181,27 @@ try:
                     
                     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                     print("Data has been sent to firebase realtime database.")
-                   
+
+                    ###### Saving to local database #######
+                    insert_query = """
+                        INSERT INTO mushapp_db (co2, humidity, temperature, water_lvl)
+                        VALUES (%s, %s, %s, %s)
+                    """
+                    data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
+                    
+                    try:
+                        cursor.execute(insert_query, data)
+                        connection.commit()  # Commit changes to the database
+                        # print(f"Inserted {cursor.rowcount} row(s) successfully.")
+
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
+                        print("Data has been saved to local database.")
+                    except pymysql.MySQLError as err:
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
+                        print(f"Database Error: {err}")
+                    ####################################
+
+
                     # to stop the loop for checking the internet
                     break
                 
@@ -185,3 +221,7 @@ try:
 except KeyboardInterrupt:
     # Close the serial port when the program is terminated
     ser.close()
+
+    # database close connection
+    cursor.close()
+    connection.close()
