@@ -34,7 +34,31 @@ for handler in logging.root.handlers[:]:
 logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
 logging.info('Forecasting Job Started...')
 logging.debug('mushapp method started...')
+########### CHECKING INTERNET ###############
+logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Checking Internet Connection...'))
+print("Checking Internet Connection...")
 
+def check_internet():
+    try:
+        requests.get("https://www.google.com")
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Internet.'))
+        return True
+    except requests.ConnectionError:
+        logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error Connecting to Internet.'))
+        return False
+
+internet=check_internet()
+while internet == False:
+    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Checking Internet Connection again...'))
+    print("Checking Internet Connection again...")
+
+    timer.sleep
+    internet=check_internet()
+
+print("Connected to Internet.")
+########### CHECKING INTERNET ###############
+
+########## Finding Serial Port ##############
 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Arduino Serial Port...'))
 print("Connecting to Arduino Serial Port...")
 
@@ -72,9 +96,12 @@ ser = serial.Serial(serial_port, baud_rate, timeout=1)
 
 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Arduino Serial Port.'))
 print("Done.")
+########## Finding Serial Port ##############
 
+########## Checking Firebase ##############
 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
 print("Connecting to Firebase Realtime Database...")
+
 # Initialize Firebase Admin SDK with your service account credentials
 cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
 firebase_admin.initialize_app(cred, {
@@ -86,15 +113,7 @@ ref = db.reference('/')
 
 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
 print("Done.")
-
-def check_internet():
-    try:
-        requests.get("https://www.google.com")
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Internet.'))
-        return True
-    except requests.ConnectionError:
-        logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error Connecting to Internet.'))
-        return False
+########## Checking Firebase ##############
 
 try:
     # Get the data
