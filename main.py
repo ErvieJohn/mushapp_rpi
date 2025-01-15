@@ -53,11 +53,16 @@ def find_available_port():
 #serial_port = '/dev/ttyAMA0'
 
 serial_port = find_available_port()
-if (serial_port is None):
+while serial_port is None:
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: No Serial Port Available.'))
     print("Error: No Serial Port Available.")
     sys.exit("No Serial Port Available.")
 
+    # Wait for a moment
+    time.sleep(1)
+    
+    serial_port = find_available_port()
+#if (serial_port is None):
 
 # Define the baud rate
 baud_rate = 9600
