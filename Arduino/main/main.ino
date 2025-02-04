@@ -7,10 +7,10 @@
 #define DHTPIN 2
 #define DHTTYPE DHT11
 #define PELTIER_PIN 3
-#define HUMIDIFIER_PIN 4
+#define HUMIDIFIER_PIN 11
 #define ULTRASONIC_TRIGGER_PIN 5
 #define ULTRASONIC_ECHO_PIN 6
-#define WATER_PUMP_PIN 7
+#define WATER_PUMP_PIN 12
 #define EXHAUST_PIN 8
 #define HEATER_PIN 9
 #define RELAY A5
@@ -115,7 +115,9 @@ void loop(){
   float humidity = dht.readHumidity();
 
   humidity += -5.0;
-  waterLevel = ultrasonic.ping_cm();
+
+  waterLevel = 20 - ultrasonic.ping_cm();//waterLvlValue();
+  if(waterLevel == 20) waterLevel = 0;
 
   // FOR MQ135
   int MQ135sensorValue = analogRead(MQ135_PIN); // Read analog value
@@ -205,10 +207,10 @@ void loop(){
     }
 
     // Waterpump
-    // Lvl 13 is the lowest, Lvl 1 is the highest
-    if(waterLevel>=8){
+    // Lvl 19 is the highest, Lvl 1 is the lowest
+    if(waterLevel<=8){
       digitalWrite(WATER_PUMP_PIN, HIGH);
-    } else if(waterLevel<=12){
+    } else if(waterLevel>=12){
       digitalWrite(WATER_PUMP_PIN, LOW);
     }
   }
