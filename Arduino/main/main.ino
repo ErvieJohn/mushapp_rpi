@@ -18,10 +18,9 @@
 // New
 #define EXHAUST_PIN2 10
 
-#define MQ135_PIN A0 // mq135
+#define MQ135_PIN A1 // mq135
 #define co2zero 55
 
-byte customMac[] = {0x00, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE};
 DHT dht(DHTPIN, DHTTYPE);
 NewPing ultrasonic(ULTRASONIC_TRIGGER_PIN, ULTRASONIC_ECHO_PIN);
 int waterLevel;
@@ -31,24 +30,17 @@ int waterLevel;
 
 // ***** FOR MQ135 ******
 #include <MQ135.h> // Include MQ135 library if available (optional for better accuracy)
-//float RLOAD = 10.0;       // Load resistance on the board (in kilo-ohms)
-//float RZERO = 76.63;      // Reference resistance in clean air (kilo-ohms)
-//float PARA = 116.6020682; // Coefficient A for CO2 curve equation
-//float PARB = 2.769034857; // Coefficient B for CO2 curve equation
+// Define constants for CO2 calculation
+#define RL 10.0  // Load resistance in kΩ (check your setup, usually 1kΩ or 10kΩ)
+#define RZERO_CLEAN_AIR 1140.0  // Adjust based on your calibration
 
-float getResistance(int adcValue) {
-  return ((1023.0 / (float)adcValue) - 1.0) * RLOAD;
-}
-
-float getPPM(float resistance) {
-  return PARA * pow((resistance / RZERO), -PARB);
-}
+MQ135 mq135_sensor(MQ135_PIN);
 // ***** END FOR MQ135 ******
 
 
 void setup()
 {
-  dht.begin(9600);
+  dht.begin();
   Serial.begin(9600);
   pinMode(PELTIER_PIN, OUTPUT);
   pinMode(HUMIDIFIER_PIN, OUTPUT);
@@ -114,15 +106,21 @@ void loop(){
   float temperature = dht.readTemperature();
   float humidity = dht.readHumidity();
 
-  humidity += -5.0;
+  //humidity += -5.0;
 
   waterLevel = 20 - ultrasonic.ping_cm();//waterLvlValue();
   if(waterLevel == 20) waterLevel = 0;
 
   // FOR MQ135
-  int MQ135sensorValue = analogRead(MQ135_PIN); // Read analog value
-  float resistance = getResistance(MQ135sensorValue); // Calculate resistance
-  float ppm = getPPM(resistance); // Calculate CO2 concentration (ppm)
+  // Read resistance and calculate new RZero
+  float resistance = mq135_sensor.getResistance();
+  float rzero = resistance / exp((log10(400.0) - 1.78) / -2.93);  // Using CO2 calibration formula
+  float correctedRZero = mq135_sensor.getCorrectedRZero(temperature, humidity);
+
+  // Calculate CO2 PPM using corrected formula
+  float ppmCO2 = 116.6020682 * pow((resistance / RZERO_CLEAN_AIR), -2.769034857);
+  //correctedPPMCO2
+  float ppm = 116.6020682 * pow((resistance / correctedRZero), -2.769034857);
 
   if ((isnan(temperature) || isnan(humidity)) || !isMQ135Connected())
   {
