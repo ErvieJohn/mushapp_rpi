@@ -1,352 +1,218 @@
-import serial
-import time
-import json
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-from firebase_admin import db
-import requests # for checking the internet
-import logging
-from datetime import datetime
-import sys
-import serial.tools.list_ports
+#include <ArduinoJson.h>
+#include <Arduino.h>
+#include <SoftwareSerial.h>
+#include <DHT.h>
+#include <NewPing.h>
 
-########### Database Connect #############
-import pymysql
+#define DHTPIN 2
+#define DHTTYPE DHT11
+#define PELTIER_PIN 3
+#define HUMIDIFIER_PIN 11
+#define ULTRASONIC_TRIGGER_PIN 5
+#define ULTRASONIC_ECHO_PIN 6
+#define WATER_PUMP_PIN 12
+#define EXHAUST_PIN 8
+#define HEATER_PIN 9
+#define RELAY A5
 
-connection = pymysql.connect(
-    host="localhost",         # Replace with your host, e.g., "127.0.0.1" or server IP
-    user="admin",     # Replace with your MariaDB username
-    password="admin", # Replace with your MariaDB password
-    database="mushapp_db", # Replace with your database name
-    charset="utf8mb4",        # Character set for encoding
-    cursorclass=pymysql.cursors.DictCursor  # Optional: Use dictionary cursor for better usability
-)
+// New
+#define EXHAUST_PIN2 10
 
-cursor = connection.cursor()
-##########################################
+#define MQ135_PIN A1 // mq135
+#define co2zero 55
+
+DHT dht(DHTPIN, DHTTYPE);
+NewPing ultrasonic(ULTRASONIC_TRIGGER_PIN, ULTRASONIC_ECHO_PIN);
+int waterLevel;
+
+//int fanPin = 7;
 
 
-LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_logfile.log') # %H_%M_%S_logfile.log')
+// ***** FOR MQ135 ******
+#include <MQ135.h> // Include MQ135 library if available (optional for better accuracy)
+// Define constants for CO2 calculation
+#define RL 10.0  // Load resistance in kΩ (check your setup, usually 1kΩ or 10kΩ)
+#define RZERO_CLEAN_AIR 1140.0  // Adjust based on your calibration
 
-for handler in logging.root.handlers[:]:
-    logging.root.removeHandler(handler)
-logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
-logging.info('Forecasting Job Started...')
-logging.debug('mushapp method started...')
-########### CHECKING INTERNET ###############
-logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Checking Internet Connection...'))
-print("Checking Internet Connection...")
+MQ135 mq135_sensor(MQ135_PIN);
+// ***** END FOR MQ135 ******
 
-def check_internet():
-    try:
-        requests.get("https://www.google.com")
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Internet.'))
-        return True
-    except requests.ConnectionError:
-        logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error Connecting to Internet.'))
-        return False
+// FOR Automatic and Manual
+bool isAutomatic = true;
 
-internet=check_internet()
-while internet == False:
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Checking Internet Connection again...'))
-    print("Checking Internet Connection again...")
+void setup()
+{
+  dht.begin();
+  Serial.begin(9600);
+  pinMode(PELTIER_PIN, OUTPUT);
+  pinMode(HUMIDIFIER_PIN, OUTPUT);
+  pinMode(WATER_PUMP_PIN, OUTPUT);
+  pinMode(EXHAUST_PIN, OUTPUT);
+  pinMode(EXHAUST_PIN2, OUTPUT);
+  pinMode(HEATER_PIN, OUTPUT);
+  //pinMode(fanPin, OUTPUT);
+  //digitalWrite(fanPin, HIGH);
 
-    timer.sleep
-    internet=check_internet()
+  pinMode(MQ135_PIN,INPUT);
+}
 
-print("Connected to Internet.")
-########### CHECKING INTERNET ###############
+bool isMQ135Connected() {
+  // Set A0 as digital input to clear floating state
+  pinMode(MQ135_PIN, OUTPUT);
+  digitalWrite(MQ135_PIN, LOW); // Pull to ground
+  
+  // Wait briefly to stabilize the pin
+  delay(10);
 
-########## Finding Serial Port ##############
-logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Arduino Serial Port...'))
-print("Connecting to Arduino Serial Port...")
+  // Set back to analog mode and read the value
+  pinMode(MQ135_PIN, INPUT);
+  int adcValue = analogRead(MQ135_PIN);
 
-def find_available_port():
-    # List all available ports
-    serial_port = list(serial.tools.list_ports.comports())
-    for port in serial_port:
-        # You can add criteria to select a specific port if needed
-        print(f"Found port: {port.device}")
-        return port.device
-    return None
+  if(adcValue != 0) return true;
+  
+  return false;
+}
 
-# Define the serial port
-# serial_port = '/dev/ttyUSB0'  # Change this to match your Arduino's serial port
-#serial_port = '/dev/ttyACM0'
-#serial_port = '/dev/ttyAMA0'
+void loop(){
+  // Change State of Fan, Heater, Humidifier, and Fan2
+  if (Serial.available() > 0) {
+    String command = Serial.readStringUntil('\n');
 
-serial_port = find_available_port()
-while serial_port is None:
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: No Serial Port Available.'))
-    print("Error: No Serial Port Available.")
-    sys.exit("No Serial Port Available.")
+    if (command == "auto"){
+      isAutomatic = true;
 
-    # Wait for a moment
-    time.sleep(1)
+      digitalWrite(EXHAUST_PIN, LOW);
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+
+    } else if(command == "manual"){
+      isAutomatic = false;
+
+      digitalWrite(EXHAUST_PIN, LOW);
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+    }
+
+    if(!isAutomatic){
+      if (command == "fanH") { 
+        digitalWrite(EXHAUST_PIN, HIGH);
+  
+      } else if (command == "fanL") {
+        digitalWrite(EXHAUST_PIN, LOW);
+  
+      } else if (command == "heaterH") { 
+        digitalWrite(HEATER_PIN, HIGH);
+  
+      } else if (command == "heaterL") { 
+        digitalWrite(HEATER_PIN, LOW);
+  
+      } else if (command == "humidifierH") { 
+        digitalWrite(HUMIDIFIER_PIN , HIGH);
+  
+      } else if (command == "humidifierL") { 
+        digitalWrite(HUMIDIFIER_PIN, LOW);
+  
+      } else if (command == "fan2H") { 
+        digitalWrite(EXHAUST_PIN2, HIGH);
+  
+      } else if (command == "fan2L") {
+        digitalWrite(EXHAUST_PIN2, LOW);
+      }
+    }
+  }
+
+  // VALUES
+  float temperature = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  //humidity += -5.0;
+
+  waterLevel = 20 - ultrasonic.ping_cm();//waterLvlValue();
+  if(waterLevel == 20) waterLevel = 0;
+
+  // FOR MQ135
+  // Read resistance and calculate new RZero
+  float resistance = mq135_sensor.getResistance();
+  float rzero = resistance / exp((log10(400.0) - 1.78) / -2.93);  // Using CO2 calibration formula
+  float correctedRZero = mq135_sensor.getCorrectedRZero(temperature, humidity);
+
+  // Calculate CO2 PPM using corrected formula
+  float ppmCO2 = 116.6020682 * pow((resistance / RZERO_CLEAN_AIR), -2.769034857);
+  //correctedPPMCO2
+  float ppm = 116.6020682 * pow((resistance / correctedRZero), -2.769034857);
+
+  if ((isnan(temperature) || isnan(humidity)) || !isMQ135Connected())
+  {
+    if (!isMQ135Connected() && !(isnan(temperature) || isnan(humidity))) {
+      Serial.println("MQ135 sensor not detected or not functioning!");
+  //    delay(1000); // Wait and retry
+  //    return;
+    } else if(isMQ135Connected() && (isnan(temperature) || isnan(humidity))) {
+      Serial.println("DHT sensor not detected or not functioning!"); //, TMP: " + String(temperature) + " HUM: " + String(humidity));
+    } else {
+      Serial.println("DHT and sensor MQ135 are not detected or not functioning!");
+    }
     
-    serial_port = find_available_port()
-#if (serial_port is None):
+    delay(1000);
+    return;
+  } else {
+    if(isAutomatic){
+      // Conditions that will happen regularly
+      if(temperature < 20 && humidity <= 85 && round(ppm) <= 1000){
+        digitalWrite(EXHAUST_PIN, HIGH);
+        digitalWrite(HEATER_PIN, HIGH);
+        digitalWrite(HUMIDIFIER_PIN, HIGH);
+        digitalWrite(EXHAUST_PIN2, HIGH);
+      } else if(temperature >= 20 && humidity <= 85 && ppm <= 1000){
+        digitalWrite(HUMIDIFIER_PIN, HIGH);
+        digitalWrite(EXHAUST_PIN2, HIGH);
 
-# Define the baud rate
-baud_rate = 9600
+        digitalWrite(EXHAUST_PIN, LOW);
+        digitalWrite(HEATER_PIN, LOW);
+      } else if(temperature < 20 && humidity > 85 && ppm <= 1000){
+        digitalWrite(EXHAUST_PIN, HIGH);
+        digitalWrite(HEATER_PIN, HIGH);
 
-# Open the serial port
-ser = serial.Serial(serial_port, baud_rate, timeout=1)
+        digitalWrite(HUMIDIFIER_PIN, LOW);
+        digitalWrite(EXHAUST_PIN2, LOW);
+      } else if(temperature >= 20 && humidity > 85 && ppm <= 1000){
+        digitalWrite(EXHAUST_PIN, HIGH);
 
-logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Arduino Serial Port.'))
-print("Done.")
-########## Finding Serial Port ##############
+        digitalWrite(HEATER_PIN, LOW);
+        digitalWrite(HUMIDIFIER_PIN, LOW);
+        digitalWrite(EXHAUST_PIN2, LOW);
+      } 
+      // Conditions that will rarely happen
+      else if((temperature < 20 && humidity <= 85 && ppm > 1000) || (temperature < 20 && humidity > 85 && ppm > 1000)){
+        digitalWrite(EXHAUST_PIN, HIGH);
+        digitalWrite(HEATER_PIN, HIGH);
 
-########## Checking Firebase ##############
-logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
-print("Connecting to Firebase Realtime Database...")
+        digitalWrite(HUMIDIFIER_PIN, LOW);
+        digitalWrite(EXHAUST_PIN2, LOW);
+      } else if((temperature >= 20 && humidity <= 85 && ppm > 1000) || (temperature >= 20 && humidity > 85 && ppm > 1000)){
+        digitalWrite(EXHAUST_PIN, HIGH);
 
-# Initialize Firebase Admin SDK with your service account credentials
-cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
-})
+        digitalWrite(HEATER_PIN, LOW);
+        digitalWrite(HUMIDIFIER_PIN, LOW);
+        digitalWrite(EXHAUST_PIN2, LOW);
+      } 
+    }
+  }
 
-# Reference to the specific path in the Firebase Realtime Database
-ref = db.reference('/')
+  delay(1000);
 
-logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
-print("Done.")
-########## Checking Firebase ##############
+  StaticJsonDocument<200> jsonDoc;
+  jsonDoc["temperature"] = temperature;
+  jsonDoc["humidity"] = humidity;
+  jsonDoc["waterLevel"] = waterLevel;
+  jsonDoc["co2ppm"] = round(ppm);
 
-try:
-    # Get the data
-    oldData = ref.get()
-    oldFanState = oldData["fan"]
-    oldHeaterState = oldData["heater"]
+  String jsonString;
+  serializeJson(jsonDoc, jsonString);
 
-    oldFan2State = oldData["fan2"]
-    oldHumidifierState = oldData["humidifier"]
+  Serial.println("JSON data: " + jsonString);
 
-    oldAutoState = oldData["auto"]
-
-    oldDateTime = datetime.now()
-    
-    # First Run change current state
-    # Change arduino relay fan state
-    if(oldFanState):
-        # Fan ON
-        ser.write(("fanH" + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
-        # print("turning on FAN!")
-    else:
-        # Fan OFF
-        ser.write(("fanL" + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
-
-    # Change arduino relay heater state
-    if(oldHeaterState):
-        # Heater ON
-        ser.write(('heaterH' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
-    else:
-        # Heater OFF
-        ser.write(('heaterL' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
-
-    if(oldFan2State):
-        # Fan ON
-        ser.write(("fan2H" + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
-        # print("turning on FAN!")
-    else:
-        # Fan OFF
-        ser.write(("fan2L" + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
-
-    # Change arduino relay heater state
-    if(oldHumidifierState):
-        # Heater ON
-        ser.write(('humidifierH' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
-    else:
-        # Heater OFF
-        ser.write(('humidifierL' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
-
-    # Change arduino relay heater state
-    if(oldAutoState):
-        # Heater ON
-        ser.write(('auto' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
-    else:
-        # Heater OFF
-        ser.write(('manual' + '\n').encode())
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
-    
-    while True:
-        # Get the data
-        currData = ref.get()
-        currFanState = currData["fan"]
-        currHeaterState = currData["heater"]
-
-        currFan2State = currData["fan2"]
-        currHumidifierState = currData["humidifier"]
-
-        currAutoState = currData["auto"]
-        
-        if(currFanState != oldFanState):
-            # update state
-            oldFanState = currFanState
-            
-            print("Fan state changed: ", currFanState)
-            
-            # Change arduino relay fan state
-            if(currFanState):
-                # Fan ON
-                ser.write(("fanH" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
-                # print("turning on FAN!")
-            else:
-                # Fan OFF
-                ser.write(("fanL" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
-                # print("turning off FAN!")
-            
-        if(currHeaterState != oldHeaterState):
-            # update state
-            oldHeaterState = currHeaterState
-            
-            print("Heater state changed: ", currHeaterState)
-            
-            # Change arduino relay heater state
-            if(currHeaterState):
-                # Heater ON
-                ser.write(('heaterH' + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
-            else:
-                # Heater OFF
-                ser.write(('heaterL' + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
-
-        if(currFan2State != oldFan2State):
-            # update state
-            oldFan2State = currFan2State
-            
-            print("Fan2 state changed: ", currFan2State)
-            
-            # Change arduino relay fan state
-            if(currFan2State):
-                # Fan ON
-                ser.write(("fan2H" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
-                # print("turning on FAN!")
-            else:
-                # Fan OFF
-                ser.write(("fan2L" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
-                # print("turning off FAN!")
-            
-        if(currHumidifierState != oldHumidifierState):
-            # update state
-            oldHumidifierState = currHumidifierState
-            
-            print("Humidifier state changed: ", currHumidifierState)
-            
-            # Change arduino relay heater state
-            if(currHumidifierState):
-                # Humidifier ON
-                ser.write(('humidifierH' + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
-            else:
-                # Humidifier OFF
-                ser.write(('humidifierL' + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
-
-        if(currAutoState != oldAutoState):
-            # update state
-            oldAutoState = currAutoState
-            
-            print("Auto state changed: ", currAutoState)
-            
-            # Change arduino relay fan state
-            if(currAutoState):
-                # Auto ON
-                ser.write(("auto" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
-                # print("turning on FAN!")
-            else:
-                # Auto OFF
-                ser.write(("manual" + '\n').encode())
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
-                # print("turning off FAN!")
-
-        # Read a line of data from the serial port
-        data = ser.readline().decode().strip()
-    
-        if(data[slice(10)] == "JSON data:"):
-            jsonData = json.loads(data[10:None])
-            
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
-            print(jsonData)
-            
-            # update the firebase realtime database
-            # update the temp
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
-            print("Sending data to firebase realtime database...")
-            while True:
-                if check_internet(): # if there is an internet connection
-                    ref.update({"temp":jsonData["temperature"]})
-                    ref.update({"humid":jsonData["humidity"]})
-                    ref.update({"water":jsonData["waterLevel"]})
-                    ref.update({"co2":jsonData["co2ppm"]})
-                    
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
-                    print("Data has been sent to firebase realtime database.")
-
-                    ###### Saving to local database #######
-                    timeDiff = datetime.now() - oldDateTime
-
-                    # saved only per minute
-                    if(timeDiff.total_seconds() > 60):
-                        insert_query = """
-                            INSERT INTO data (co2, humidity, temperature, water_lvl)
-                            VALUES (%s, %s, %s, %s)
-                        """
-                        data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
-                        
-                        try:
-                            cursor.execute(insert_query, data)
-                            connection.commit()  # Commit changes to the database
-                            # print(f"Inserted {cursor.rowcount} row(s) successfully.")
-
-                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
-                            print("Data has been saved to local database.")
-
-                            oldDateTime = datetime.now()
-
-                        except pymysql.MySQLError as err:
-                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
-                            print(f"Database Error: {err}")
-                    ####################################
-
-
-                    # to stop the loop for checking the internet
-                    break
-                
-                else:
-                    logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection.'))
-                    print("No Internet Connection")
-            
-                # Wait for a moment
-                time.sleep(1)
-        else:
-            logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
-            print("Error:", data)
-                
-        # Wait for a moment
-        time.sleep(1)
-        
-except KeyboardInterrupt:
-    # Close the serial port when the program is terminated
-    ser.close()
-
-    # database close connection
-    cursor.close()
-    connection.close()
+  delay(1000);
+}
