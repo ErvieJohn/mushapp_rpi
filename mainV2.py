@@ -124,6 +124,8 @@ try:
     oldFan2State = oldData["fan2"]
     oldHumidifierState = oldData["humidifier"]
 
+    oldWaterPumpState = oldData["waterPump"]
+
     oldAutoState = oldData["auto"]
 
     oldDateTime = datetime.now()
@@ -179,6 +181,16 @@ try:
         # Heater OFF
         ser.write(('manual' + '\n').encode())
         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+
+    if(oldWaterPumpState):
+        # Fan ON
+        ser.write(("waterPumpH" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
+        # print("turning on FAN!")
+    else:
+        # Fan OFF
+        ser.write(("waterPumpL" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
     
     while True:
         # Get the data
@@ -188,6 +200,8 @@ try:
 
         currFan2State = currData["fan2"]
         currHumidifierState = currData["humidifier"]
+
+        currWaterPumpState = currData["waterPump"]
 
         currAutoState = currData["auto"]
         
@@ -275,6 +289,24 @@ try:
                 # Auto OFF
                 ser.write(("manual" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+                # print("turning off FAN!")
+
+        if(currWaterPumpState != oldWaterPumpState):
+            # update state
+            oldWaterPumpState = currWaterPumpState
+            
+            print("Water Pump state changed: ", currWaterPumpState)
+            
+            # Change arduino relay fan state
+            if(currWaterPumpState):
+                # Fan ON
+                ser.write(("waterPumpH" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
+                # print("turning on FAN!")
+            else:
+                # Fan OFF
+                ser.write(("waterPumpL" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning WATER PUMP.'))
                 # print("turning off FAN!")
 
         # Read a line of data from the serial port
