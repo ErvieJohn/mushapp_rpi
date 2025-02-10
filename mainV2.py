@@ -124,6 +124,8 @@ try:
     oldFan2State = oldData["fan2"]
     oldHumidifierState = oldData["humidifier"]
 
+    oldAutoState = oldData["auto"]
+
     oldDateTime = datetime.now()
     
     # First Run change current state
@@ -167,6 +169,16 @@ try:
         # Heater OFF
         ser.write(('humidifierL' + '\n').encode())
         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+
+    # Change arduino relay heater state
+    if(oldAutoState):
+        # Heater ON
+        ser.write(('auto' + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+    else:
+        # Heater OFF
+        ser.write(('manual' + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
     
     while True:
         # Get the data
@@ -176,6 +188,8 @@ try:
 
         currFan2State = currData["fan2"]
         currHumidifierState = currData["humidifier"]
+
+        currAutoState = currData["auto"]
         
         if(currFanState != oldFanState):
             # update state
@@ -244,6 +258,24 @@ try:
                 # Humidifier OFF
                 ser.write(('humidifierL' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+
+        if(currAutoState != oldAutoState):
+            # update state
+            oldAutoState = currAutoState
+            
+            print("Auto state changed: ", currAutoState)
+            
+            # Change arduino relay fan state
+            if(currAutoState):
+                # Auto ON
+                ser.write(("auto" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+                # print("turning on FAN!")
+            else:
+                # Auto OFF
+                ser.write(("manual" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+                # print("turning off FAN!")
 
         # Read a line of data from the serial port
         data = ser.readline().decode().strip()
