@@ -80,8 +80,19 @@ void loop(){
 
     if (command == "auto"){
       isAutomatic = true;
+
+      digitalWrite(EXHAUST_PIN, LOW);
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+
     } else if(command == "manual"){
       isAutomatic = false;
+
+      digitalWrite(EXHAUST_PIN, LOW);
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
     }
 
     if(!isAutomatic){
