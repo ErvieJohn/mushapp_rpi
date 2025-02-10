@@ -85,6 +85,7 @@ void loop(){
       digitalWrite(HEATER_PIN, LOW);
       digitalWrite(HUMIDIFIER_PIN, LOW);
       digitalWrite(EXHAUST_PIN2, LOW);
+      digitalWrite(WATER_PUMP_PIN, LOW);
 
     } else if(command == "manual"){
       isAutomatic = false;
@@ -93,6 +94,7 @@ void loop(){
       digitalWrite(HEATER_PIN, LOW);
       digitalWrite(HUMIDIFIER_PIN, LOW);
       digitalWrite(EXHAUST_PIN2, LOW);
+      digitalWrite(WATER_PUMP_PIN, LOW);
     }
 
     if(!isAutomatic){
@@ -119,6 +121,12 @@ void loop(){
   
       } else if (command == "fan2L") {
         digitalWrite(EXHAUST_PIN2, LOW);
+      } else if (command == "waterPumpH") { 
+        digitalWrite(WATER_PUMP_PIN, HIGH);
+  
+      } else if (command == "waterPumpL") {
+        digitalWrite(WATER_PUMP_PIN, LOW);
+  
       }
     }
   }
