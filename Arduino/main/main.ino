@@ -65,17 +65,7 @@ bool isMQ135Connected() {
   // Set back to analog mode and read the value
   pinMode(MQ135_PIN, INPUT);
   int adcValue = analogRead(MQ135_PIN);
-//  Serial.println("adcValue: " + String(adcValue));
 
-  // Check if the analog value is consistently in a reasonable range
-  // Floating pins typically give values that fluctuate widely
-//  if (adcValue > 50 && adcValue < 1000) { 
-//    delay(10); // Short delay to confirm stable reading
-//    int adcValueCheck = analogRead(MQ135_PIN);
-//    if (abs(adcValue - adcValueCheck) < 10) { // Verify stability
-//      return true;
-//    }
-//  }
   if(adcValue != 0) return true;
   
   return false;
@@ -137,100 +127,48 @@ void loop(){
     delay(1000);
     return;
   } else {
-    // Temperature
-    if(temperature < 20) {
-      /*
-        Below 20C (mas malamig siya) so doon mag oopen si HEATER to 
-        control the heat and MALAKING FAN para maglabas ng hangin or 
-        lamig.
-      */ 
+    // Conditions that will happen regularly
+    if(temperature < 20 && humidity <= 85 && round(ppm) <= 1000){
       digitalWrite(EXHAUST_PIN, HIGH);
       digitalWrite(HEATER_PIN, HIGH);
-    } else {
-      /*
-        In between 20-30 and 30 up, hindi mag oon ang HEATER and 
-        MALAKING FAN. kasi nasa tamang range siya and if 30 UP, mainit 
-        na siya, so OFF lang ang heater.
-      */
+      digitalWrite(HUMIDIFIER_PIN, HIGH);
+      digitalWrite(EXHAUST_PIN2, HIGH);
+    } else if(temperature >= 20 && humidity <= 85 && ppm <= 1000){
+      digitalWrite(HUMIDIFIER_PIN, HIGH);
+      digitalWrite(EXHAUST_PIN2, HIGH);
+
       digitalWrite(EXHAUST_PIN, LOW);
       digitalWrite(HEATER_PIN, LOW);
-    }
-
-    // Humidifier
-    if(humidity <= 85){
-      /*
-        - Below 70 (naka-on lang si HUMIDIFIER and MALIIT na FAN) 
-          kasi siya yung nag bibigay ng fresh air inside proto and to 
-          avoid dryness. if dry ang mushroom there is a chance na mag 
-          fail yung pag develop niya.
-        - In between 70 and 85% (STILL ON HUMIDIFIER AND MALIIT NA FAN) 
-          to bring fresh air inside the proto 
-      */
-      digitalWrite(EXHAUST_PIN2, HIGH);
-      digitalWrite(HUMIDIFIER_PIN, HIGH);
-      digitalWrite(EXHAUST_PIN, LOW);
-    } else {
-      /*
-        - 85 up, need i-off ang humidifier nad maliit na fan, it can 
-          cause disease/bacteria sa mga mushrooms. if the range is too 
-          high
-        - if 85 up, need I-on naman ang malaking FAN para maglabas ng 
-          hangin.
-      */
-      digitalWrite(EXHAUST_PIN2, LOW);
-      digitalWrite(HUMIDIFIER_PIN, LOW);
+    } else if(temperature < 20 && humidity > 85 && ppm <= 1000){
       digitalWrite(EXHAUST_PIN, HIGH);
-    }
+      digitalWrite(HEATER_PIN, HIGH);
 
-    // CO2
-    if(round(ppm) > 1000){
-      /*
-        - More than 1000ppm - it can cause drowsiness and poor air. 
-          the mushroom  may be small or deformed. mushrooms may grow 
-          more slowly or DIE.
-        - if more than 1000pmm - need I-ON ang MALAKING FAN.
-      */
-      digitalWrite(EXHAUST_PIN, HIGH);
       digitalWrite(HUMIDIFIER_PIN, LOW);
       digitalWrite(EXHAUST_PIN2, LOW);
-    } else {
-      /*
-      - to maintain the optimal level of CO2, HUMIDIFIER CAN HELP to regulate the CO2 levels. so need din siya iopen. (HUMIDIFIER AND FAN NA MALIIT)
-      - Same factor sila if too high or low ang PPM ng CO2. mushrooms may grow more slowly or DIE and may be small or deformed.
-      - Need i-on si HUMIDIFIER and MALIIT NA FAN if lower or in between the range
-      */
-      digitalWrite(EXHAUST_PIN, LOW);
-      digitalWrite(HUMIDIFIER_PIN, HIGH);
-      digitalWrite(EXHAUST_PIN2, HIGH);
-    }
+    } else if(temperature >= 20 && humidity > 85 && ppm <= 1000){
+      digitalWrite(EXHAUST_PIN, HIGH);
 
-    // Waterpump
-    // Lvl 19 is the highest, Lvl 1 is the lowest
-    if(waterLevel<=8){
-      digitalWrite(WATER_PUMP_PIN, HIGH);
-    } else if(waterLevel>=12){
-      digitalWrite(WATER_PUMP_PIN, LOW);
-    }
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+    } 
+    // Conditions that will rarely happen
+    else if((temperature < 20 && humidity <= 85 && ppm > 1000) || (temperature < 20 && humidity > 85 && ppm > 1000)){
+      digitalWrite(EXHAUST_PIN, HIGH);
+      digitalWrite(HEATER_PIN, HIGH);
+
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+    } else if((temperature >= 20 && humidity <= 85 && ppm > 1000) || (temperature >= 20 && humidity > 85 && ppm > 1000)){
+      digitalWrite(EXHAUST_PIN, HIGH);
+
+      digitalWrite(HEATER_PIN, LOW);
+      digitalWrite(HUMIDIFIER_PIN, LOW);
+      digitalWrite(EXHAUST_PIN2, LOW);
+    } 
   }
 
   delay(1000);
-
-//    Serial.print("Temperature: ");
-//    Serial.print(temperature);
-//    Serial.print("Humidity: ");
-//    Serial.print(humidity);
-//    Serial.print("Water Levell: ");
-//    Serial.println(waterLevel);
-//    Serial.print("LVL: ");
-//
-//    Serial.print("Peltier: ");
-//    Serial.println((temperature > 30) ? "ON" : "OFF");
-//
-//    Serial.print("Humidifier: ");
-//    Serial.println((humidity < 80) ? "ON" : "OFF");
-//
-//    Serial.print("Water Pump: ");
-//    Serial.println((waterLevel <= 30) ? "ON" : (waterLevel >= 95) ? "OFF" : "N/A");
 
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["temperature"] = temperature;
