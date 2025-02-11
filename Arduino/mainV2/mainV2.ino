@@ -206,6 +206,13 @@ void loop(){
         digitalWrite(HUMIDIFIER_PIN, LOW);
         digitalWrite(EXHAUST_PIN2, LOW);
       } 
+
+      // Lvl 19 is the highest, Lvl 1 is the lowest
+      if(waterLevel<=8){
+        digitalWrite(WATER_PUMP_PIN, HIGH);
+      } else if(waterLevel>=12){
+        digitalWrite(WATER_PUMP_PIN, LOW);
+      }
     }
   }
 
