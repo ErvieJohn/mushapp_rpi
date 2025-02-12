@@ -352,13 +352,19 @@ try:
             print("Sending data to firebase realtime database...")
             
             if check_internet(): # if there is an internet connection
-                ref.update({"temp":jsonData["temperature"]})
-                ref.update({"humid":jsonData["humidity"]})
-                ref.update({"water":jsonData["waterLevel"]})
-                ref.update({"co2":jsonData["co2ppm"]})
+                try: 
+                    ref.update({"temp":jsonData["temperature"]})
+                    ref.update({"humid":jsonData["humidity"]})
+                    ref.update({"water":jsonData["waterLevel"]})
+                    ref.update({"co2":jsonData["co2ppm"]})
+                    
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                    print("Data has been sent to firebase realtime database.")
+
+                except Exception as e:
+                    # Handle the error (you can log it or take alternative actions)
+                    print(f"Failed to update Firebase: {str(e)}")
                 
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
-                print("Data has been sent to firebase realtime database.")
             
             else:
                 logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection. Can\'t send the data to irebase realtime database.'))
