@@ -109,12 +109,12 @@ try:
                     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
                     print(f"Database Error: {err}")
                 ####################################
-            else:
-                logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
-                print("Error:", data)
+        else:
+            logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
+            print("Error:", data)
                 
-            # Wait for a moment
-            time.sleep(1)
+        # Wait for a moment
+        time.sleep(1)
     
 except KeyboardInterrupt:
     # Close the serial port when the program is terminated
