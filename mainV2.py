@@ -367,7 +367,7 @@ try:
                     print("No Internet Connection")
             
                 # Wait for a moment
-                time.sleep(1)
+                # time.sleep(1)
         else:
             logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
             print("Error:", data)
