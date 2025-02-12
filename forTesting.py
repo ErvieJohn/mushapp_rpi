@@ -101,11 +101,13 @@ def connectToFirebase():
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
     print("Connecting to Firebase Realtime Database...")
 
-    # Initialize Firebase Admin SDK with your service account credentials
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
-    })
-
+    try:
+        # Initialize Firebase Admin SDK with your service account credentials
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
+        })
+    except Exception as e:
+         print(f"Unexpected error: {str(e)}")
     # Reference to the specific path in the Firebase Realtime Database
     
 
