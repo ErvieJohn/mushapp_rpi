@@ -163,7 +163,7 @@ void loop(){
       Serial.println("DHT and sensor MQ135 are not detected or not functioning!");
     }
     
-    delay(1000);
+    delay(500);
     return;
   } else {
     if(isAutomatic){
@@ -216,7 +216,7 @@ void loop(){
     }
   }
 
-  delay(1000);
+  // delay(1000);
 
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["temperature"] = temperature;
@@ -229,5 +229,5 @@ void loop(){
 
   Serial.println("JSON data: " + jsonString);
 
-  delay(1000);
+  delay(500);
 }
