@@ -81,7 +81,7 @@ try:
         if(data[slice(10)] == "JSON data:"):
             jsonData = json.loads(data[10:None])
             
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
+            # logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
             print(jsonData)
     
             ###### Saving to local database #######
