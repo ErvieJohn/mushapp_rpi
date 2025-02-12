@@ -79,40 +79,40 @@ try:
         if(data[slice(10)] == "JSON data:"):
             jsonData = json.loads(data[10:None])
             
-        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
-        print(jsonData)
-
-        ###### Saving to local database #######
-        timeDiff = datetime.now() - oldDateTime
-
-        # saved only per minute
-        if(timeDiff.total_seconds() > 60):
-            insert_query = """
-                INSERT INTO data (co2, humidity, temperature, water_lvl)
-                VALUES (%s, %s, %s, %s)
-            """
-            data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
-            
-            try:
-                cursor.execute(insert_query, data)
-                connection.commit()  # Commit changes to the database
-                # print(f"Inserted {cursor.rowcount} row(s) successfully.")
-
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
-                print("Data has been saved to local database.")
-
-                oldDateTime = datetime.now()
-
-            except pymysql.MySQLError as err:
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
-                print(f"Database Error: {err}")
-            ####################################
-        else:
-            logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
-            print("Error:", data)
-            
-        # Wait for a moment
-        time.sleep(1)
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
+            print(jsonData)
+    
+            ###### Saving to local database #######
+            timeDiff = datetime.now() - oldDateTime
+    
+            # saved only per minute
+            if(timeDiff.total_seconds() > 60):
+                insert_query = """
+                    INSERT INTO data (co2, humidity, temperature, water_lvl)
+                    VALUES (%s, %s, %s, %s)
+                """
+                data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
+                
+                try:
+                    cursor.execute(insert_query, data)
+                    connection.commit()  # Commit changes to the database
+                    # print(f"Inserted {cursor.rowcount} row(s) successfully.")
+    
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
+                    print("Data has been saved to local database.")
+    
+                    oldDateTime = datetime.now()
+    
+                except pymysql.MySQLError as err:
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
+                    print(f"Database Error: {err}")
+                ####################################
+            else:
+                logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
+                print("Error:", data)
+                
+            # Wait for a moment
+            time.sleep(1)
     
 except KeyboardInterrupt:
     # Close the serial port when the program is terminated
