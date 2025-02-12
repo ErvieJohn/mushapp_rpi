@@ -313,61 +313,66 @@ try:
         data = ser.readline().decode().strip()
     
         if(data[slice(10)] == "JSON data:"):
-            jsonData = json.loads(data[10:None])
-            
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
-            print(jsonData)
-            
-            # update the firebase realtime database
-            # update the temp
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
-            print("Sending data to firebase realtime database...")
-            while True:
-                if check_internet(): # if there is an internet connection
-                    ref.update({"temp":jsonData["temperature"]})
-                    ref.update({"humid":jsonData["humidity"]})
-                    ref.update({"water":jsonData["waterLevel"]})
-                    ref.update({"co2":jsonData["co2ppm"]})
-                    
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
-                    print("Data has been sent to firebase realtime database.")
-
-                    ###### Saving to local database #######
-                    timeDiff = datetime.now() - oldDateTime
-
-                    # saved only per minute
-                    if(timeDiff.total_seconds() > 60):
-                        insert_query = """
-                            INSERT INTO data (co2, humidity, temperature, water_lvl)
-                            VALUES (%s, %s, %s, %s)
-                        """
-                        data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
-                        
-                        try:
-                            cursor.execute(insert_query, data)
-                            connection.commit()  # Commit changes to the database
-                            # print(f"Inserted {cursor.rowcount} row(s) successfully.")
-
-                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
-                            print("Data has been saved to local database.")
-
-                            oldDateTime = datetime.now()
-
-                        except pymysql.MySQLError as err:
-                            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
-                            print(f"Database Error: {err}")
-                    ####################################
-
-
-                    # to stop the loop for checking the internet
-                    break
+            try:
+                jsonData = json.loads(data[10:None])
                 
-                else:
-                    logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection.'))
-                    print("No Internet Connection")
-            
-                # Wait for a moment
-                # time.sleep(1)
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
+                print(jsonData)
+                
+                # update the firebase realtime database
+                # update the temp
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
+                print("Sending data to firebase realtime database...")
+                while True:
+                    if check_internet(): # if there is an internet connection
+                        ref.update({"temp":jsonData["temperature"]})
+                        ref.update({"humid":jsonData["humidity"]})
+                        ref.update({"water":jsonData["waterLevel"]})
+                        ref.update({"co2":jsonData["co2ppm"]})
+                        
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                        print("Data has been sent to firebase realtime database.")
+    
+                        ###### Saving to local database #######
+                        timeDiff = datetime.now() - oldDateTime
+    
+                        # saved only per minute
+                        if(timeDiff.total_seconds() > 60):
+                            insert_query = """
+                                INSERT INTO data (co2, humidity, temperature, water_lvl)
+                                VALUES (%s, %s, %s, %s)
+                            """
+                            data = (jsonData["co2ppm"], jsonData["humidity"], jsonData["temperature"], jsonData["waterLevel"])
+                            
+                            try:
+                                cursor.execute(insert_query, data)
+                                connection.commit()  # Commit changes to the database
+                                # print(f"Inserted {cursor.rowcount} row(s) successfully.")
+    
+                                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been saved to local database.'))
+                                print("Data has been saved to local database.")
+    
+                                oldDateTime = datetime.now()
+    
+                            except pymysql.MySQLError as err:
+                                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Database Error: {err}'))
+                                print(f"Database Error: {err}")
+                        ####################################
+    
+    
+                        # to stop the loop for checking the internet
+                        break
+                    
+                    else:
+                        logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection.'))
+                        print("No Internet Connection")
+                
+                    # Wait for a moment
+                    # time.sleep(1)
+            except Exception as e:
+                logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Unexpected error: {str(e)}'))
+                print(f"Unexpected error: {str(e)}")
+                
         else:
             logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
             print("Error:", data)
