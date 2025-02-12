@@ -229,5 +229,5 @@ void loop(){
 
   Serial.println("JSON data: " + jsonString);
 
-  delay(500);
+  delay(1000);
 }
