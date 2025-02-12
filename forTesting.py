@@ -98,11 +98,12 @@ print("Done.")
 cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
 initialized = False
 def connectToFirebase():
+    global initialized
     ########## Checking Firebase ##############
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
     print("Connecting to Firebase Realtime Database...")
 
-    if(initialized == False):
+    if(not initialized):
         try:
             # Initialize Firebase Admin SDK with your service account credentials
             firebase_admin.initialize_app(cred, {
