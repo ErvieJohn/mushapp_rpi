@@ -72,6 +72,8 @@ print("Done.")
 ########## Finding Serial Port ##############
 
 try:
+    oldDateTime = datetime.now()
+    
     while True:
         # Read a line of data from the serial port
         data = ser.readline().decode().strip()
