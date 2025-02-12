@@ -48,22 +48,32 @@ def check_internet():
         return False
 
 if check_internet():
-    ########## Checking Firebase ##############
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
-    print("Connecting to Firebase Realtime Database...")
+    try: 
+        ########## Checking Firebase ##############
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
+        print("Connecting to Firebase Realtime Database...")
+        
+        # Initialize Firebase Admin SDK with your service account credentials
+        cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
+        })
+        
+        # Reference to the specific path in the Firebase Realtime Database
+        ref = db.reference('/')
+        
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
+        print("Done.")
+        ########## Checking Firebase ##############
     
-    # Initialize Firebase Admin SDK with your service account credentials
-    cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
-    firebase_admin.initialize_app(cred, {
-        'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
-    })
-    
-    # Reference to the specific path in the Firebase Realtime Database
-    ref = db.reference('/')
-    
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
-    print("Done.")
-    ########## Checking Firebase ##############
+    except ConnectionError:
+        print("No internet connection during Firebase initialization")
+        # You might want to retry or use offline functionality
+    except firebase_admin.exceptions.FirebaseError as e:
+        print(f"Firebase initialization error: {str(e)}")
+        # Handle invalid credentials or other Firebase-specific errors
+    except Exception as e:
+        print(f"Unexpected error during Firebase initialization: {str(e)}")
 
 else:
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection.'))
@@ -117,199 +127,211 @@ print("Done.")
 
 try:
     if check_internet():
-        # Get the data
-        oldData = ref.get()
-        oldFanState = oldData["fan"]
-        oldHeaterState = oldData["heater"]
-    
-        oldFan2State = oldData["fan2"]
-        oldHumidifierState = oldData["humidifier"]
-    
-        oldWaterPumpState = oldData["waterPump"]
-    
-        oldAutoState = oldData["auto"]
-    
-        oldDateTime = datetime.now()
+        try:
+            # Get the data
+            oldData = ref.get()
+            oldFanState = oldData["fan"]
+            oldHeaterState = oldData["heater"]
         
-        # First Run change current state
-        # Change arduino relay fan state
-        if(oldFanState):
-            # Fan ON
-            ser.write(("fanH" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
-            # print("turning on FAN!")
-        else:
-            # Fan OFF
-            ser.write(("fanL" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
-    
-        # Change arduino relay heater state
-        if(oldHeaterState):
-            # Heater ON
-            ser.write(('heaterH' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
-        else:
-            # Heater OFF
-            ser.write(('heaterL' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
-    
-        if(oldFan2State):
-            # Fan ON
-            ser.write(("fan2H" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
-            # print("turning on FAN!")
-        else:
-            # Fan OFF
-            ser.write(("fan2L" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
-    
-        # Change arduino relay heater state
-        if(oldHumidifierState):
-            # Heater ON
-            ser.write(('humidifierH' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
-        else:
-            # Heater OFF
-            ser.write(('humidifierL' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
-    
-        # Change arduino relay heater state
-        if(oldAutoState):
-            # Heater ON
-            ser.write(('auto' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
-        else:
-            # Heater OFF
-            ser.write(('manual' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
-    
-        if(oldWaterPumpState):
-            # Fan ON
-            ser.write(("waterPumpH" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
-            # print("turning on FAN!")
-        else:
-            # Fan OFF
-            ser.write(("waterPumpL" + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
+            oldFan2State = oldData["fan2"]
+            oldHumidifierState = oldData["humidifier"]
+        
+            oldWaterPumpState = oldData["waterPump"]
+        
+            oldAutoState = oldData["auto"]
+        
+            oldDateTime = datetime.now()
+            
+            # First Run change current state
+            # Change arduino relay fan state
+            if(oldFanState):
+                # Fan ON
+                ser.write(("fanH" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
+                # print("turning on FAN!")
+            else:
+                # Fan OFF
+                ser.write(("fanL" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
+        
+            # Change arduino relay heater state
+            if(oldHeaterState):
+                # Heater ON
+                ser.write(('heaterH' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+            else:
+                # Heater OFF
+                ser.write(('heaterL' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+        
+            if(oldFan2State):
+                # Fan ON
+                ser.write(("fan2H" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
+                # print("turning on FAN!")
+            else:
+                # Fan OFF
+                ser.write(("fan2L" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
+        
+            # Change arduino relay heater state
+            if(oldHumidifierState):
+                # Heater ON
+                ser.write(('humidifierH' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
+            else:
+                # Heater OFF
+                ser.write(('humidifierL' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+        
+            # Change arduino relay heater state
+            if(oldAutoState):
+                # Heater ON
+                ser.write(('auto' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+            else:
+                # Heater OFF
+                ser.write(('manual' + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+        
+            if(oldWaterPumpState):
+                # Fan ON
+                ser.write(("waterPumpH" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
+                # print("turning on FAN!")
+            else:
+                # Fan OFF
+                ser.write(("waterPumpL" + '\n').encode())
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
+
+        except ConnectionError:
+            print("No internet connection")
+        except Exception as e:
+            print(f"Other error occurred: {str(e)}")
     
     while True:
         if check_internet():
-            # Get the data
-            currData = ref.get()
-            currFanState = currData["fan"]
-            currHeaterState = currData["heater"]
-    
-            currFan2State = currData["fan2"]
-            currHumidifierState = currData["humidifier"]
-    
-            currWaterPumpState = currData["waterPump"]
-    
-            currAutoState = currData["auto"]
-            
-            if(currFanState != oldFanState):
-                # update state
-                oldFanState = currFanState
+            try:
+                # Get the data
+                currData = ref.get()
+                currFanState = currData["fan"]
+                currHeaterState = currData["heater"]
+        
+                currFan2State = currData["fan2"]
+                currHumidifierState = currData["humidifier"]
+        
+                currWaterPumpState = currData["waterPump"]
+        
+                currAutoState = currData["auto"]
                 
-                print("Fan state changed: ", currFanState)
-                
-                # Change arduino relay fan state
-                if(currFanState):
-                    # Fan ON
-                    ser.write(("fanH" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
-                    # print("turning on FAN!")
-                else:
-                    # Fan OFF
-                    ser.write(("fanL" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
-                    # print("turning off FAN!")
-                
-            if(currHeaterState != oldHeaterState):
-                # update state
-                oldHeaterState = currHeaterState
-                
-                print("Heater state changed: ", currHeaterState)
-                
-                # Change arduino relay heater state
-                if(currHeaterState):
-                    # Heater ON
-                    ser.write(('heaterH' + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
-                else:
-                    # Heater OFF
-                    ser.write(('heaterL' + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
-    
-            if(currFan2State != oldFan2State):
-                # update state
-                oldFan2State = currFan2State
-                
-                print("Fan2 state changed: ", currFan2State)
-                
-                # Change arduino relay fan state
-                if(currFan2State):
-                    # Fan ON
-                    ser.write(("fan2H" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
-                    # print("turning on FAN!")
-                else:
-                    # Fan OFF
-                    ser.write(("fan2L" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
-                    # print("turning off FAN!")
-                
-            if(currHumidifierState != oldHumidifierState):
-                # update state
-                oldHumidifierState = currHumidifierState
-                
-                print("Humidifier state changed: ", currHumidifierState)
-                
-                # Change arduino relay heater state
-                if(currHumidifierState):
-                    # Humidifier ON
-                    ser.write(('humidifierH' + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
-                else:
-                    # Humidifier OFF
-                    ser.write(('humidifierL' + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
-    
-            if(currAutoState != oldAutoState):
-                # update state
-                oldAutoState = currAutoState
-                
-                print("Auto state changed: ", currAutoState)
-                
-                # Change arduino relay fan state
-                if(currAutoState):
-                    # Auto ON
-                    ser.write(("auto" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
-                    # print("turning on FAN!")
-                else:
-                    # Auto OFF
-                    ser.write(("manual" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
-                    # print("turning off FAN!")
-    
-            if(currWaterPumpState != oldWaterPumpState):
-                # update state
-                oldWaterPumpState = currWaterPumpState
-                
-                print("Water Pump state changed: ", currWaterPumpState)
-                
-                # Change arduino relay fan state
-                if(currWaterPumpState):
-                    # Fan ON
-                    ser.write(("waterPumpH" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
-                    # print("turning on FAN!")
-                else:
-                    # Fan OFF
-                    ser.write(("waterPumpL" + '\n').encode())
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning WATER PUMP.'))
-                    # print("turning off FAN!")
+                if(currFanState != oldFanState):
+                    # update state
+                    oldFanState = currFanState
+                    
+                    print("Fan state changed: ", currFanState)
+                    
+                    # Change arduino relay fan state
+                    if(currFanState):
+                        # Fan ON
+                        ser.write(("fanH" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
+                        # print("turning on FAN!")
+                    else:
+                        # Fan OFF
+                        ser.write(("fanL" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
+                        # print("turning off FAN!")
+                    
+                if(currHeaterState != oldHeaterState):
+                    # update state
+                    oldHeaterState = currHeaterState
+                    
+                    print("Heater state changed: ", currHeaterState)
+                    
+                    # Change arduino relay heater state
+                    if(currHeaterState):
+                        # Heater ON
+                        ser.write(('heaterH' + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+                    else:
+                        # Heater OFF
+                        ser.write(('heaterL' + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+        
+                if(currFan2State != oldFan2State):
+                    # update state
+                    oldFan2State = currFan2State
+                    
+                    print("Fan2 state changed: ", currFan2State)
+                    
+                    # Change arduino relay fan state
+                    if(currFan2State):
+                        # Fan ON
+                        ser.write(("fan2H" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
+                        # print("turning on FAN!")
+                    else:
+                        # Fan OFF
+                        ser.write(("fan2L" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
+                        # print("turning off FAN!")
+                    
+                if(currHumidifierState != oldHumidifierState):
+                    # update state
+                    oldHumidifierState = currHumidifierState
+                    
+                    print("Humidifier state changed: ", currHumidifierState)
+                    
+                    # Change arduino relay heater state
+                    if(currHumidifierState):
+                        # Humidifier ON
+                        ser.write(('humidifierH' + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
+                    else:
+                        # Humidifier OFF
+                        ser.write(('humidifierL' + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+        
+                if(currAutoState != oldAutoState):
+                    # update state
+                    oldAutoState = currAutoState
+                    
+                    print("Auto state changed: ", currAutoState)
+                    
+                    # Change arduino relay fan state
+                    if(currAutoState):
+                        # Auto ON
+                        ser.write(("auto" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+                        # print("turning on FAN!")
+                    else:
+                        # Auto OFF
+                        ser.write(("manual" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+                        # print("turning off FAN!")
+        
+                if(currWaterPumpState != oldWaterPumpState):
+                    # update state
+                    oldWaterPumpState = currWaterPumpState
+                    
+                    print("Water Pump state changed: ", currWaterPumpState)
+                    
+                    # Change arduino relay fan state
+                    if(currWaterPumpState):
+                        # Fan ON
+                        ser.write(("waterPumpH" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
+                        # print("turning on FAN!")
+                    else:
+                        # Fan OFF
+                        ser.write(("waterPumpL" + '\n').encode())
+                        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning WATER PUMP.'))
+                        # print("turning off FAN!")
+        
+            except ConnectionError:
+                print("No internet connection")
+            except Exception as e:
+                print(f"Other error occurred: {str(e)}")
 
         # Read a line of data from the serial port
         data = ser.readline().decode().strip()
@@ -325,17 +347,24 @@ try:
             if check_internet(): # if there is an internet connection
                 # update the firebase realtime database
                 # update the temp
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
-                print("Sending data to firebase realtime database...")
                 
-                ref.update({"temp":jsonData["temperature"]})
-                ref.update({"humid":jsonData["humidity"]})
-                ref.update({"water":jsonData["waterLevel"]})
-                ref.update({"co2":jsonData["co2ppm"]})
-                
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
-                print("Data has been sent to firebase realtime database.")
-
+                try:
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
+                    print("Sending data to firebase realtime database...")
+        
+                    ref.update({"temp":jsonData["temperature"]})
+                    ref.update({"humid":jsonData["humidity"]})
+                    ref.update({"water":jsonData["waterLevel"]})
+                    ref.update({"co2":jsonData["co2ppm"]})
+                    
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                    print("Data has been sent to firebase realtime database.")         
+                    
+                except ConnectionError:
+                    print("No internet connection")
+                except Exception as e:
+                    print(f"Other error occurred: {str(e)}")
+    
             else:
                 logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection. Can\'t send to firebase realtime database.'))
                 print("No Internet Connection. Can\'t send to firebase realtime database.")
