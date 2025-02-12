@@ -337,8 +337,8 @@ try:
                 print("Data has been sent to firebase realtime database.")
 
             else:
-                logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection. Can't send to firebase realtime database.'))
-                print("No Internet Connection. Can't send to firebase realtime database.")
+                logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S No Internet Connection. Can\'t send to firebase realtime database.'))
+                print("No Internet Connection. Can\'t send to firebase realtime database.")
 
             ###### Saving to local database #######
             timeDiff = datetime.now() - oldDateTime
