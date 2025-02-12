@@ -52,7 +52,7 @@ while internet == False:
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Checking Internet Connection again...'))
     print("Checking Internet Connection again...")
 
-    timer.sleep
+    time.sleep(1)
     internet=check_internet()
 
 print("Connected to Internet.")
