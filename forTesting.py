@@ -96,20 +96,22 @@ print("Done.")
 ########## Finding Serial Port ##############
 
 cred = credentials.Certificate("/home/admin/Desktop/main/key.json")
+initialized = False
 def connectToFirebase():
     ########## Checking Firebase ##############
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
     print("Connecting to Firebase Realtime Database...")
 
-    try:
-        # Initialize Firebase Admin SDK with your service account credentials
-        firebase_admin.initialize_app(cred, {
-            'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
-        })
-    except Exception as e:
-         print(f"Unexpected error: {str(e)}")
+    if(not initialized):
+        try:
+            # Initialize Firebase Admin SDK with your service account credentials
+            firebase_admin.initialize_app(cred, {
+                'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
+            })
+            initialized = True
+        except Exception as e:
+            print(f"Unexpected error: {str(e)}")
     # Reference to the specific path in the Firebase Realtime Database
-    
 
     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
     print("Done.")
