@@ -216,7 +216,7 @@ void loop(){
     }
   }
 
-  // delay(1000);
+  delay(1000);
 
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["temperature"] = temperature;
