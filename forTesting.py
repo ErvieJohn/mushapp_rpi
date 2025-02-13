@@ -100,22 +100,22 @@ initialized = False
 def connectToFirebase():
     global initialized
     ########## Checking Firebase ##############
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
-    print("Connecting to Firebase Realtime Database...")
-
     if(not initialized):
         try:
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connecting to Firebase Realtime Database...'))
+            print("Connecting to Firebase Realtime Database...")
+            
             # Initialize Firebase Admin SDK with your service account credentials
             firebase_admin.initialize_app(cred, {
                 'databaseURL': 'https://mushapp-c0311-default-rtdb.firebaseio.com/'
             })
             initialized = True
+            
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
+            print("Done.")
         except Exception as e:
             print(f"Unexpected error: {str(e)}")
     # Reference to the specific path in the Firebase Realtime Database
-
-    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Connected to Firebase Realtime Database.'))
-    print("Done.")
 
     return db.reference('/')
     ########## Checking Firebase ##############
