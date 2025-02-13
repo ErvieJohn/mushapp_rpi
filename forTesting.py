@@ -31,7 +31,8 @@ LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_l
 
 for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
-logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
+#logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)    
+logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO) 
 logging.info('Forecasting Job Started...')
 logging.debug('mushapp method started...')
 ########### CHECKING INTERNET ###############
