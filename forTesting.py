@@ -134,6 +134,8 @@ try:
 
     oldAutoState = False
 
+    oldPeltierState = False
+
     if check_internet():
         ref = connectToFirebase()
 
@@ -148,6 +150,8 @@ try:
         oldWaterPumpState = oldData["waterPump"]
 
         oldAutoState = oldData["auto"]
+
+        oldPeltierState = oldData["peltier"]
 
     oldDateTime = datetime.now()
     
@@ -212,6 +216,16 @@ try:
         # Fan OFF
         ser.write(("waterPumpL" + '\n').encode())
         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
+
+    if(oldPeltierState):
+        # Fan ON
+        ser.write(("peltierH" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
+        # print("turning on FAN!")
+    else:
+        # Fan OFF
+        ser.write(("peltierL" + '\n').encode())
+        logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF PELTIER.'))
     
     while True:
         if check_internet():
@@ -228,6 +242,8 @@ try:
             currWaterPumpState = currData["waterPump"]
 
             currAutoState = currData["auto"]
+
+            currPeltierState = currData["peltier"]
             
             if(currFanState != oldFanState):
                 # update state
@@ -331,6 +347,24 @@ try:
                     # Fan OFF
                     ser.write(("waterPumpL" + '\n').encode())
                     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning WATER PUMP.'))
+                    # print("turning off FAN!")
+
+            if(currPeltierState != oldPeltierState):
+                # update state
+                oldPeltierState = currPeltierState
+                
+                print("Peltier state changed: ", currPeltierState)
+                
+                # Change arduino relay fan state
+                if(currPeltierState):
+                    # Fan ON
+                    ser.write(("peltierH" + '\n').encode())
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
+                    # print("turning on FAN!")
+                else:
+                    # Fan OFF
+                    ser.write(("peltierL" + '\n').encode())
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAPELTIERN.'))
                     # print("turning off FAN!")
 
         # Read a line of data from the serial port
