@@ -86,6 +86,7 @@ void loop(){
       digitalWrite(HUMIDIFIER_PIN, LOW);
       digitalWrite(EXHAUST_PIN2, LOW);
       digitalWrite(WATER_PUMP_PIN, LOW);
+      digitalWrite(PELTIER_PIN, LOW);
 
     } else if(command == "manual"){
       isAutomatic = false;
@@ -95,6 +96,7 @@ void loop(){
       digitalWrite(HUMIDIFIER_PIN, LOW);
       digitalWrite(EXHAUST_PIN2, LOW);
       digitalWrite(WATER_PUMP_PIN, LOW);
+      digitalWrite(PELTIER_PIN, LOW);
     }
 
     if(!isAutomatic){
@@ -126,6 +128,12 @@ void loop(){
   
       } else if (command == "waterPumpL") {
         digitalWrite(WATER_PUMP_PIN, LOW);
+  
+      } else if (command == "peltierH") { 
+        digitalWrite(PELTIER_PIN, HIGH);
+  
+      } else if (command == "peltierL") {
+        digitalWrite(PELTIER_PIN, LOW);
   
       }
     }
@@ -216,6 +224,15 @@ void loop(){
         }
       } else if(waterLevel>=12){
         digitalWrite(WATER_PUMP_PIN, LOW);
+      }
+
+      // FOR PELTIER
+      if(temperature < 20){
+        digitalWrite(PELTIER_PIN, LOW);
+        digitalWrite(HEATER_PIN, HIGH);
+      } else {
+        digitalWrite(PELTIER_PIN, HIGH);
+        digitalWrite(HEATER_PIN, LOW);
       }
     }
   }
