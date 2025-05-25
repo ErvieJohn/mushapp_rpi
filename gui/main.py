@@ -33,11 +33,11 @@ class TabButtonLayout(QWidget):
         font.setPointSize(13)
 
         # Create labels
-        self.label1 = QLabel("Temperature: <b>33.1°C</b>")
-        self.label2 = QLabel("Humidity: <b>33.1%</b>")
-        self.label3 = QLabel("CO2: <b>33.1 PPM</b>")
-        self.label4 = QLabel("Water Percentage: <b>33.1%</b>")
-        self.label5 = QLabel("Water Level: <b>5</b>")
+        self.label1 = QLabel("Temperature: <b>0°C</b>")
+        self.label2 = QLabel("Humidity: <b>0%</b>")
+        self.label3 = QLabel("CO2: <b>0 PPM</b>")
+        self.label4 = QLabel("Water Percentage: <b>0%</b>")
+        self.label5 = QLabel("Water Level: <b>0</b>")
 
         self.loading = QLabel("Initializing...")
         fontLoading = QFont()
