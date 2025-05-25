@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont
 
 class FullScreenApp(QWidget):
     def __init__(self):
@@ -16,6 +17,9 @@ class FullScreenApp(QWidget):
         # Proper layout to center the label
         layout = QVBoxLayout(self)
         label = QLabel("Hello LCD 3.5\" Screen!", self)
+        font = QFont()
+        font.setPointSize(5)  # Set font size to 20 points
+        label.setFont(font)
         label.setAlignment(Qt.AlignCenter)
         layout.addWidget(label)
         self.setLayout(layout)
