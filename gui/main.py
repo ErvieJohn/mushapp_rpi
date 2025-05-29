@@ -581,7 +581,7 @@ class TabButtonLayout(QWidget):
         ########## Checking Firebase ##############
 
 
-    def find_available_port():
+    def find_available_port(self):
         # List all available ports
         serial_port = list(serial.tools.list_ports.comports())
         for port in serial_port:
