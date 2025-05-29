@@ -487,7 +487,7 @@ class TabButtonLayout(QWidget):
                         print(f"Unexpected error: {str(e)}")
                         self.jsonData = {"temperature": 0, "humidity": 0, "waterLevel": 0, "co2ppm": 0}
 
-                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=jsonData)))
+                    logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data Collected: {data}'.format(data=self.jsonData)))
                     print(self.jsonData)
 
                     # update the firebase realtime database
