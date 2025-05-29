@@ -323,7 +323,7 @@ class TabButtonLayout(QWidget):
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
             
         # Detect removed ports
-        self.removed_ports = known_ports - self.current_ports
+        self.removed_ports = self.known_ports - self.current_ports
         for port in self.removed_ports:
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Arduino unplugged: {port}.'))
             print(f"Arduino unplugged: {port}")
@@ -332,7 +332,7 @@ class TabButtonLayout(QWidget):
             self.arduino_connected = False
             self.ser.close()
             
-        known_ports = self.current_ports
+        self.known_ports = self.current_ports
 
         if self.arduino_connected:
             #try:
