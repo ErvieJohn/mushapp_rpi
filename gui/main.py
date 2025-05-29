@@ -549,8 +549,8 @@ class TabButtonLayout(QWidget):
                     ####################################
 
                 else:
-                    logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=data)))
-                    print("Error:", data)
+                    logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error: {data}'.format(data=self.data)))
+                    print("Error:", self.data)
             except serial.serialutil.SerialException as e:
                 print(f"SerialException caught: {e}")
                 # You might want to mark Arduino as disconnected here
