@@ -122,7 +122,7 @@ class TabButtonLayout(QWidget):
         grid.addWidget(self.label7, 1, 0)
         grid.addWidget(self.switch2, 1, 1)
         grid.addWidget(self.label8, 1, 2)
-        grid.addWidget(self.switch3, 1, 4)
+        grid.addWidget(self.switch3, 1, 3)
         
         grid.addWidget(self.label9, 2, 0)
         grid.addWidget(self.switch4, 2, 1)
