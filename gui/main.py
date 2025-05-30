@@ -117,23 +117,23 @@ class TabButtonLayout(QWidget):
         for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
             switch.setChecked(False)
         
-        grid.addWidget(self.label6, 4, 1)
-        grid.addWidget(self.switch1, 4, 2)
+        grid.addWidget(self.label6, 3, 1)
+        grid.addWidget(self.switch1, 3, 1)
 
-        grid.addWidget(self.label7, 5, 1)
-        grid.addWidget(self.switch2, 5, 2)
-        grid.addWidget(self.label8, 5, 3)
-        grid.addWidget(self.switch3, 5, 4)
+        grid.addWidget(self.label7, 4, 1)
+        grid.addWidget(self.switch2, 4, 2)
+        # grid.addWidget(self.label8, 5, 3)
+        # grid.addWidget(self.switch3, 6, 4)
         
-        grid.addWidget(self.label9, 6, 1)
-        grid.addWidget(self.switch4, 6, 2)
-        grid.addWidget(self.label10, 6, 3)
-        grid.addWidget(self.switch5, 6, 4)
+        # grid.addWidget(self.label9, 6, 1)
+        # grid.addWidget(self.switch4, 6, 2)
+        # grid.addWidget(self.label10, 6, 3)
+        # grid.addWidget(self.switch5, 6, 4)
 
-        grid.addWidget(self.label11, 7, 1)
-        grid.addWidget(self.switch6, 7, 2)
-        grid.addWidget(self.label12, 7, 3)
-        grid.addWidget(self.switch7, 7, 4)
+        # grid.addWidget(self.label11, 7, 1)
+        # grid.addWidget(self.switch6, 7, 2)
+        # grid.addWidget(self.label12, 7, 3)
+        # grid.addWidget(self.switch7, 7, 4)
 
         # Create two buttons (like tabs)
         button1 = QPushButton("Home")
