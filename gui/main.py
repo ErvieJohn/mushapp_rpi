@@ -115,14 +115,17 @@ class TabButtonLayout(QWidget):
 
         # Arrange labels in cross shape
         grid = QGridLayout()
-        
+        self.empty_widget = QWidget()
+
+
         grid.addWidget(self.label6, 0, 1)
-        grid.addWidget(self.switch1, 0, 1)
+        grid.addWidget(self.switch1, 0, 2)
 
         grid.addWidget(self.label7, 1, 0)
         grid.addWidget(self.switch2, 1, 1)
         grid.addWidget(self.label8, 1, 2)
-        grid.addWidget(self.switch3, 1, 3)
+        grid.addWidget(self.empty_widget, 1, 3)
+        grid.addWidget(self.switch3, 1, 4)
         
         grid.addWidget(self.label9, 2, 0)
         grid.addWidget(self.switch4, 2, 1)
