@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton,
-    QVBoxLayout, QHBoxLayout, QGridLayout
+    QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy
 )
 from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen
 from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect
@@ -28,6 +28,7 @@ class MySwitch(QPushButton):
         self.setCheckable(True)
         self.setMinimumWidth(66)
         self.setMinimumHeight(22)
+        self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
     def paintEvent(self, event):
         label = "ON" if self.isChecked() else "OFF"
@@ -52,7 +53,7 @@ class MySwitch(QPushButton):
         if not self.isChecked():
             sw_rect.moveLeft(-width)
         painter.drawRoundedRect(sw_rect, radius, radius)
-        painter.drawText(sw_rect, Qt.AlignLeft, label)
+        painter.drawText(sw_rect, Qt.AlignCenter, label)
 
 class TabButtonLayout(QWidget):
     def __init__(self):
@@ -117,30 +118,30 @@ class TabButtonLayout(QWidget):
         grid = QGridLayout()
 
         grid.addWidget(self.label6, 0, 1)
-        grid.addWidget(self.switch1, 0, 2)
+        grid.addWidget(self.switch1, 0, 2, Qt.AlignLeft)
 
         grid.addWidget(self.label7, 1, 0)
-        grid.addWidget(self.switch2, 1, 1)
+        grid.addWidget(self.switch2, 1, 1, Qt.AlignLeft)
         grid.addWidget(self.label8, 1, 2)
-        grid.addWidget(self.switch3, 1, 3)
+        grid.addWidget(self.switch3, 1, 3, Qt.AlignLeft)
         
         grid.addWidget(self.label9, 2, 0)
-        grid.addWidget(self.switch4, 2, 1)
+        grid.addWidget(self.switch4, 2, 1, Qt.AlignLeft)
         grid.addWidget(self.label10, 2, 2)
-        grid.addWidget(self.switch5, 2, 3)
+        grid.addWidget(self.switch5, 2, 3, Qt.AlignLeft)
 
         grid.addWidget(self.label11, 3, 0)
-        grid.addWidget(self.switch6, 3, 1)
+        grid.addWidget(self.switch6, 3, 1, Qt.AlignLeft)
         grid.addWidget(self.label12, 3, 2)
-        grid.addWidget(self.switch7, 3, 3)
+        grid.addWidget(self.switch7, 3, 3, Qt.AlignLeft)
         
         # FOR VALUES
         grid.addWidget(self.label1, 5, 0)
-        grid.addWidget(self.label2, 5, 2)
+        grid.addWidget(self.label2, 5, 2, Qt.AlignLeft)
         grid.addWidget(self.label3, 6, 1)
-        grid.addWidget(self.label4, 7, 0)
+        grid.addWidget(self.label4, 7, 0, Qt.AlignLeft)
         grid.addWidget(self.label5, 7, 2)
-        grid.addWidget(self.loading, 8, 1)
+        grid.addWidget(self.loading, 8, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
         button1 = QPushButton("Home")
