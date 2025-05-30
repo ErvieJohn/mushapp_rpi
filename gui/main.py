@@ -52,7 +52,7 @@ class MySwitch(QPushButton):
         if not self.isChecked():
             sw_rect.moveLeft(-width)
         painter.drawRoundedRect(sw_rect, radius, radius)
-        painter.drawText(sw_rect, Qt.AlignCenter, label)
+        painter.drawText(sw_rect, Qt.AlignLeft, label)
 
 class TabButtonLayout(QWidget):
     def __init__(self):
@@ -92,7 +92,7 @@ class TabButtonLayout(QWidget):
         
         for label in self.labels:
             label.setFont(font)
-            label.setAlignment(Qt.AlignCenter)
+            label.setAlignment(Qt.AlignLeft)
             label.hide()
 
         
