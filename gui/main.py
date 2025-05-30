@@ -96,8 +96,8 @@ class TabButtonLayout(QWidget):
         
         self.ch_bx3 = MySwitch()
         self.ch_bx3.setChecked(True)
-        self.ch_bx3.clicked.connect(True)
-        self.ch_bx3.clicked.connect(True)
+        # self.ch_bx3.clicked.connect(True)
+        # self.ch_bx3.clicked.connect(True)
         
         grid.addWidget(self.ch_bx3, 4, 1)
 
