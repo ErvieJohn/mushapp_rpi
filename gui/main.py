@@ -100,7 +100,7 @@ class TabButtonLayout(QWidget):
         
         self.switch1 = MySwitch()
         self.switch1.setChecked(True)
-        self.switch1.clicked.connect(self.clicked_auto)
+        # self.switch1.clicked.connect(self.clicked_auto)
         self.switch2 = MySwitch()
         self.switch2.clicked.connect(self.clicked_fan1)
         self.switch3 = MySwitch()
