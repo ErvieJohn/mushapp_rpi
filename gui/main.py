@@ -26,7 +26,8 @@ class MySwitch(QPushButton):
         super().__init__(parent)
         print('init')
         self.setCheckable(True)
-        self.setMinimumWidth(66)
+        self.setMinimumWidth(30)
+        self.setMaximumWidth(30)
         self.setMinimumHeight(22)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
@@ -180,7 +181,7 @@ class TabButtonLayout(QWidget):
 
         self.setLayout(main_layout)
         self.setWindowTitle("Mushapp")
-        self.setMaximumWidth(550)
+        # self.setMaximumWidth(550)
         self.showFullScreen()
 
         self.initializing()
