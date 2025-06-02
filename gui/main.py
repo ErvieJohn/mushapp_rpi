@@ -103,16 +103,23 @@ class TabButtonLayout(QWidget):
         
         self.switch1 = MySwitch()
         self.switch1.setChecked(True)
-        # self.ch_bx3.clicked.connect(True)
+        self.switch1.clicked.connect(self.clicked_auto)
         self.switch2 = MySwitch()
+        self.switch2.clicked.connect(self.clicked_fan1)
         self.switch3 = MySwitch()
+        self.switch3.clicked.connect(self.clicked_fan2)
         self.switch4 = MySwitch()
+        self.switch4.clicked.connect(self.clicked_heater)
         self.switch5 = MySwitch()
+        self.switch5.clicked.connect(self.clicked_humid)
         self.switch6 = MySwitch()
+        self.switch6.clicked.connect(self.clicked_peltier)
         self.switch7 = MySwitch()
+        self.switch7.clicked.connect(self.clicked_waterPump)
 
         for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
             switch.setChecked(False)
+            switch.hide()
 
         # Arrange labels in cross shape
         grid = QGridLayout()
@@ -394,7 +401,7 @@ class TabButtonLayout(QWidget):
             self.baud_rate = 9600
 
             # Open the serial port
-            self.ser = serial.Serial(serial_port, self.baud_rate, timeout=1)
+            self.ser = serial.Serial(self.serial_port, self.baud_rate, timeout=1)
             self.arduino_connected = True
             
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Arduino plugged in: {port}.'))
@@ -585,10 +592,10 @@ class TabButtonLayout(QWidget):
 
                     if self.check_internet(): # if there is an internet connection
                         try:
-                            ref.update({"temp":self.jsonData["temperature"]})
-                            ref.update({"humid":self.jsonData["humidity"]})
-                            ref.update({"water":self.jsonData["waterLevel"]})
-                            ref.update({"co2":self.jsonData["co2ppm"]})
+                            self.ref.update({"temp":self.jsonData["temperature"]})
+                            self.ref.update({"humid":self.jsonData["humidity"]})
+                            self.ref.update({"water":self.jsonData["waterLevel"]})
+                            self.ref.update({"co2":self.jsonData["co2ppm"]})
 
                             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                             print("Data has been sent to firebase realtime database.")
@@ -639,7 +646,6 @@ class TabButtonLayout(QWidget):
                 #arduino_connected = False
                 self.ser.close()
 
-
     def connectToFirebase(self):
         ########## Checking Firebase ##############
         if(not self.initialized):
@@ -662,7 +668,6 @@ class TabButtonLayout(QWidget):
         return db.reference('/')
         ########## Checking Firebase ##############
 
-
     def find_available_port(self):
         # List all available ports
         serial_port = list(serial.tools.list_ports.comports())
@@ -683,6 +688,203 @@ class TabButtonLayout(QWidget):
         except requests.ConnectionError:
             logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error Connecting to Internet.'))
             return False
+
+    def clicked_auto(self):
+        if self.switch1.isChecked():
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.hide()
+
+            self.ser.write(('auto' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+
+        else:
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.show()
+
+            self.ser.write(('manual' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+        
+        self.oldAutoState = not self.switch1.isChecked()
+        self.currAutoState = not self.switch1.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"auto": not self.switch1.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch1.setChecked(not self.switch1.isChecked())
+
+    def clicked_fan1(self):
+        # Change arduino relay fan state
+        if(not self.switch2.isChecked()):
+            # Fan ON
+            self.ser.write(("fanH" + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
+            # print("turning on FAN!")
+            
+        else:
+            # Fan OFF
+            self.ser.write(("fanL" + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
+            # print("turning off FAN!")
+
+        self.oldFanState = not self.switch2.isChecked()
+        self.currFanState = not self.switch2.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"fan2": not self.switch2.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch2.setChecked(not self.switch2.isChecked())
+
+    def clicked_fan2(self):
+        if(not self.switch3.isChecked()):
+            # Fan ON
+            self.ser.write(("fan2H" + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
+            # print("turning on FAN!")
+            
+        else:
+            # Fan OFF
+            self.ser.write(("fan2L" + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
+            # print("turning off FAN!")
+
+        self.oldFan2State = not self.switch3.isChecked()
+        self.currFan2State = not self.switch3.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"fan2": not self.switch3.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch3.setChecked(not self.switch3.isChecked())
+    
+    def clicked_heater(self):
+        # Change arduino relay heater state
+        if(not self.switch4.isChecked()):
+            # Heater ON
+            self.ser.write(('heaterH' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+        else:
+            # Heater OFF
+            self.ser.write(('heaterL' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+  
+        self.oldHeaterState = not self.switch4.isChecked()
+        self.currHeaterState = not self.switch4.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"heater": not self.switch4.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch4.setChecked(not self.switch4.isChecked())
+
+    def clicked_humid(self):
+        if(not self.switch5.isChecked()):
+            # Humidifier ON
+            self.ser.write(('humidifierH' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
+        else:
+            # Humidifier OFF
+            self.ser.write(('humidifierL' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+
+        self.oldHumidifierState = not self.switch5.isChecked()
+        self.currHumidifierState = not self.switch5.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"humidifier": not self.switch5.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch5.setChecked(not self.switch5.isChecked())
+
+    def clicked_peltier(self):
+        if(not self.switch6.isChecked()):
+            # Peltier ON
+            self.ser.write(('peltierH' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
+        else:
+            # Peltier OFF
+            self.ser.write(('peltierL' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF PELTIER.'))
+
+        self.oldPeltierState = not self.switch6.isChecked()
+        self.currPeltierState = not self.switch6.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"peltier": not self.switch6.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch6.setChecked(not self.switch6.isChecked())
+
+    def clicked_waterPump(self):
+        if(not self.switch7.isChecked()):
+            # WATER PUMP ON
+            self.ser.write(('waterPumpH' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
+        else:
+            # WATER PUMP OFF
+            self.ser.write(('waterPumpL' + '\n').encode())
+            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
+
+        self.oldWaterPumpState = not self.switch7.isChecked()
+        self.currWaterPumpState = not self.switch7.isChecked()
+
+        if self.check_internet(): # if there is an internet connection
+            try:
+                self.ref.update({"waterPump": not self.switch7.isChecked()})
+                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+                print("Data has been sent to firebase realtime database.")
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+                print(f"Failed to update Firebase: {str(e)}")
+
+        self.switch7.setChecked(not self.switch7.isChecked())
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
