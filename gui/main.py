@@ -183,8 +183,8 @@ class TabButtonLayout(QWidget):
 
         self.setLayout(main_layout)
         self.setWindowTitle("Mushapp")
-        self.setMaximumWidth(600)
-        self.setMinimumWidth(600)
+        self.setMaximumWidth(500)
+        self.setMinimumWidth(500)
         self.showFullScreen()
 
         self.initializing()
