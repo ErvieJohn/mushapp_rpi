@@ -87,13 +87,7 @@ class TabButtonLayout(QWidget):
         self.loading.setFont(fontLoading)
         self.loading.setAlignment(Qt.AlignCenter)
 
-        self.labels = [self.label1, self.label2, self.label4, self.label5, self.label6]
-
-        self.label3.setFont(font)
-        self.label3.setAlignment(Qt.AlignLeft)
-        self.label3.setMaximumWidth(90)
-        self.label3.setMinimumWidth(90)
-        self.label3.hide()
+        self.labels = [self.label1, self.label2, self.label4,  self.label3, self.label5, self.label6]
         
         # self.label7, self.label8, self.label9, self.label10, self.label11, self.label12
         for label in self.labels:
@@ -109,8 +103,6 @@ class TabButtonLayout(QWidget):
             label.setFont(font)
             label.setAlignment(Qt.AlignLeft)
             label.hide()
-
-        self.label7.setAlignment(Qt.AlignRight)
 
         # Switch Button
         
@@ -137,31 +129,31 @@ class TabButtonLayout(QWidget):
         # Arrange labels in cross shape
         grid = QGridLayout()
 
-        grid.addWidget(self.label6, 5, 1)
-        grid.addWidget(self.switch1, 5, 2, Qt.AlignLeft)
+        grid.addWidget(self.label6, 0, 1)
+        grid.addWidget(self.switch1, 0, 2, Qt.AlignLeft)
 
-        grid.addWidget(self.label7, 6, 0)
-        grid.addWidget(self.switch2, 6, 1, Qt.AlignLeft)
-        grid.addWidget(self.label8, 6, 2)
-        grid.addWidget(self.switch3, 6, 3, Qt.AlignLeft)
+        grid.addWidget(self.label7, 1, 0)
+        grid.addWidget(self.switch2, 1, 1, Qt.AlignLeft)
+        grid.addWidget(self.label8, 1, 2)
+        grid.addWidget(self.switch3, 1, 3, Qt.AlignLeft)
         
-        grid.addWidget(self.label9, 7, 0)
-        grid.addWidget(self.switch4, 7, 1, Qt.AlignLeft)
-        grid.addWidget(self.label10, 7, 2)
-        grid.addWidget(self.switch5, 7, 3, Qt.AlignLeft)
+        grid.addWidget(self.label9, 2, 0)
+        grid.addWidget(self.switch4, 2, 1, Qt.AlignLeft)
+        grid.addWidget(self.label10, 2, 2)
+        grid.addWidget(self.switch5, 2, 3, Qt.AlignLeft)
 
-        grid.addWidget(self.label11, 8, 0)
-        grid.addWidget(self.switch6, 8, 1, Qt.AlignLeft)
-        grid.addWidget(self.label12, 8, 2)
-        grid.addWidget(self.switch7, 8, 3, Qt.AlignLeft)
+        grid.addWidget(self.label11, 3, 0)
+        grid.addWidget(self.switch6, 3, 1, Qt.AlignLeft)
+        grid.addWidget(self.label12, 3, 2)
+        grid.addWidget(self.switch7, 3, 3, Qt.AlignLeft)
         
         # FOR VALUES
-        grid.addWidget(self.label1, 0, 0)
-        grid.addWidget(self.label2, 0, 2, Qt.AlignLeft)
-        grid.addWidget(self.label3, 1, 1)
-        grid.addWidget(self.label4, 2, 0, Qt.AlignLeft)
-        grid.addWidget(self.label5, 2, 2)
-        grid.addWidget(self.loading, 4, 1, Qt.AlignLeft)
+        grid.addWidget(self.label1, 5, 0)
+        grid.addWidget(self.label2, 5, 2, Qt.AlignLeft)
+        grid.addWidget(self.label3, 6, 1)
+        grid.addWidget(self.label4, 6, 0, Qt.AlignLeft)
+        grid.addWidget(self.label5, 7, 2)
+        grid.addWidget(self.loading, 8, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
         button1 = QPushButton("Home")
@@ -201,8 +193,6 @@ class TabButtonLayout(QWidget):
             self.loading.hide()
             for label in self.labels:
                 label.show()
-
-            self.label3.show()
 
         self.count = 0
         try:
