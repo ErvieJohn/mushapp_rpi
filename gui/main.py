@@ -87,14 +87,20 @@ class TabButtonLayout(QWidget):
         self.loading.setFont(fontLoading)
         self.loading.setAlignment(Qt.AlignCenter)
 
-        self.labels = [self.label1, self.label2, self.label3, self.label4, self.label5, self.label6]
+        self.labels = [self.label1, self.label2, self.label4, self.label5, self.label6]
+
+        self.label3.setFont(font)
+        self.label3.setAlignment(Qt.AlignLeft)
+        self.label3.setMaximumWidth(90)
+        self.label3.setMinimumWidth(90)
+        self.label3.hide()
         
         # self.label7, self.label8, self.label9, self.label10, self.label11, self.label12
         for label in self.labels:
             label.setFont(font)
             label.setAlignment(Qt.AlignLeft)
             label.setMaximumWidth(130)
-            # label.setMinimumWidth(130)
+            label.setMinimumWidth(130)
             label.hide()
 
         self.switchLabels = [self.label7, self.label8, self.label9, self.label10, self.label11, self.label12]
@@ -145,7 +151,7 @@ class TabButtonLayout(QWidget):
         grid.addWidget(self.label11, 8, 0)
         grid.addWidget(self.switch6, 8, 1, Qt.AlignLeft)
         grid.addWidget(self.label12, 8, 2)
-        grid.addWidget(self.switch7, 9, 3, Qt.AlignLeft)
+        grid.addWidget(self.switch7, 8, 3, Qt.AlignLeft)
         
         # FOR VALUES
         grid.addWidget(self.label1, 0, 0)
@@ -193,6 +199,8 @@ class TabButtonLayout(QWidget):
             self.loading.hide()
             for label in self.labels:
                 label.show()
+
+            self.label3.show()
 
         self.count = 0
         try:
