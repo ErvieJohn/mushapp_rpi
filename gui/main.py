@@ -62,6 +62,8 @@ class TabButtonLayout(QWidget):
         # INITIATION
         self.init = True
 
+        self.isHome = True
+
         # Font setup
         font = QFont()
         font.setPointSize(10)
@@ -153,7 +155,7 @@ class TabButtonLayout(QWidget):
         grid.addWidget(self.label3, 6, 1)
         grid.addWidget(self.label4, 6, 0, Qt.AlignLeft)
         grid.addWidget(self.label5, 7, 2)
-        grid.addWidget(self.loading, 8, 1, Qt.AlignLeft)
+        grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
         button1 = QPushButton("Home")
