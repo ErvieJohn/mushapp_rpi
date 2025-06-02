@@ -26,8 +26,7 @@ class MySwitch(QPushButton):
         super().__init__(parent)
         print('init')
         self.setCheckable(True)
-        self.setMinimumWidth(30)
-        self.setMaximumWidth(30)
+        self.setMinimumWidth(66)
         self.setMinimumHeight(22)
         self.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
 
@@ -65,7 +64,7 @@ class TabButtonLayout(QWidget):
 
         # Font setup
         font = QFont()
-        font.setPointSize(13)
+        font.setPointSize(11)
 
         # Create labels
         self.label1 = QLabel("Temperature: <b>0°C</b>")
@@ -89,10 +88,13 @@ class TabButtonLayout(QWidget):
         self.loading.setAlignment(Qt.AlignCenter)
 
         self.labels = [self.label1, self.label2, self.label3, self.label4, self.label5, self.label6]
+        
         # self.label7, self.label8, self.label9, self.label10, self.label11, self.label12
         for label in self.labels:
             label.setFont(font)
             label.setAlignment(Qt.AlignLeft)
+            label.setMaximumWidth(50)
+            label.setMinimumWidth(50)
             label.hide()
 
         self.switchLabels = [self.label7, self.label8, self.label9, self.label10, self.label11, self.label12]
