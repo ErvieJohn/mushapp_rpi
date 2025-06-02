@@ -736,6 +736,7 @@ class TabButtonLayout(QWidget):
             return False
 
     def clicked_auto(self):
+        print("CLICKED AUTOOOOOOO: ", self.switch1.isChecked())
         self.switchLabels = [self.label7, self.label8, self.label9, self.label10, 
                         self.label11, self.label12]
 
