@@ -96,9 +96,6 @@ class TabButtonLayout(QWidget):
             label.setAlignment(Qt.AlignLeft)
             label.hide()
 
-        
-        
-
         # Switch Button
         
         self.switch1 = MySwitch()
@@ -298,40 +295,49 @@ class TabButtonLayout(QWidget):
                 self.ser.write(("fanH" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
                 # print("turning on FAN!")
+
+                self.switch2.setChecked(True)
             else:
                 # Fan OFF
                 self.ser.write(("fanL" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
+                self.switch2.setChecked(False)
 
             # Change arduino relay heater state
             if(self.oldHeaterState):
                 # Heater ON
                 self.ser.write(('heaterH' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+                self.switch4.setChecked(True)
             else:
                 # Heater OFF
                 self.ser.write(('heaterL' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+                self.switch4.setChecked(False)
 
             if(self.oldFan2State):
                 # Fan ON
                 self.ser.write(("fan2H" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
                 # print("turning on FAN!")
+                self.switch3.setChecked(True)
             else:
                 # Fan OFF
                 self.ser.write(("fan2L" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
+                self.switch3.setChecked(False)
 
             # Change arduino relay heater state
             if(self.oldHumidifierState):
                 # Heater ON
                 self.ser.write(('humidifierH' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
+                self.switch5.setChecked(True)
             else:
                 # Heater OFF
                 self.ser.write(('humidifierL' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+                self.switch5.setChecked(False)
 
             # Change arduino relay heater state
             if(self.oldAutoState):
@@ -339,30 +345,38 @@ class TabButtonLayout(QWidget):
                 self.ser.write(('auto' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
                 self.ref.update({'auto': True})
+                self.switch1.setChecked(True)
             else:
                 # Heater OFF
                 self.ser.write(('manual' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+                self.switch1.setChecked(False)
 
             if(self.oldWaterPumpState):
                 # Fan ON
                 self.ser.write(("waterPumpH" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
                 # print("turning on FAN!")
+                self.switch7.setChecked(True)
+                
             else:
                 # Fan OFF
                 self.ser.write(("waterPumpL" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
+                self.switch7.setChecked(False)
 
             if(self.oldPeltierState):
                 # Fan ON
                 self.ser.write(("peltierH" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
                 # print("turning on FAN!")
+                self.switch6.setChecked(True)
+
             else:
                 # Fan OFF
                 self.ser.write(("peltierL" + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF PELTIER.'))
+                self.switch6.setChecked(False)
             
             self.init = False
 
@@ -454,11 +468,13 @@ class TabButtonLayout(QWidget):
                         self.ser.write(("fanH" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
                         # print("turning on FAN!")
+                        self.switch2.setChecked(True)
                     else:
                         # Fan OFF
                         self.ser.write(("fanL" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
                         # print("turning off FAN!")
+                        self.switch2.setChecked(False)
 
                 if(self.currHeaterState != self.oldHeaterState):
                     # update state
@@ -471,10 +487,12 @@ class TabButtonLayout(QWidget):
                         # Heater ON
                         self.ser.write(('heaterH' + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
+                        self.switch4.setChecked(True)
                     else:
                         # Heater OFF
                         self.ser.write(('heaterL' + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
+                        self.switch4.setChecked(False)
 
                 if(self.currFan2State != self.oldFan2State):
                     # update state
@@ -488,11 +506,13 @@ class TabButtonLayout(QWidget):
                         self.ser.write(("fan2H" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
                         # print("turning on FAN!")
+                        self.switch3.setChecked(True)
                     else:
                         # Fan OFF
                         self.ser.write(("fan2L" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
                         # print("turning off FAN!")
+                        self.switch3.setChecked(False)
 
                 if(self.currHumidifierState != self.oldHumidifierState):
                     # update state
@@ -505,10 +525,12 @@ class TabButtonLayout(QWidget):
                         # Humidifier ON
                         self.ser.write(('humidifierH' + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
+                        self.switch5.setChecked(True)
                     else:
                         # Humidifier OFF
                         self.ser.write(('humidifierL' + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
+                        self.switch5.setChecked(False)
 
                 if(self.currAutoState != self.oldAutoState):
                     # update state
@@ -522,11 +544,13 @@ class TabButtonLayout(QWidget):
                         self.ser.write(("auto" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
                         # print("turning on FAN!")
+                        self.switch1.setChecked(True)
                     else:
                         # Auto OFF
                         self.ser.write(("manual" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
                         # print("turning off FAN!")
+                        self.switch1.setChecked(False)
 
                 if(self.currWaterPumpState != self.oldWaterPumpState):
                     # update state
@@ -540,11 +564,13 @@ class TabButtonLayout(QWidget):
                         self.ser.write(("waterPumpH" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
                         # print("turning on FAN!")
+                        self.switch7.setChecked(True)
                     else:
                         # Fan OFF
                         self.ser.write(("waterPumpL" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning WATER PUMP.'))
                         # print("turning off FAN!")
+                        self.switch7.setChecked(False)
 
                 if(self.currPeltierState != self.oldPeltierState):
                     # update state
@@ -558,11 +584,13 @@ class TabButtonLayout(QWidget):
                         self.ser.write(("peltierH" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
                         # print("turning on FAN!")
+                        self.switch6.setChecked(True)
                     else:
                         # Fan OFF
                         self.ser.write(("peltierL" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF PELTIERN.'))
                         # print("turning off FAN!")
+                        self.switch6.setChecked(False)
 
             # Read a line of data from the serial port
             try:
@@ -690,18 +718,29 @@ class TabButtonLayout(QWidget):
             return False
 
     def clicked_auto(self):
-        if self.switch1.isChecked():
+        print("CLICKED: ", not self.switch1.isChecked())
+
+        self.switchLabels = [self.label7, self.label8, self.label9, self.label10, 
+                        self.label11, self.label12]
+
+        if not self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
                 switch.hide()
+
+            for label in self.switchLabels:
+                label.hide()
 
             self.ser.write(('auto' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
 
         else:
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
-                switch.setChecked(False)
+                switch.setChecked()
                 switch.show()
+
+                for label in self.switchLabels:
+                    label.show()
 
             self.ser.write(('manual' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
