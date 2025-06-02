@@ -94,8 +94,9 @@ class TabButtonLayout(QWidget):
             label.setAlignment(Qt.AlignLeft)
             label.hide()
 
-        self.swLabels= [self.label7, self.label8, self.label9, self.label10, self.label11, self.label12]
-        for label in self.swLabels:
+        self.switchLabels = [self.label7, self.label8, self.label9, self.label10, self.label11, self.label12]
+
+        for label in self.switchLabels:
             label.setFont(font)
             label.setAlignment(Qt.AlignLeft)
             label.hide()
@@ -755,8 +756,6 @@ class TabButtonLayout(QWidget):
 
     def clicked_auto(self):
         print("CLICKED AUTOOOOOOO: ", self.switch1.isChecked())
-        self.switchLabels = [self.label7, self.label8, self.label9, self.label10, 
-                        self.label11, self.label12]
 
         if not self.switch1.isChecked():
             print("AUTOOOOOOOOOOOOOOOO: ", self.switch1.isChecked())
