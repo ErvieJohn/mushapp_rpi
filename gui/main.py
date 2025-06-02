@@ -812,7 +812,7 @@ class TabButtonLayout(QWidget):
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"fan2": self.switch2.isChecked()})
+                self.ref.update({"fan": self.switch2.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
