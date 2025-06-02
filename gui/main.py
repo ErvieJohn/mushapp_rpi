@@ -736,46 +736,46 @@ class TabButtonLayout(QWidget):
             return False
 
     def clicked_auto(self):
-        print("CLICKED: ", not self.switch1.isChecked())
+        print("CLICKED: ", self.switch1.isChecked())
 
-        self.switchLabels = [self.label7, self.label8, self.label9, self.label10, 
-                        self.label11, self.label12]
+        # self.switchLabels = [self.label7, self.label8, self.label9, self.label10, 
+        #                 self.label11, self.label12]
 
-        if not self.switch1.isChecked():
-            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
-                switch.setChecked(False)
-                switch.hide()
+        # if not self.switch1.isChecked():
+        #     for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+        #         switch.setChecked(False)
+        #         switch.hide()
 
-            for label in self.switchLabels:
-                label.hide()
+        #     for label in self.switchLabels:
+        #         label.hide()
 
-            self.ser.write(('auto' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+        #     self.ser.write(('auto' + '\n').encode())
+        #     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
 
-        else:
-            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
-                switch.setChecked()
-                switch.show()
+        # else:
+        #     for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+        #         switch.setChecked()
+        #         switch.show()
 
-            for label in self.switchLabels:
-                label.show()
+        #     for label in self.switchLabels:
+        #         label.show()
 
-            self.ser.write(('manual' + '\n').encode())
-            logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
+        #     self.ser.write(('manual' + '\n').encode())
+        #     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
         
-        self.oldAutoState = not self.switch1.isChecked()
-        self.currAutoState = not self.switch1.isChecked()
+        # self.oldAutoState = not self.switch1.isChecked()
+        # self.currAutoState = not self.switch1.isChecked()
 
-        if self.check_internet(): # if there is an internet connection
-            try:
-                self.ref.update({"auto": not self.switch1.isChecked()})
-                logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
-                print("Data has been sent to firebase realtime database.")
+        # if self.check_internet(): # if there is an internet connection
+        #     try:
+        #         self.ref.update({"auto": not self.switch1.isChecked()})
+        #         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
+        #         print("Data has been sent to firebase realtime database.")
 
-            except Exception as e:
-                # Handle the error (you can log it or take alternative actions)
-                logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
-                print(f"Failed to update Firebase: {str(e)}")
+        #     except Exception as e:
+        #         # Handle the error (you can log it or take alternative actions)
+        #         logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
+        #         print(f"Failed to update Firebase: {str(e)}")
 
         self.switch1.setChecked(not self.switch1.isChecked())
 
