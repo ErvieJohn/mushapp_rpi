@@ -158,24 +158,63 @@ class TabButtonLayout(QWidget):
         grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
-        button1 = QPushButton("Home")
-        button2 = QPushButton("Logs")
-        
+        self.button1 = QPushButton("Home")
+        self.button2 = QPushButton("Logs")
+
+        self.button1.setStyleSheet("""
+            QPushButton {
+                background-color: lightgray;
+                color: black;
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+            QPushButton:pressed {
+                background-color: #a3d2ca;
+            }
+            QPushButton:disabled {
+                background-color: #e0e0e0;
+                color: #888;
+                border: 1px solid #aaa;
+            }
+        """)
+
+        self.button2.setStyleSheet("""
+            QPushButton {
+                background-color: lightgray;
+                color: black;
+                border: 1px solid #ccc;
+                padding: 5px;
+            }
+            QPushButton:pressed {
+                background-color: #a3d2ca;
+            }
+            QPushButton:disabled {
+                background-color: #e0e0e0;
+                color: #888;
+                border: 1px solid #aaa;
+            }
+        """)
+
+        self.button1.clicked.connect(self.clicked_home)
+        self.button2.clicked.connect(self.clicked_logs)
+
+        self.button1.setChecked(True)
+
         fontBtn = QFont("Arial", 13)
         fontBtn.setBold(True)
-        button1.setFont(fontBtn)
-        button2.setFont(fontBtn)
+        self.button1.setFont(fontBtn)
+        self.button2.setFont(fontBtn)
 
-        button1.setIcon(QIcon("images/home.png"))
-        button2.setIcon(QIcon("images/logs.png"))
+        self.button1.setIcon(QIcon("images/home.png"))
+        self.button2.setIcon(QIcon("images/logs.png"))
 
-        button1.setMinimumHeight(50)
-        button2.setMinimumHeight(50)
+        self.button1.setMinimumHeight(50)
+        self.button2.setMinimumHeight(50)
 
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
-        bottom_layout.addWidget(button1)
-        bottom_layout.addWidget(button2)
+        bottom_layout.addWidget(self.button1)
+        bottom_layout.addWidget(self.button2)
 
         # Combine everything in a vertical layout
         main_layout = QVBoxLayout()
@@ -963,6 +1002,14 @@ class TabButtonLayout(QWidget):
                 print(f"Failed to update Firebase: {str(e)}")
 
         # self.switch7.setChecked(not self.switch7.isChecked())
+
+    def clicked_home(self):
+        self.button1.setDisabled(True)
+        print("Clicked Home")
+
+    def clicked_logs(self):
+        self.button2.setDisabled(True)
+        print("Clicked Logs")
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
