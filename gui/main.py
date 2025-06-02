@@ -755,10 +755,7 @@ class TabButtonLayout(QWidget):
             return False
 
     def clicked_auto(self):
-        print("CLICKED AUTOOOOOOO: ", self.switch1.isChecked())
-
-        if not self.switch1.isChecked():
-            print("AUTOOOOOOOOOOOOOOOO: ", self.switch1.isChecked())
+        if self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
                 switch.hide()
@@ -770,7 +767,6 @@ class TabButtonLayout(QWidget):
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
 
         else:
-            print("MANUALLLLLLLLL: ", self.switch1.isChecked())
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
                 switch.show()
@@ -781,12 +777,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(('manual' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
         
-        self.oldAutoState = not self.switch1.isChecked()
-        self.currAutoState = not self.switch1.isChecked()
+        self.oldAutoState = self.switch1.isChecked()
+        self.currAutoState = self.switch1.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"auto": not self.switch1.isChecked()})
+                self.ref.update({"auto": self.switch1.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -799,7 +795,7 @@ class TabButtonLayout(QWidget):
 
     def clicked_fan1(self):
         # Change arduino relay fan state
-        if(not self.switch2.isChecked()):
+        if(self.switch2.isChecked()):
             # Fan ON
             self.ser.write(("fanH" + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN.'))
@@ -811,12 +807,12 @@ class TabButtonLayout(QWidget):
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN.'))
             # print("turning off FAN!")
 
-        self.oldFanState = not self.switch2.isChecked()
-        self.currFanState = not self.switch2.isChecked()
+        self.oldFanState = self.switch2.isChecked()
+        self.currFanState = self.switch2.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"fan2": not self.switch2.isChecked()})
+                self.ref.update({"fan2": self.switch2.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -828,7 +824,7 @@ class TabButtonLayout(QWidget):
         # self.switch2.setChecked(not self.switch2.isChecked())
 
     def clicked_fan2(self):
-        if(not self.switch3.isChecked()):
+        if(self.switch3.isChecked()):
             # Fan ON
             self.ser.write(("fan2H" + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON FAN2.'))
@@ -840,12 +836,12 @@ class TabButtonLayout(QWidget):
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF FAN2.'))
             # print("turning off FAN!")
 
-        self.oldFan2State = not self.switch3.isChecked()
-        self.currFan2State = not self.switch3.isChecked()
+        self.oldFan2State = self.switch3.isChecked()
+        self.currFan2State = self.switch3.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"fan2": not self.switch3.isChecked()})
+                self.ref.update({"fan2": self.switch3.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -858,7 +854,7 @@ class TabButtonLayout(QWidget):
     
     def clicked_heater(self):
         # Change arduino relay heater state
-        if(not self.switch4.isChecked()):
+        if(self.switch4.isChecked()):
             # Heater ON
             self.ser.write(('heaterH' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HEATER.'))
@@ -867,12 +863,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(('heaterL' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HEATER.'))
   
-        self.oldHeaterState = not self.switch4.isChecked()
-        self.currHeaterState = not self.switch4.isChecked()
+        self.oldHeaterState = self.switch4.isChecked()
+        self.currHeaterState = self.switch4.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"heater": not self.switch4.isChecked()})
+                self.ref.update({"heater": self.switch4.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -884,7 +880,7 @@ class TabButtonLayout(QWidget):
         # self.switch4.setChecked(not self.switch4.isChecked())
 
     def clicked_humid(self):
-        if(not self.switch5.isChecked()):
+        if(self.switch5.isChecked()):
             # Humidifier ON
             self.ser.write(('humidifierH' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON HUMIDIFIER.'))
@@ -893,12 +889,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(('humidifierL' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF HUMIDIFIER.'))
 
-        self.oldHumidifierState = not self.switch5.isChecked()
-        self.currHumidifierState = not self.switch5.isChecked()
+        self.oldHumidifierState = self.switch5.isChecked()
+        self.currHumidifierState = self.switch5.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"humidifier": not self.switch5.isChecked()})
+                self.ref.update({"humidifier": self.switch5.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -910,7 +906,7 @@ class TabButtonLayout(QWidget):
         # self.switch5.setChecked(not self.switch5.isChecked())
 
     def clicked_peltier(self):
-        if(not self.switch6.isChecked()):
+        if(self.switch6.isChecked()):
             # Peltier ON
             self.ser.write(('peltierH' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON PELTIER.'))
@@ -919,12 +915,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(('peltierL' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF PELTIER.'))
 
-        self.oldPeltierState = not self.switch6.isChecked()
-        self.currPeltierState = not self.switch6.isChecked()
+        self.oldPeltierState = self.switch6.isChecked()
+        self.currPeltierState = self.switch6.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"peltier": not self.switch6.isChecked()})
+                self.ref.update({"peltier": self.switch6.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
@@ -936,7 +932,7 @@ class TabButtonLayout(QWidget):
         # self.switch6.setChecked(not self.switch6.isChecked())
 
     def clicked_waterPump(self):
-        if(not self.switch7.isChecked()):
+        if(self.switch7.isChecked()):
             # WATER PUMP ON
             self.ser.write(('waterPumpH' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON WATER PUMP.'))
@@ -945,12 +941,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(('waterPumpL' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF WATER PUMP.'))
 
-        self.oldWaterPumpState = not self.switch7.isChecked()
-        self.currWaterPumpState = not self.switch7.isChecked()
+        self.oldWaterPumpState = self.switch7.isChecked()
+        self.currWaterPumpState = self.switch7.isChecked()
 
         if self.check_internet(): # if there is an internet connection
             try:
-                self.ref.update({"waterPump": not self.switch7.isChecked()})
+                self.ref.update({"waterPump": self.switch7.isChecked()})
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Data has been sent to firebase realtime database.'))
                 print("Data has been sent to firebase realtime database.")
 
