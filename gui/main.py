@@ -777,7 +777,10 @@ class TabButtonLayout(QWidget):
         #         logging.info(datetime.now().strftime(f'%m-%d-%Y %H:%M:%S Failed to update Firebase: {str(e)}'))
         #         print(f"Failed to update Firebase: {str(e)}")
 
-        self.switch1.setChecked(not self.switch1.isChecked())
+        if(self.switch1.isChecked()):
+            self.switch1.setChecked(False)
+        else:
+            self.switch1.setChecked(True)
 
     def clicked_fan1(self):
         # Change arduino relay fan state
