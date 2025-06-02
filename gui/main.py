@@ -656,7 +656,7 @@ class TabButtonLayout(QWidget):
                     self.label1.setText("Temperature: <b>{}°C</b>".format(self.jsonData["temperature"]))
                     self.label2.setText("Humidity: <b>{}%</b>".format(self.jsonData["humidity"]))
                     self.label3.setText("CO2: <b>{} PPM</b>".format(self.jsonData["co2ppm"]))
-                    self.label4.setText("Water Percentage: <b>{:.1f}%</b>".format(self.jsonData["waterLevel"]/19 * 100))
+                    self.label4.setText("Water %: <b>{:.1f}%</b>".format(self.jsonData["waterLevel"]/19 * 100))
                     self.label5.setText("Water Level: <b>{}</b>".format(self.jsonData["waterLevel"]))
 
                     if self.check_internet(): # if there is an internet connection
