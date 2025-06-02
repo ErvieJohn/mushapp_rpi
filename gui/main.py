@@ -110,6 +110,8 @@ class TabButtonLayout(QWidget):
             label.setAlignment(Qt.AlignLeft)
             label.hide()
 
+        self.label7.setAlignment(Qt.AlignRight)
+
         # Switch Button
         
         self.switch1 = MySwitch()
