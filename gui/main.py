@@ -424,6 +424,12 @@ class TabButtonLayout(QWidget):
             self.ser.write(("auto" + '\n').encode())
             self.ref.update({'auto': True})
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked()
+                switch.hide()
+
+            for label in self.switchLabels:
+                label.hide()
             
         # Detect removed ports
         self.removed_ports = self.known_ports - self.current_ports
@@ -545,12 +551,24 @@ class TabButtonLayout(QWidget):
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
                         # print("turning on FAN!")
                         self.switch1.setChecked(True)
+                        for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                            switch.setChecked()
+                            switch.hide()
+
+                        for label in self.switchLabels:
+                            label.hide()
                     else:
                         # Auto OFF
                         self.ser.write(("manual" + '\n').encode())
                         logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
                         # print("turning off FAN!")
                         self.switch1.setChecked(False)
+                        for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                            switch.setChecked()
+                            switch.hide()
+
+                        for label in self.switchLabels:
+                            label.hide()
 
                 if(self.currWaterPumpState != self.oldWaterPumpState):
                     # update state
@@ -739,8 +757,8 @@ class TabButtonLayout(QWidget):
                 switch.setChecked()
                 switch.show()
 
-                for label in self.switchLabels:
-                    label.show()
+            for label in self.switchLabels:
+                label.show()
 
             self.ser.write(('manual' + '\n').encode())
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
