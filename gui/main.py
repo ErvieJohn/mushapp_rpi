@@ -350,11 +350,25 @@ class TabButtonLayout(QWidget):
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
                 self.ref.update({'auto': True})
                 self.switch1.setChecked(True)
+
+                for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                    switch.setChecked(False)
+                    switch.hide()
+
+                for label in self.switchLabels:
+                    label.hide()
             else:
                 # Heater OFF
                 self.ser.write(('manual' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning OFF AUTOMATIC.'))
                 self.switch1.setChecked(False)
+
+                for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                    switch.setChecked(False)
+                    switch.show()
+
+                for label in self.switchLabels:
+                    label.show()
 
             if(self.oldWaterPumpState):
                 # Fan ON
@@ -568,7 +582,7 @@ class TabButtonLayout(QWidget):
                         # print("turning off FAN!")
                         self.switch1.setChecked(False)
                         for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
-                            switch.setChecked(True)
+                            switch.setChecked(False)
                             switch.hide()
 
                         for label in self.switchLabels:
@@ -745,6 +759,7 @@ class TabButtonLayout(QWidget):
                         self.label11, self.label12]
 
         if not self.switch1.isChecked():
+            print("AUTOOOOOOOOOOOOOOOO: ", self.switch1.isChecked())
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
                 switch.hide()
@@ -756,8 +771,9 @@ class TabButtonLayout(QWidget):
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
 
         else:
+            print("MANUALLLLLLLLL: ", self.switch1.isChecked())
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
-                switch.setChecked(True)
+                switch.setChecked(False)
                 switch.show()
 
             for label in self.switchLabels:
