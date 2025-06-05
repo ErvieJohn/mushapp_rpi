@@ -395,7 +395,13 @@ class TabButtonLayout(QWidget):
                 # Heater ON
                 self.ser.write(('auto' + '\n').encode())
                 logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
-                self.ref.update({'auto': True})
+
+                try:
+                    self.ref.update({'auto': True})
+                except Exception as e:
+                    # Handle the error (you can log it or take alternative actions)
+                    print(f"Failed to update Firebase: {str(e)}")
+
                 self.switch1.setChecked(True)
 
                 for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
@@ -460,7 +466,7 @@ class TabButtonLayout(QWidget):
 
         # for detection of plugged/unplugged arduino port
         self.current_ports = set(self.list_serial_ports())
-
+        
         # Detect new ports
         self.new_ports = self.current_ports - self.known_ports
         for port in self.new_ports:
@@ -487,7 +493,12 @@ class TabButtonLayout(QWidget):
             print(f"Arduino plugged in: {port}")
             
             self.ser.write(("auto" + '\n').encode())
-            self.ref.update({'auto': True})
+            try:
+                self.ref.update({'auto': True})
+
+            except Exception as e:
+                # Handle the error (you can log it or take alternative actions)
+                print(f"Failed to update Firebase: {str(e)}")
             logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Turning ON AUTOMATIC.'))
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
@@ -495,7 +506,7 @@ class TabButtonLayout(QWidget):
 
             for label in self.switchLabels:
                 label.hide()
-            
+
         # Detect removed ports
         self.removed_ports = self.known_ports - self.current_ports
         for port in self.removed_ports:
