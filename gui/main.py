@@ -1052,12 +1052,16 @@ class TabButtonLayout(QWidget):
     def clicked_home(self):
         self.button1.setDisabled(True)
         self.button2.setDisabled(False)
+        QWidget().setLayout(self.logLayout)  # Detach old layout safely
         self.setLayout(self.main_layout)
-
+        
     def clicked_logs(self):
         self.button2.setDisabled(True)
         self.button1.setDisabled(False)
+        QWidget().setLayout(self.main_layout)  # Detach old layout safely
         self.setLayout(self.logLayout)
+
+        
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
