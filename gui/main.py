@@ -226,7 +226,7 @@ class TabButtonLayout(QWidget):
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(self.grid)
         self.main_layout.addStretch(1)  # Push buttons to bottom
-        self.main_layout.addWidget(self.logLayout)
+        self.main_layout.addLayout(self.logLayout)
         self.main_layout.addLayout(bottom_layout)
 
         self.setLayout(self.main_layout)
