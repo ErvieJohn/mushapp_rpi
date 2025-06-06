@@ -1052,8 +1052,8 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.hide()
 
-        for i in range(self.main_layout.count()):
-            item = self.logLayout.itemAt(i)
+        for i in range(self.grid.count()):
+            item = self.grid.itemAt(i)
             widget = item.widget()
             if widget:
                 widget.show()
@@ -1062,8 +1062,8 @@ class TabButtonLayout(QWidget):
         self.button2.setDisabled(False) 
         
     def clicked_logs(self):
-        for i in range(self.main_layout.count()):
-            item = self.logLayout.itemAt(i)
+        for i in range(self.grid.count()):
+            item = self.grid.itemAt(i)
             widget = item.widget()
             if widget:
                 widget.hide()
