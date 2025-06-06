@@ -274,6 +274,7 @@ class TabButtonLayout(QWidget):
         self.cursor = self.connection.cursor()
         ##########################################
 
+        self.last_pos = 0
         self.LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_logfile.log') # %H_%M_%S_logfile.log')
         self.MAX_LINES = 500
 
