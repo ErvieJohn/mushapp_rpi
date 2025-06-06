@@ -159,6 +159,7 @@ class TabButtonLayout(QWidget):
 
         # Create two buttons (like tabs)
         self.button1 = QPushButton("Home")
+        self.button1.setDisabled(True)
         self.button2 = QPushButton("Logs")
 
         self.button1.setStyleSheet("""
