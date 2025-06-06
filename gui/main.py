@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton,
-    QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy
+    QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy, QPlainTextEdit
 )
 from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen
 from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect
@@ -218,12 +218,22 @@ class TabButtonLayout(QWidget):
         bottom_layout.addWidget(self.button2)
 
         # Combine everything in a vertical layout
-        main_layout = QVBoxLayout()
-        main_layout.addLayout(grid)
-        main_layout.addStretch(1)  # Push buttons to bottom
-        main_layout.addLayout(bottom_layout)
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addLayout(grid)
+        self.main_layout.addStretch(1)  # Push buttons to bottom
+        self.main_layout.addLayout(bottom_layout)
 
-        self.setLayout(main_layout)
+        self.logLayout = QVBoxLayout()
+        self.log_display = QPlainTextEdit()
+        self.log_display.setReadOnly(True)
+        self.logLayout.addWidget(self.log_display)
+        self.logLayout.addLayout(bottom_layout)
+
+        if self.isHome:
+            self.setLayout(self.main_layout)
+        else:
+            self.setLayout(self.logLayout)
+        
         self.setWindowTitle("Mushapp")
         self.setMaximumWidth(480)
         self.setMinimumWidth(480)
@@ -265,6 +275,7 @@ class TabButtonLayout(QWidget):
         ##########################################
 
         self.LOG_FILENAME = datetime.now().strftime('/home/admin/Desktop/main/logs/%d_%m_%Y_logfile.log') # %H_%M_%S_logfile.log')
+        self.MAX_LINES = 500
 
         for handler in logging.root.handlers[:]:
             logging.root.removeHandler(handler)
@@ -769,6 +780,28 @@ class TabButtonLayout(QWidget):
                 #arduino_connected = False
                 self.ser.close()
 
+            try:
+                with open(self.LOG_FILENAME, "r") as f:
+                    f.seek(self.last_pos)
+                    new_data = f.read()
+                    self.last_pos = f.tell()
+
+                if new_data:
+                    # Append and limit to last MAX_LINES
+                    current_text = self.log_display.toPlainText().splitlines()
+                    new_lines = new_data.splitlines()
+                    all_lines = current_text + new_lines
+                    all_lines = all_lines[-self.MAX_LINES:]
+
+                    self.log_display.setPlainText("\n".join(all_lines))
+                    self.log_display.verticalScrollBar().setValue(
+                        self.log_display.verticalScrollBar().maximum()
+                    )
+            except Exception as e:
+                # Optionally print/log the error, but don't crash the app
+                print(f"Error reading log file: {e}")
+                return
+
     def connectToFirebase(self):
         ########## Checking Firebase ##############
         if(not self.initialized):
@@ -1018,12 +1051,12 @@ class TabButtonLayout(QWidget):
     def clicked_home(self):
         self.button1.setDisabled(True)
         self.button2.setDisabled(False)
-        print("Clicked Home")
+        self.setLayout(self.main_layout)
 
     def clicked_logs(self):
         self.button2.setDisabled(True)
         self.button1.setDisabled(False)
-        print("Clicked Logs")
+        self.setLayout(self.logLayout)
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
