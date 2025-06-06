@@ -129,33 +129,33 @@ class TabButtonLayout(QWidget):
             switch.hide()
 
         # Arrange labels in cross shape
-        grid = QGridLayout()
+        self.grid = QGridLayout()
 
-        grid.addWidget(self.label6, 0, 1)
-        grid.addWidget(self.switch1, 0, 2, Qt.AlignLeft)
+        self.grid.addWidget(self.label6, 0, 1)
+        self.grid.addWidget(self.switch1, 0, 2, Qt.AlignLeft)
 
-        grid.addWidget(self.label7, 1, 0)
-        grid.addWidget(self.switch2, 1, 1, Qt.AlignLeft)
-        grid.addWidget(self.label8, 1, 2)
-        grid.addWidget(self.switch3, 1, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label7, 1, 0)
+        self.grid.addWidget(self.switch2, 1, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label8, 1, 2)
+        self.grid.addWidget(self.switch3, 1, 3, Qt.AlignLeft)
         
-        grid.addWidget(self.label9, 2, 0)
-        grid.addWidget(self.switch4, 2, 1, Qt.AlignLeft)
-        grid.addWidget(self.label10, 2, 2)
-        grid.addWidget(self.switch5, 2, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label9, 2, 0)
+        self.grid.addWidget(self.switch4, 2, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label10, 2, 2)
+        self.grid.addWidget(self.switch5, 2, 3, Qt.AlignLeft)
 
-        grid.addWidget(self.label11, 3, 0)
-        grid.addWidget(self.switch6, 3, 1, Qt.AlignLeft)
-        grid.addWidget(self.label12, 3, 2)
-        grid.addWidget(self.switch7, 3, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label11, 3, 0)
+        self.grid.addWidget(self.switch6, 3, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label12, 3, 2)
+        self.grid.addWidget(self.switch7, 3, 3, Qt.AlignLeft)
         
         # FOR VALUES
-        grid.addWidget(self.label1, 5, 0)
-        grid.addWidget(self.label2, 5, 2, Qt.AlignLeft)
-        grid.addWidget(self.label3, 6, 1)
-        grid.addWidget(self.label4, 7, 0, Qt.AlignLeft)
-        grid.addWidget(self.label5, 7, 2)
-        grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label1, 5, 0)
+        self.grid.addWidget(self.label2, 5, 2, Qt.AlignLeft)
+        self.grid.addWidget(self.label3, 6, 1)
+        self.grid.addWidget(self.label4, 7, 0, Qt.AlignLeft)
+        self.grid.addWidget(self.label5, 7, 2)
+        self.grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
         self.button1 = QPushButton("Home")
@@ -217,23 +217,19 @@ class TabButtonLayout(QWidget):
         bottom_layout.addWidget(self.button1)
         bottom_layout.addWidget(self.button2)
 
-        # Combine everything in a vertical layout
-        self.main_layout = QVBoxLayout()
-        self.main_layout.addLayout(grid)
-        self.main_layout.addStretch(1)  # Push buttons to bottom
-        self.main_layout.addLayout(bottom_layout)
-
         self.logLayout = QVBoxLayout()
         self.log_display = QPlainTextEdit()
         self.log_display.setReadOnly(True)
         self.logLayout.addWidget(self.log_display)
-        self.logLayout.addLayout(bottom_layout)
 
-        if self.isHome:
-            self.setLayout(self.main_layout)
-        else:
-            self.setLayout(self.logLayout)
-        
+        # Combine everything in a vertical layout
+        self.main_layout = QVBoxLayout()
+        self.main_layout.addLayout(self.grid)
+        self.main_layout.addStretch(1)  # Push buttons to bottom
+        self.main_layout.addWidget(self.logLayout)
+        self.main_layout.addLayout(bottom_layout)
+
+        self.setLayout(self.main_layout)
         self.setWindowTitle("Mushapp")
         self.setMaximumWidth(480)
         self.setMinimumWidth(480)
@@ -1050,18 +1046,36 @@ class TabButtonLayout(QWidget):
         # self.switch7.setChecked(not self.switch7.isChecked())
 
     def clicked_home(self):
+        for i in range(self.logLayout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.hide()
+
+        for i in range(self.main_layout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.show()
+
         self.button1.setDisabled(True)
-        self.button2.setDisabled(False)
-        QWidget().setLayout(self.logLayout)  # Detach old layout safely
-        self.setLayout(self.main_layout)
+        self.button2.setDisabled(False) 
         
     def clicked_logs(self):
+        for i in range(self.main_layout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.hide()
+
+        for i in range(self.logLayout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.show()
+
         self.button2.setDisabled(True)
         self.button1.setDisabled(False)
-        QWidget().setLayout(self.main_layout)  # Detach old layout safely
-        self.setLayout(self.logLayout)
-
-        
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
