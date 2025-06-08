@@ -1046,22 +1046,42 @@ class TabButtonLayout(QWidget):
         # self.switch7.setChecked(not self.switch7.isChecked())
 
     def clicked_home(self):
-        for i in range(self.logLayout.count()):
-            item = self.logLayout.itemAt(i)
-            widget = item.widget()
-            if widget:
-                widget.hide()
-
-        for i in range(self.grid.count()):
-            item = self.grid.itemAt(i)
-            widget = item.widget()
-            if widget:
-                widget.show()
-
         self.button1.setDisabled(True)
         self.button2.setDisabled(False) 
+
+        for i in range(self.logLayout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.hide()
+
+        for i in range(self.grid.count()):
+            item = self.grid.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.show()
+
+        if self.switch1.isChecked():
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.hide()
+
+            for label in self.switchLabels:
+                label.hide()
+
+        else:
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.show()
+
+            for label in self.switchLabels:
+                label.show()
+        
         
     def clicked_logs(self):
+        self.button2.setDisabled(True)
+        self.button1.setDisabled(False)
+
         for i in range(self.grid.count()):
             item = self.grid.itemAt(i)
             widget = item.widget()
@@ -1072,10 +1092,7 @@ class TabButtonLayout(QWidget):
             item = self.logLayout.itemAt(i)
             widget = item.widget()
             if widget:
-                widget.show()
-
-        self.button2.setDisabled(True)
-        self.button1.setDisabled(False)
+                widget.show()        
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
