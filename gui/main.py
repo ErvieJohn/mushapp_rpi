@@ -83,11 +83,11 @@ class TabButtonLayout(QWidget):
         self.label11 = QLabel("Peltier: ")
         self.label12 = QLabel("Water Pump: ")
 
-        self.loading = QLabel("Initializing...")
-        fontLoading = QFont()
-        fontLoading.setPointSize(16)
-        self.loading.setFont(fontLoading)
-        self.loading.setAlignment(Qt.AlignCenter)
+        # self.loading = QLabel("Initializing...")
+        # fontLoading = QFont()
+        # fontLoading.setPointSize(16)
+        # self.loading.setFont(fontLoading)
+        # self.loading.setAlignment(Qt.AlignCenter)
 
         self.labels = [self.label1, self.label2, self.label4,  self.label3, self.label5, self.label6]
         
@@ -155,7 +155,7 @@ class TabButtonLayout(QWidget):
         self.grid.addWidget(self.label3, 6, 1)
         self.grid.addWidget(self.label4, 7, 0, Qt.AlignLeft)
         self.grid.addWidget(self.label5, 7, 2)
-        self.grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
+        # self.grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
         self.button1 = QPushButton("Home")
@@ -237,10 +237,10 @@ class TabButtonLayout(QWidget):
 
         self.initializing()
 
-        if not self.init:
-            self.loading.hide()
-            for label in self.labels:
-                label.show()
+        # if not self.init:
+        #     self.loading.hide()
+        #     for label in self.labels:
+        #         label.show()
 
         self.count = 0
         try:
