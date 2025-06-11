@@ -238,6 +238,34 @@ class TabButtonLayout(QWidget):
 
         self.initializing()
 
+        for i in range(self.logLayout.count()):
+            item = self.logLayout.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.show()
+
+        for i in range(self.grid.count()):
+            item = self.grid.itemAt(i)
+            widget = item.widget()
+            if widget:
+                widget.show()
+
+        if self.switch1.isChecked():
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.hide()
+
+            for label in self.switchLabels:
+                label.hide()
+
+        else:
+            for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+                switch.setChecked(False)
+                switch.show()
+
+            for label in self.switchLabels:
+                label.show()
+
         # if not self.init:
         #     self.loading.hide()
         #     for label in self.labels:
