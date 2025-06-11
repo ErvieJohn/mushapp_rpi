@@ -185,8 +185,8 @@ class TabButtonLayout(QWidget):
         # Arrange labels in cross shape
         self.grid = QGridLayout()
 
-        self.grid.addWidget(self.label6, 1, 1)
-        self.grid.addWidget(self.switch1, 1, 2, Qt.AlignLeft)
+        #self.grid.addWidget(self.label6, 1, 1)
+        #self.grid.addWidget(self.switch1, 1, 2, Qt.AlignLeft)
 
         self.grid.addWidget(self.label7, 2, 0)
         self.grid.addWidget(self.switch2, 2, 1, Qt.AlignLeft)
@@ -269,6 +269,13 @@ class TabButtonLayout(QWidget):
         top_layout = QHBoxLayout()
         top_layout.addWidget(self.label0)
 
+        autoLayout = QHBoxLayout()
+        autoLayout.addStretch(1) 
+        autoLayout.addWidget(self.label6)
+        autoLayout.addWidget(self.switch1)
+        autoLayout.addStretch(1) 
+        autoLayout.setAlignment(Qt.AlignHCenter)
+
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
         bottom_layout.addWidget(self.button1)
@@ -286,9 +293,10 @@ class TabButtonLayout(QWidget):
         # Combine everything in a vertical layout
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(top_layout)
+        self.main_layout.addLayout(autoLayout)
         self.main_layout.addLayout(self.grid)
-        self.main_layout.addStretch(1)  # Push buttons to bottom
         self.main_layout.addLayout(self.logLayout)
+        self.main_layout.addStretch(1)  # Push buttons to bottom
         self.main_layout.addLayout(bottom_layout)
 
         self.setLayout(self.main_layout)
