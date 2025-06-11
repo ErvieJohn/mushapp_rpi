@@ -1197,6 +1197,7 @@ class TabButtonLayout(QWidget):
                 widget.show()
 
         self.switch1.show()
+        self.label6.show()
         if self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
@@ -1231,7 +1232,8 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()
 
-        for switch in [self.switch1, self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+        self.switch1.hide()
+        for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
             switch.setChecked(False)
             switch.hide()
 
