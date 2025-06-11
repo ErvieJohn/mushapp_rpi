@@ -286,8 +286,8 @@ class TabButtonLayout(QWidget):
         self.setMinimumWidth(480)
         self.showFullScreen()
 
-        self.start_loading(3)
         self.initializing()
+        self.start_loading(3)
 
         for i in range(self.logLayout.count()):
             item = self.logLayout.itemAt(i)
