@@ -110,7 +110,6 @@ class TabButtonLayout(QWidget):
         
         # INITIATION
         self.loading_overlay = LoadingOverlay(self)
-        self.start_loading(5)
         self.init = True
 
         self.isHome = True
@@ -287,6 +286,7 @@ class TabButtonLayout(QWidget):
         self.setMinimumWidth(480)
         self.showFullScreen()
 
+        self.start_loading(5)
         self.initializing()
 
         for i in range(self.logLayout.count()):
