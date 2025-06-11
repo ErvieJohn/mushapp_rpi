@@ -284,7 +284,7 @@ class TabButtonLayout(QWidget):
         switchesH1Layout.addWidget(self.label8)
         switchesH1Layout.addWidget(self.switch3)
         switchesH1Layout.addStretch(1) 
-        switchesH1Layout.setAlignment(Qt.AlignHCenter)
+        switchesH1Layout.setAlignment(Qt.AlignHRight)
 
         switchesH2Layout = QHBoxLayout()
         switchesH2Layout.addStretch(1) 
@@ -294,7 +294,7 @@ class TabButtonLayout(QWidget):
         switchesH2Layout.addWidget(self.label10)
         switchesH2Layout.addWidget(self.switch5)
         switchesH2Layout.addStretch(1) 
-        switchesH2Layout.setAlignment(Qt.AlignHCenter)
+        switchesH2Layout.setAlignment(Qt.AlignHRight)
 
         switchesH3Layout = QHBoxLayout()
         switchesH3Layout.addStretch(1)
@@ -304,7 +304,7 @@ class TabButtonLayout(QWidget):
         switchesH3Layout.addWidget(self.label12)
         switchesH3Layout.addWidget(self.switch7)
         switchesH3Layout.addStretch(1)
-        switchesH3Layout.setAlignment(Qt.AlignHCenter)
+        switchesH3Layout.setAlignment(Qt.AlignHRight)
         
         switchesVLayout = QVBoxLayout()
         switchesVLayout.addLayout(switchesH1Layout)
