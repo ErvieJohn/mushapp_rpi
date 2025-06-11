@@ -267,6 +267,9 @@ class TabButtonLayout(QWidget):
         bottom_layout.addWidget(self.button1)
         bottom_layout.addWidget(self.button2)
 
+        self.button1.show()
+        self.button2.show()
+
         self.logLayout = QVBoxLayout()
         self.log_display = QPlainTextEdit()
         self.log_display.setReadOnly(True)
@@ -1184,7 +1187,7 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()        
     
-    def start_loading(self, time=5):
+    def start_loading(self, time=3):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         self.loading_overlay.show()
         self.loading_overlay.raise_()
