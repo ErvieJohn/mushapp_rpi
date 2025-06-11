@@ -47,7 +47,7 @@ class LoadingOverlay(QFrame):
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
-        movie = QMovie("loading.gif")  # Replace with your gif
+        movie = QMovie("images/loading.gif")  # Replace with your gif
         movie.setScaledSize(QSize(64, 64))
         movie.start()
 
