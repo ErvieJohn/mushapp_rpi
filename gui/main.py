@@ -274,40 +274,25 @@ class TabButtonLayout(QWidget):
         autoLayout.addWidget(self.switch1)
         autoLayout.setAlignment(Qt.AlignHCenter)
 
-        switchesH1Layout = QHBoxLayout()
-        switchesH1Layout.addStretch(1) 
-        switchesH1Layout.addWidget(self.label7)
-        switchesH1Layout.addWidget(self.switch2)
-        switchesH1Layout.addStretch(1) 
-        switchesH1Layout.addWidget(self.label8)
-        switchesH1Layout.addWidget(self.switch3)
-        switchesH1Layout.addStretch(1) 
-        switchesH1Layout.setAlignment(Qt.AlignVCenter)
+        # Left column: label7 + switch2, label9 + switch4, label11 + switch6
+        leftColumnLayout = QVBoxLayout()
+        leftColumnLayout.addLayout(self._makeSwitchRow(self.label7, self.switch2))
+        leftColumnLayout.addLayout(self._makeSwitchRow(self.label9, self.switch4))
+        leftColumnLayout.addLayout(self._makeSwitchRow(self.label11, self.switch6))
 
-        switchesH2Layout = QHBoxLayout()
-        switchesH2Layout.addStretch(1) 
-        switchesH2Layout.addWidget(self.label9)
-        switchesH2Layout.addWidget(self.switch4)
-        switchesH2Layout.addStretch(1) 
-        switchesH2Layout.addWidget(self.label10)
-        switchesH2Layout.addWidget(self.switch5)
-        switchesH2Layout.addStretch(1) 
-        switchesH2Layout.setAlignment(Qt.AlignVCenter)
+        # Right column: label8 + switch3, label10 + switch5, label12 + switch7
+        rightColumnLayout = QVBoxLayout()
+        rightColumnLayout.addLayout(self._makeSwitchRow(self.label8, self.switch3))
+        rightColumnLayout.addLayout(self._makeSwitchRow(self.label10, self.switch5))
+        rightColumnLayout.addLayout(self._makeSwitchRow(self.label12, self.switch7))
 
-        switchesH3Layout = QHBoxLayout()
-        switchesH3Layout.addStretch(1)
-        switchesH3Layout.addWidget(self.label11)
-        switchesH3Layout.addWidget(self.switch6)
-        switchesH3Layout.addStretch(1)
-        switchesH3Layout.addWidget(self.label12)
-        switchesH3Layout.addWidget(self.switch7)
-        switchesH3Layout.addStretch(1)
-        switchesH3Layout.setAlignment(Qt.AlignVCenter)
-        
-        switchesVLayout = QVBoxLayout()
-        switchesVLayout.addLayout(switchesH1Layout)
-        switchesVLayout.addLayout(switchesH2Layout)
-        switchesVLayout.addLayout(switchesH3Layout)
+        # Main layout: horizontal, holds both columns
+        switchesLayout = QHBoxLayout()
+        switchesLayout.addStretch(1)
+        switchesLayout.addLayout(leftColumnLayout)
+        switchesLayout.addStretch(1)
+        switchesLayout.addLayout(rightColumnLayout)
+        switchesLayout.addStretch(1)
 
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
@@ -327,7 +312,7 @@ class TabButtonLayout(QWidget):
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(top_layout)
         self.main_layout.addLayout(autoLayout)
-        self.main_layout.addLayout(switchesVLayout)
+        self.main_layout.addLayout(switchesLayout)
         self.main_layout.addLayout(self.grid)
         self.main_layout.addLayout(self.logLayout)
         self.main_layout.addStretch(1)  # Push buttons to bottom
@@ -1186,6 +1171,13 @@ class TabButtonLayout(QWidget):
 
         # self.switch7.setChecked(not self.switch7.isChecked())
 
+    def _makeSwitchRow(self, label, switch):
+        layout = QHBoxLayout()
+        layout.addWidget(label)
+        layout.addWidget(switch)
+        layout.setAlignment(Qt.AlignLeft)
+        return layout
+
     def clicked_home(self):
         self.start_loading()
         self.label0.setText("<b>HOME</b>")
@@ -1242,7 +1234,7 @@ class TabButtonLayout(QWidget):
             switch.setChecked(False)
             switch.hide()
 
-        for label in [(self.switchLabels), self.label1]:
+        for label in self.switchLabels + self.label1:
             label.hide()
     
     def start_loading(self, time=1):
