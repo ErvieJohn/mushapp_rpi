@@ -1168,7 +1168,6 @@ class TabButtonLayout(QWidget):
     
     def start_loading(self):
         self.loading_overlay.show()
-        self.button.setEnabled(False)
 
         self.thread = WorkerThread()
         self.thread.finished.connect(self.finish_loading)
@@ -1176,7 +1175,6 @@ class TabButtonLayout(QWidget):
 
     def finish_loading(self):
         self.loading_overlay.hide()
-        self.button.setEnabled(True)
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
