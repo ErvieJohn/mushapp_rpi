@@ -314,7 +314,7 @@ class TabButtonLayout(QWidget):
             for label in self.switchLabels:
                 label.show()
 
-        self.start_loading(5)
+        self.start_loading()
         self.initializing()
 
         # if not self.init:
@@ -1184,7 +1184,7 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()        
     
-    def start_loading(self, time=1):
+    def start_loading(self, time=5):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         self.loading_overlay.show()
         self.loading_overlay.raise_()
