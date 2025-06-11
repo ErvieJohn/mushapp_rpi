@@ -920,6 +920,7 @@ class TabButtonLayout(QWidget):
             return False
 
     def clicked_auto(self):
+        self.start_loading()
         if self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
@@ -959,6 +960,7 @@ class TabButtonLayout(QWidget):
         # self.switch1.setChecked(not self.switch1.isChecked())
 
     def clicked_fan1(self):
+        self.start_loading()
         # Change arduino relay fan state
         if(self.switch2.isChecked()):
             # Fan ON
@@ -989,6 +991,7 @@ class TabButtonLayout(QWidget):
         # self.switch2.setChecked(not self.switch2.isChecked())
 
     def clicked_fan2(self):
+        self.start_loading()
         if(self.switch3.isChecked()):
             # Fan ON
             self.ser.write(("fan2H" + '\n').encode())
@@ -1018,6 +1021,7 @@ class TabButtonLayout(QWidget):
         # self.switch3.setChecked(not self.switch3.isChecked())
     
     def clicked_heater(self):
+        self.start_loading()
         # Change arduino relay heater state
         if(self.switch4.isChecked()):
             # Heater ON
@@ -1045,6 +1049,7 @@ class TabButtonLayout(QWidget):
         # self.switch4.setChecked(not self.switch4.isChecked())
 
     def clicked_humid(self):
+        self.start_loading()
         if(self.switch5.isChecked()):
             # Humidifier ON
             self.ser.write(('humidifierH' + '\n').encode())
@@ -1071,6 +1076,7 @@ class TabButtonLayout(QWidget):
         # self.switch5.setChecked(not self.switch5.isChecked())
 
     def clicked_peltier(self):
+        self.start_loading()
         if(self.switch6.isChecked()):
             # Peltier ON
             self.ser.write(('peltierH' + '\n').encode())
@@ -1097,6 +1103,7 @@ class TabButtonLayout(QWidget):
         # self.switch6.setChecked(not self.switch6.isChecked())
 
     def clicked_waterPump(self):
+        self.start_loading()
         if(self.switch7.isChecked()):
             # WATER PUMP ON
             self.ser.write(('waterPumpH' + '\n').encode())
