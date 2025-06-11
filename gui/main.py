@@ -119,6 +119,7 @@ class TabButtonLayout(QWidget):
         font.setPointSize(10)
 
         # Create labels
+        self.label0 = QLabel("<b>HOME</b>")
         self.label1 = QLabel("Temperature: <b>0°C</b>")
         self.label2 = QLabel("Humidity: <b>0%</b>")
         self.label3 = QLabel("CO2: <b>0 PPM</b>")
@@ -138,6 +139,9 @@ class TabButtonLayout(QWidget):
         # fontLoading.setPointSize(16)
         # self.loading.setFont(fontLoading)
         # self.loading.setAlignment(Qt.AlignCenter)
+
+        self.label0.setFont(QFont().setPointSize(14))
+        self.label0.setAlignment(Qt.AlignLeft)
 
         self.labels = [self.label1, self.label2, self.label4,  self.label3, self.label5, self.label6]
         
@@ -181,30 +185,31 @@ class TabButtonLayout(QWidget):
         # Arrange labels in cross shape
         self.grid = QGridLayout()
 
-        self.grid.addWidget(self.label6, 0, 1)
-        self.grid.addWidget(self.switch1, 0, 2, Qt.AlignLeft)
+        self.grid.addWidget(self.label0, 0, 0)
+        self.grid.addWidget(self.label6, 1, 1)
+        self.grid.addWidget(self.switch1, 1, 2, Qt.AlignLeft)
 
-        self.grid.addWidget(self.label7, 1, 0)
-        self.grid.addWidget(self.switch2, 1, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label8, 1, 2)
-        self.grid.addWidget(self.switch3, 1, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label7, 2, 0)
+        self.grid.addWidget(self.switch2, 2, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label8, 2, 2)
+        self.grid.addWidget(self.switch3, 2, 3, Qt.AlignLeft)
         
-        self.grid.addWidget(self.label9, 2, 0)
-        self.grid.addWidget(self.switch4, 2, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label10, 2, 2)
-        self.grid.addWidget(self.switch5, 2, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label9, 3, 0)
+        self.grid.addWidget(self.switch4, 3, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label10, 3, 2)
+        self.grid.addWidget(self.switch5, 3, 3, Qt.AlignLeft)
 
-        self.grid.addWidget(self.label11, 3, 0)
-        self.grid.addWidget(self.switch6, 3, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label12, 3, 2)
-        self.grid.addWidget(self.switch7, 3, 3, Qt.AlignLeft)
+        self.grid.addWidget(self.label11, 4, 0)
+        self.grid.addWidget(self.switch6, 4, 1, Qt.AlignLeft)
+        self.grid.addWidget(self.label12, 4, 2)
+        self.grid.addWidget(self.switch7, 4, 3, Qt.AlignLeft)
         
         # FOR VALUES
-        self.grid.addWidget(self.label1, 5, 0)
-        self.grid.addWidget(self.label2, 5, 2, Qt.AlignLeft)
-        self.grid.addWidget(self.label3, 6, 1)
-        self.grid.addWidget(self.label4, 7, 0, Qt.AlignLeft)
-        self.grid.addWidget(self.label5, 7, 2)
+        self.grid.addWidget(self.label1, 6, 0)
+        self.grid.addWidget(self.label2, 6, 2, Qt.AlignLeft)
+        self.grid.addWidget(self.label3, 7, 1)
+        self.grid.addWidget(self.label4, 8, 0, Qt.AlignLeft)
+        self.grid.addWidget(self.label5, 8, 2)
         # self.grid.addWidget(self.loading, 7, 1, Qt.AlignLeft)
 
         # Create two buttons (like tabs)
@@ -317,7 +322,7 @@ class TabButtonLayout(QWidget):
             for label in self.switchLabels:
                 label.show()
 
-        self.start_loading()
+        self.start_loading(5)
         self.initializing()
 
         # if not self.init:
@@ -1138,6 +1143,7 @@ class TabButtonLayout(QWidget):
 
     def clicked_home(self):
         self.start_loading()
+        self.label0.setText("<b>HOME</b>")
         self.button1.setDisabled(True)
         self.button2.setDisabled(False) 
 
@@ -1172,6 +1178,7 @@ class TabButtonLayout(QWidget):
         
     def clicked_logs(self):
         self.start_loading()
+        self.label0.setText("<b>LOGS</b>")
         self.button2.setDisabled(True)
         self.button1.setDisabled(False)
 
@@ -1187,7 +1194,7 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()        
     
-    def start_loading(self, time=3):
+    def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         self.loading_overlay.show()
         self.loading_overlay.raise_()
