@@ -1234,7 +1234,7 @@ class TabButtonLayout(QWidget):
             switch.setChecked(False)
             switch.hide()
 
-        for label in self.switchLabels + self.label1:
+        for label in self.switchLabels + [self.label1]:
             label.hide()
     
     def start_loading(self, time=1):
