@@ -158,17 +158,17 @@ class TabButtonLayout(QWidget):
         self.switch1.setChecked(True)
         self.switch1.toggled.connect(self.clicked_auto)
         self.switch2 = MySwitch()
-        self.switch2.clicked.connect(self.clicked_fan1)
+        self.switch2.toggled.connect(self.clicked_fan1)
         self.switch3 = MySwitch()
-        self.switch3.clicked.connect(self.clicked_fan2)
+        self.switch3.toggled.connect(self.clicked_fan2)
         self.switch4 = MySwitch()
-        self.switch4.clicked.connect(self.clicked_heater)
+        self.switch4.toggled.connect(self.clicked_heater)
         self.switch5 = MySwitch()
-        self.switch5.clicked.connect(self.clicked_humid)
+        self.switch5.toggled.connect(self.clicked_humid)
         self.switch6 = MySwitch()
-        self.switch6.clicked.connect(self.clicked_peltier)
+        self.switch6.toggled.connect(self.clicked_peltier)
         self.switch7 = MySwitch()
-        self.switch7.clicked.connect(self.clicked_waterPump)
+        self.switch7.toggled.connect(self.clicked_waterPump)
 
         for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
             switch.setChecked(False)
@@ -919,9 +919,8 @@ class TabButtonLayout(QWidget):
             logging.error(datetime.now().strftime('%m-%d-%Y %H:%M:%S Error Connecting to Internet.'))
             return False
 
-    def clicked_auto(self, checked):
-        if checked:
-            self.start_loading()
+    def clicked_auto(self):
+        self.start_loading()
 
         if self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
