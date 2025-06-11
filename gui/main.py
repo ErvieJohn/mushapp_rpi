@@ -242,7 +242,7 @@ class TabButtonLayout(QWidget):
             item = self.logLayout.itemAt(i)
             widget = item.widget()
             if widget:
-                widget.show()
+                widget.hide()
 
         for i in range(self.grid.count()):
             item = self.grid.itemAt(i)
@@ -1082,7 +1082,7 @@ class TabButtonLayout(QWidget):
             item = self.logLayout.itemAt(i)
             widget = item.widget()
             if widget:
-                widget.show()
+                widget.hide()
 
         for i in range(self.grid.count()):
             item = self.grid.itemAt(i)
