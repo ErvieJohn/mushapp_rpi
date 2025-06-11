@@ -61,6 +61,7 @@ class LoadingOverlay(QFrame):
         self.hide()
 
     def resizeEvent(self, event):
+        super().resizeEvent(event)
         self.resize(self.parent().size())
         # Center spinner_label explicitly
         self.spinner_label.setGeometry(QRect(
