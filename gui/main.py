@@ -27,7 +27,7 @@ class WorkerThread(QThread):
     finished = pyqtSignal()
 
     def run(self):
-        time.sleep(1)  # Simulate a long-running task
+        time.sleep(0.5)  # Simulate a long-running task
         self.finished.emit()
 
 class LoadingOverlay(QFrame):
@@ -48,7 +48,7 @@ class LoadingOverlay(QFrame):
 
         self.spinner_label = QLabel()
         movie = QMovie("images/loading64.gif")  # Replace with your gif
-        movie.setScaledSize(QSize(64, 64))
+        #movie.setScaledSize(QSize(64, 64))
         movie.start()
 
         self.spinner_label.setMovie(movie)
