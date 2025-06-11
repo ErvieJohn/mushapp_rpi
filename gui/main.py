@@ -1175,7 +1175,7 @@ class TabButtonLayout(QWidget):
         layout = QHBoxLayout()
         layout.addWidget(label)
         layout.addWidget(switch)
-        layout.setAlignment(Qt.AlignLeft)
+        layout.setAlignment(Qt.AlignRight)
         return layout
 
     def clicked_home(self):
