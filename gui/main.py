@@ -59,6 +59,13 @@ class LoadingOverlay(QFrame):
 
     def resizeEvent(self, event):
         self.resize(self.parent().size())
+        # Center spinner_label explicitly
+        self.spinner_label.setGeometry(QRect(
+            (self.width() - 64) / 2,
+            (self.height() - 64) / 2,
+            64,
+            64
+        ))
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
