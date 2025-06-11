@@ -106,6 +106,7 @@ class TabButtonLayout(QWidget):
         super().__init__()
         
         # INITIATION
+        self.loading_overlay = LoadingOverlay(self)
         self.start_loading()
         self.init = True
 
@@ -312,8 +313,6 @@ class TabButtonLayout(QWidget):
 
             for label in self.switchLabels:
                 label.show()
-
-        self.loading_overlay = LoadingOverlay(self)
 
         # if not self.init:
         #     self.loading.hide()
