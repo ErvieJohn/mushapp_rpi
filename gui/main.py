@@ -221,6 +221,7 @@ class TabButtonLayout(QWidget):
         self.log_display = QPlainTextEdit()
         self.log_display.setReadOnly(True)
         self.logLayout.addWidget(self.log_display)
+        self.log_display.hide()
 
         # Combine everything in a vertical layout
         self.main_layout = QVBoxLayout()
