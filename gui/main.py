@@ -1,10 +1,10 @@
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton,
     QVBoxLayout, QHBoxLayout, QGridLayout, 
-    QSizePolicy, QPlainTextEdit, QDialog, QProgressBar
+    QSizePolicy, QPlainTextEdit, QDialog, QProgressBar, QFrame
 )
-from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen
-from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal
+from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen, QMovie
+from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal, QSize
 
 import serial
 import time
@@ -30,30 +30,35 @@ class WorkerThread(QThread):
         time.sleep(2)  # Simulate a long-running task
         self.finished.emit()
 
-# Modal loading dialog
-class LoadingDialog(QDialog):
+class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowFlags(Qt.Window | Qt.CustomizeWindowHint)
-        self.setModal(True)
 
-        self.label = QLabel("Loading, please wait...")
-        self.label.setAlignment(Qt.AlignCenter)
+        self.setFrameShape(QFrame.NoFrame)
+        self.setAttribute(Qt.WA_TransparentForMouseEvents, False)
 
-        self.progress = QProgressBar(self)
-        self.progress.setRange(0, 0)  # Indeterminate progress bar
+        self.setStyleSheet("""
+            QFrame {
+                background-color: rgba(0, 0, 0, 128);
+            }
+        """)
 
         layout = QVBoxLayout()
-        layout.addWidget(self.label)
-        layout.addWidget(self.progress)
+        layout.setAlignment(Qt.AlignCenter)
+
+        self.spinner_label = QLabel()
+        movie = QMovie("loading.gif")  # Replace with your gif
+        movie.setScaledSize(QSize(64, 64))
+        movie.start()
+
+        self.spinner_label.setMovie(movie)
+        layout.addWidget(self.spinner_label)
+
         self.setLayout(layout)
-        self.resize(200, 100)
-        self.showFullScreen()
-        
-        # Center the dialog on the parent window
-        if parent:
-            parent_rect = parent.geometry()
-            self.move(parent_rect.center() - self.rect().center())
+        self.hide()
+
+    def resizeEvent(self, event):
+        self.resize(self.parent().size())
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -299,6 +304,8 @@ class TabButtonLayout(QWidget):
 
             for label in self.switchLabels:
                 label.show()
+
+        self.loading_overlay = LoadingOverlay(self)
 
         # if not self.init:
         #     self.loading.hide()
@@ -1160,18 +1167,16 @@ class TabButtonLayout(QWidget):
                 widget.show()        
     
     def start_loading(self):
-        # Show loading dialog
-        self.loading_dialog = LoadingDialog(self)
-        self.loading_dialog.show()
+        self.loading_overlay.show()
+        self.button.setEnabled(False)
 
-        # Start worker thread
         self.thread = WorkerThread()
         self.thread.finished.connect(self.finish_loading)
         self.thread.start()
 
     def finish_loading(self):
-        # Close loading dialog
-        self.loading_dialog.accept()
+        self.loading_overlay.hide()
+        self.button.setEnabled(True)
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
