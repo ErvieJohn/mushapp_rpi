@@ -123,7 +123,7 @@ class TabButtonLayout(QWidget):
         self.label1 = QLabel("Temperature: <b>0°C</b>")
         self.label2 = QLabel("Humidity: <b>0%</b>")
         self.label3 = QLabel("CO2: <b>0 PPM</b>")
-        self.label4 = QLabel("Water %: <b>0%</b>")
+        self.label4 = QLabel("Water Percentage: <b>0%</b>")
         self.label5 = QLabel("Water Level: <b>0</b>")
 
         self.label6 = QLabel("Automatic: ")
@@ -836,7 +836,7 @@ class TabButtonLayout(QWidget):
                     self.label1.setText("Temperature: <b>{}°C</b>".format(self.jsonData["temperature"]))
                     self.label2.setText("Humidity: <b>{}%</b>".format(self.jsonData["humidity"]))
                     self.label3.setText("CO2: <b>{} PPM</b>".format(self.jsonData["co2ppm"]))
-                    self.label4.setText("Water %: <b>{:.1f}%</b>".format(self.jsonData["waterLevel"]/19 * 100))
+                    self.label4.setText("Water Percentage: <b>{:.1f}%</b>".format(self.jsonData["waterLevel"]/19 * 100))
                     self.label5.setText("Water Level: <b>{}</b>".format(self.jsonData["waterLevel"]))
 
                     if self.check_internet(): # if there is an internet connection
