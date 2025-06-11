@@ -65,8 +65,8 @@ class LoadingOverlay(QFrame):
         self.resize(self.parent().size())
         # Center spinner_label explicitly
         self.spinner_label.setGeometry(QRect(
-            (self.width() - 64) / 2,
-            (self.height() - 64) / 2,
+            (480 - 64) / 2,
+            (480 - 64) / 2,
             64,
             64
         ))
