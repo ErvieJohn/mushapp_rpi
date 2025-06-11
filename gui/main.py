@@ -337,7 +337,7 @@ class TabButtonLayout(QWidget):
             self.connection.close()
 
     def initializing(self):
-        self.start_loading()
+        self.start_loading(5)
         self.connection = pymysql.connect(
             host="localhost",         # Replace with your host, e.g., "127.0.0.1" or server IP
             user="admin",     # Replace with your MariaDB username
