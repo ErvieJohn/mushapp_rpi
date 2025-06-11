@@ -188,10 +188,10 @@ class TabButtonLayout(QWidget):
         #self.grid.addWidget(self.label6, 1, 1)
         #self.grid.addWidget(self.switch1, 1, 2, Qt.AlignLeft)
 
-        self.grid.addWidget(self.label7, 2, 0)
-        self.grid.addWidget(self.switch2, 2, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label8, 2, 2)
-        self.grid.addWidget(self.switch3, 2, 3, Qt.AlignLeft)
+        #self.grid.addWidget(self.label7, 2, 0)
+        #self.grid.addWidget(self.switch2, 2, 1, Qt.AlignLeft)
+        #self.grid.addWidget(self.label8, 2, 2)
+        #self.grid.addWidget(self.switch3, 2, 3, Qt.AlignLeft)
         
         self.grid.addWidget(self.label9, 3, 0)
         self.grid.addWidget(self.switch4, 3, 1, Qt.AlignLeft)
@@ -270,11 +270,40 @@ class TabButtonLayout(QWidget):
         top_layout.addWidget(self.label0)
 
         autoLayout = QHBoxLayout()
-        autoLayout.addStretch(1) 
+        #autoLayout.addStretch(1) 
         autoLayout.addWidget(self.label6)
         autoLayout.addWidget(self.switch1)
-        autoLayout.addStretch(1) 
+        #autoLayout.addStretch(1) 
         autoLayout.setAlignment(Qt.AlignHCenter)
+
+        switchesH1Layout = QHBoxLayout()
+        switchesH1Layout.addWidget(self.label7)
+        switchesH1Layout.addWidget(self.switch2)
+        switchesH1Layout.addStretch(1) 
+        switchesH1Layout.addWidget(self.label8)
+        switchesH1Layout.addWidget(self.switch3)
+        switchesH1Layout.setAlignment(Qt.AlignHCenter)
+
+        switchesH2Layout = QHBoxLayout()
+        switchesH2Layout.addWidget(self.label9)
+        switchesH2Layout.addWidget(self.switch4)
+        switchesH2Layout.addWidget(self.label10)
+        switchesH2Layout.addWidget(self.switch5)
+        switchesH2Layout.setAlignment(Qt.AlignHCenter)
+
+        switchesH3Layout = QHBoxLayout()
+        switchesH3Layout.addWidget(self.label11)
+        switchesH3Layout.addWidget(self.switch6)
+        switchesH3Layout.addStretch(1)
+        switchesH3Layout.addWidget(self.label12)
+        switchesH3Layout.addWidget(self.switch7)
+        switchesH3Layout.setAlignment(Qt.AlignHCenter)
+        
+        switchesVLayout = QVBoxLayout()
+        switchesVLayout.addWidget(switchesH1Layout)
+        switchesVLayout.addWidget(switchesH2Layout)
+        switchesVLayout.addWidget(switchesH3Layout)
+
 
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
@@ -1203,6 +1232,13 @@ class TabButtonLayout(QWidget):
             widget = item.widget()
             if widget:
                 widget.show()
+
+        for switch in [self.switch1, self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
+            switch.setChecked(False)
+            switch.hide()
+
+        for label in [(self.switchLabels), self.label1]:
+            label.hide()
     
     def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
