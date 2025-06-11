@@ -1196,6 +1196,7 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()
 
+        self.switch1.show()
         if self.switch1.isChecked():
             for switch in [self.switch2, self.switch3, self.switch4, self.switch5, self.switch6, self.switch7]:
                 switch.setChecked(False)
@@ -1234,8 +1235,10 @@ class TabButtonLayout(QWidget):
             switch.setChecked(False)
             switch.hide()
 
-        for label in self.switchLabels + [self.label1]:
+        for label in self.switchLabels:
             label.hide()
+
+        self.label1.hide()
     
     def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
