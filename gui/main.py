@@ -48,6 +48,7 @@ class LoadingDialog(QDialog):
         layout.addWidget(self.progress)
         self.setLayout(layout)
         self.resize(200, 100)
+        self.showFullScreen()
         
         # Center the dialog on the parent window
         if parent:
