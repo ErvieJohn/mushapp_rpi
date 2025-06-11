@@ -25,9 +25,12 @@ import pymysql
 # Background task executed in separate thread
 class WorkerThread(QThread):
     finished = pyqtSignal()
+    def __init__(self, sleep_time):
+        super().__init__()
+        self.sleep_time = sleep_time
 
     def run(self):
-        time.sleep(0.5)  # Simulate a long-running task
+        time.sleep(self.sleep_time)  # Simulate a long-running task
         self.finished.emit()
 
 class LoadingOverlay(QFrame):
@@ -107,7 +110,7 @@ class TabButtonLayout(QWidget):
         
         # INITIATION
         self.loading_overlay = LoadingOverlay(self)
-        self.start_loading()
+        self.start_loading(5)
         self.init = True
 
         self.isHome = True
@@ -1181,10 +1184,10 @@ class TabButtonLayout(QWidget):
             if widget:
                 widget.show()        
     
-    def start_loading(self):
+    def start_loading(self, time=1):
         self.loading_overlay.show()
 
-        self.thread = WorkerThread()
+        self.thread = WorkerThread(time)
         self.thread.finished.connect(self.finish_loading)
         self.thread.start()
 
