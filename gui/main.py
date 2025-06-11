@@ -193,15 +193,15 @@ class TabButtonLayout(QWidget):
         #self.grid.addWidget(self.label8, 2, 2)
         #self.grid.addWidget(self.switch3, 2, 3, Qt.AlignLeft)
         
-        self.grid.addWidget(self.label9, 3, 0)
-        self.grid.addWidget(self.switch4, 3, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label10, 3, 2)
-        self.grid.addWidget(self.switch5, 3, 3, Qt.AlignLeft)
+        # self.grid.addWidget(self.label9, 3, 0)
+        # self.grid.addWidget(self.switch4, 3, 1, Qt.AlignLeft)
+        # self.grid.addWidget(self.label10, 3, 2)
+        # self.grid.addWidget(self.switch5, 3, 3, Qt.AlignLeft)
 
-        self.grid.addWidget(self.label11, 4, 0)
-        self.grid.addWidget(self.switch6, 4, 1, Qt.AlignLeft)
-        self.grid.addWidget(self.label12, 4, 2)
-        self.grid.addWidget(self.switch7, 4, 3, Qt.AlignLeft)
+        # self.grid.addWidget(self.label11, 4, 0)
+        # self.grid.addWidget(self.switch6, 4, 1, Qt.AlignLeft)
+        # self.grid.addWidget(self.label12, 4, 2)
+        # self.grid.addWidget(self.switch7, 4, 3, Qt.AlignLeft)
         
         # FOR VALUES
         self.grid.addWidget(self.label1, 6, 0)
@@ -300,10 +300,9 @@ class TabButtonLayout(QWidget):
         switchesH3Layout.setAlignment(Qt.AlignHCenter)
         
         switchesVLayout = QVBoxLayout()
-        switchesVLayout.addWidget(switchesH1Layout)
-        switchesVLayout.addWidget(switchesH2Layout)
-        switchesVLayout.addWidget(switchesH3Layout)
-
+        switchesVLayout.addLayout(switchesH1Layout)
+        switchesVLayout.addLayout(switchesH2Layout)
+        switchesVLayout.addLayout(switchesH3Layout)
 
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
@@ -323,6 +322,7 @@ class TabButtonLayout(QWidget):
         self.main_layout = QVBoxLayout()
         self.main_layout.addLayout(top_layout)
         self.main_layout.addLayout(autoLayout)
+        self.main_layout.addLayout(switchesVLayout)
         self.main_layout.addLayout(self.grid)
         self.main_layout.addLayout(self.logLayout)
         self.main_layout.addStretch(1)  # Push buttons to bottom
