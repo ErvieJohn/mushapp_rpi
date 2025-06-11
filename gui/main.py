@@ -104,8 +104,9 @@ class MySwitch(QPushButton):
 class TabButtonLayout(QWidget):
     def __init__(self):
         super().__init__()
-
+        
         # INITIATION
+        self.start_loading()
         self.init = True
 
         self.isHome = True
