@@ -286,9 +286,6 @@ class TabButtonLayout(QWidget):
         self.setMinimumWidth(480)
         self.showFullScreen()
 
-        self.initializing()
-        self.start_loading(3)
-
         for i in range(self.logLayout.count()):
             item = self.logLayout.itemAt(i)
             widget = item.widget()
@@ -317,11 +314,14 @@ class TabButtonLayout(QWidget):
             for label in self.switchLabels:
                 label.show()
 
+        self.start_loading(5)
+        self.initializing()
+
         # if not self.init:
         #     self.loading.hide()
         #     for label in self.labels:
         #         label.show()
-
+        
         self.count = 0
         try:
             # Create QTimer
