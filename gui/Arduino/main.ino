@@ -5,8 +5,8 @@
 //#include <NewPing.h>
 
 #define DHTPIN 2
-//#define DHTTYPE DHT11
-#define DHTTYPE DHT22
+#define DHTTYPE DHT11
+//#define DHTTYPE DHT22
 #define PELTIER_PIN 3
 #define HUMIDIFIER_PIN 11
 #define ULTRASONIC_TRIGGER_PIN 5
