@@ -185,7 +185,6 @@ class TabButtonLayout(QWidget):
         # Arrange labels in cross shape
         self.grid = QGridLayout()
 
-        self.grid.addWidget(self.label0, 0, 0)
         self.grid.addWidget(self.label6, 1, 1)
         self.grid.addWidget(self.switch1, 1, 2, Qt.AlignLeft)
 
@@ -267,6 +266,9 @@ class TabButtonLayout(QWidget):
         self.button1.setMinimumHeight(50)
         self.button2.setMinimumHeight(50)
 
+        top_layout = QHBoxLayout()
+        top_layout.addWidget(self.label0)
+
         # Layout for the buttons at bottom
         bottom_layout = QHBoxLayout()
         bottom_layout.addWidget(self.button1)
@@ -283,6 +285,7 @@ class TabButtonLayout(QWidget):
 
         # Combine everything in a vertical layout
         self.main_layout = QVBoxLayout()
+        self.main_layout.addLayout(top_layout)
         self.main_layout.addLayout(self.grid)
         self.main_layout.addStretch(1)  # Push buttons to bottom
         self.main_layout.addLayout(self.logLayout)
@@ -1174,8 +1177,7 @@ class TabButtonLayout(QWidget):
 
             for label in self.switchLabels:
                 label.show()
-        
-        
+
     def clicked_logs(self):
         self.start_loading()
         self.label0.setText("<b>LOGS</b>")
@@ -1192,7 +1194,7 @@ class TabButtonLayout(QWidget):
             item = self.logLayout.itemAt(i)
             widget = item.widget()
             if widget:
-                widget.show()        
+                widget.show()
     
     def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
