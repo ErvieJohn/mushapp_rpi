@@ -1235,10 +1235,8 @@ class TabButtonLayout(QWidget):
             switch.setChecked(False)
             switch.hide()
 
-        for label in self.switchLabels:
+        for label in self.switchLabels + [self.label6]:
             label.hide()
-
-        self.label1.hide()
     
     def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
