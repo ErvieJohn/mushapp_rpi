@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton,
-    QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy, QPlainTextEdit
+    QVBoxLayout, QHBoxLayout, QGridLayout, 
+    QSizePolicy, QPlainTextEdit, QDialog, QProgressBar
 )
 from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen
-from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect
+from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal
 
 import serial
 import time
@@ -20,6 +21,38 @@ import serial.tools.list_ports
 
 ########### Database Connect #############
 import pymysql
+
+# Background task executed in separate thread
+class WorkerThread(QThread):
+    finished = pyqtSignal()
+
+    def run(self):
+        time.sleep(2)  # Simulate a long-running task
+        self.finished.emit()
+
+# Modal loading dialog
+class LoadingDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowFlags(Qt.Window | Qt.CustomizeWindowHint)
+        self.setModal(True)
+
+        self.label = QLabel("Loading, please wait...")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.progress = QProgressBar(self)
+        self.progress.setRange(0, 0)  # Indeterminate progress bar
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        layout.addWidget(self.progress)
+        self.setLayout(layout)
+        self.resize(200, 100)
+        
+        # Center the dialog on the parent window
+        if parent:
+            parent_rect = parent.geometry()
+            self.move(parent_rect.center() - self.rect().center())
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -1075,6 +1108,7 @@ class TabButtonLayout(QWidget):
         # self.switch7.setChecked(not self.switch7.isChecked())
 
     def clicked_home(self):
+        self.start_loading()
         self.button1.setDisabled(True)
         self.button2.setDisabled(False) 
 
@@ -1108,6 +1142,7 @@ class TabButtonLayout(QWidget):
         
         
     def clicked_logs(self):
+        self.start_loading()
         self.button2.setDisabled(True)
         self.button1.setDisabled(False)
 
@@ -1122,6 +1157,20 @@ class TabButtonLayout(QWidget):
             widget = item.widget()
             if widget:
                 widget.show()        
+    
+    def start_loading(self):
+        # Show loading dialog
+        self.loading_dialog = LoadingDialog(self)
+        self.loading_dialog.show()
+
+        # Start worker thread
+        self.thread = WorkerThread()
+        self.thread.finished.connect(self.finish_loading)
+        self.thread.start()
+
+    def finish_loading(self):
+        # Close loading dialog
+        self.loading_dialog.accept()
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
