@@ -58,7 +58,6 @@ class LoadingOverlay(QFrame):
         layout.addWidget(self.spinner_label)
 
         self.setLayout(layout)
-        self.showFullScreen()
         self.hide()
 
     def resizeEvent(self, event):
