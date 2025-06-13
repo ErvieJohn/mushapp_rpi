@@ -372,7 +372,7 @@ class TabButtonLayout(QWidget):
             for label in self.switchLabels:
                 label.show()
 
-        # self.start_loading(4)
+        self.start_loading(3)
         self.initializing()
         
         # if not self.init:
