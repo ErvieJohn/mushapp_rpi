@@ -1272,12 +1272,12 @@ class TabButtonLayout(QWidget):
         for label in self.switchLabels + [self.label6]:
             label.hide()
     
-    def start_loading(self, time=1):
+    def start_loading(self, time=5):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
         self.loading_overlay.raise_()
-        #self.loading_overlay.repaint()  # Force immediate repaint
+        self.loading_overlay.repaint()  # Force immediate repaint
 
         self.thread = WorkerThread(time)
         self.thread.finished.connect(self.finish_loading)
