@@ -234,6 +234,7 @@ class TabButtonLayout(QWidget):
                 color: black;
                 border: 1px solid #ccc;
                 padding: 5px;
+                border-radius: 12px;
             }
             QPushButton:pressed {
                 background-color: #a3d2ca;
@@ -251,6 +252,7 @@ class TabButtonLayout(QWidget):
                 color: black;
                 border: 1px solid #ccc;
                 padding: 5px;
+                border-radius: 12px;
             }
             QPushButton:pressed {
                 background-color: #a3d2ca;
