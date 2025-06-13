@@ -51,15 +51,10 @@ class LoadingOverlay(QFrame):
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
-        self.spinner_label.clear()
         self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
         self.spinner_label.setStyleSheet("background-color: transparent;")
         self.spinner_label.setFixedSize(64, 64)  # Match your movie size
-        movie = QMovie("images/mushloading64.gif")  # Replace with your gif
-        movie.setScaledSize(QSize(64, 64))
-        movie.start()
-
-        self.spinner_label.setMovie(movie)
+        
         layout.addWidget(self.spinner_label)
 
         self.setLayout(layout)
@@ -75,6 +70,14 @@ class LoadingOverlay(QFrame):
         #     64
         # ))
         super().resizeEvent(event)
+
+    def show_spinner(self):
+        self.spinner_label.clear()
+        self.movie = QMovie("images/mushloading64.gif")
+        self.movie.setScaledSize(QSize(64, 64))
+        self.spinner_label.setMovie(self.movie)
+        self.movie.start()
+        self.show()
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -1271,7 +1274,8 @@ class TabButtonLayout(QWidget):
     
     def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
-        self.loading_overlay.show()
+        # self.loading_overlay.show()
+        self.loading_overlay.show_spinner()
         self.loading_overlay.raise_()
         self.loading_overlay.repaint()  # Force immediate repaint
 
