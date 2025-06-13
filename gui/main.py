@@ -37,49 +37,34 @@ class WorkerThread(QThread):
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.setFrameShape(QFrame.NoFrame)
+        self.setStyleSheet("QFrame { background-color: rgba(0, 0, 0, 128); }")
         self.setAttribute(Qt.WA_TransparentForMouseEvents, False)
-
-        self.setStyleSheet("""
-            QFrame {
-                background-color: rgba(0, 0, 0, 128);
-            }
-        """)
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
-        self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
+        self.spinner_label.setFixedSize(64, 64)
         self.spinner_label.setStyleSheet("background-color: transparent;")
-        self.spinner_label.setFixedSize(64, 64)  # Match your movie size
-        
         layout.addWidget(self.spinner_label)
 
         self.setLayout(layout)
         self.hide()
 
-    def resizeEvent(self, event):
-        self.resize(self.parent().size())
-        # Center spinner_label explicitly
-        # self.spinner_label.setGeometry(QRect(
-        #     int((self.width() - 64) / 2),
-        #     int((self.height() - 64) / 2),
-        #     64,
-        #     64
-        # ))
-        super().resizeEvent(event)
-
     def show_spinner(self):
         self.spinner_label.clear()
-        self.movie = QMovie("images/mushloading64.gif")
-        self.movie.setScaledSize(QSize(64, 64))
-        self.spinner_label.setMovie(self.movie)
-        self.movie.start()
-        print("Movie valid:", self.movie.isValid())
-        print("Movie running:", self.movie.state() == QMovie.Running)
+
+        # 🧠 Create a brand new QMovie every time
+        movie = QMovie("images/mushloading64.gif")
+        movie.setScaledSize(QSize(64, 64))
+        self.spinner_label.setMovie(movie)
+        movie.start()
+
+        # Save reference to avoid garbage collection
+        self._movie = movie
+
         self.show()
+        self.raise_()
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -1275,11 +1260,11 @@ class TabButtonLayout(QWidget):
             label.hide()
     
     def start_loading(self, time=1):
-        self.loading_overlay.resize(self.size())  # Ensure overlay fits window
+        #self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
-        self.loading_overlay.raise_()
-        self.loading_overlay.repaint()  # Force immediate repaint
+        #self.loading_overlay.raise_()
+        #self.loading_overlay.repaint()  # Force immediate repaint
 
         self.thread = WorkerThread(time)
         self.thread.finished.connect(self.finish_loading)
