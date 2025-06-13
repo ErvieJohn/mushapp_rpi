@@ -837,7 +837,7 @@ class TabButtonLayout(QWidget):
                     iHumid = int(self.jsonData["humidity"])
                     iCo2 = int(self.jsonData["co2ppm"])
                     iWater = int(self.jsonData["waterLevel"])
-                    fWater = float(self.jsonData["waterLevel"]/19 * 100)
+                    fWater = self.jsonData["waterLevel"]/19 * 100
 
                     self.label1.setText('Temperature: <b><span style="color:{};">{}°C</span></b>'.format(
                         "green" if fTemp >= 20 or fTemp <= 30 
