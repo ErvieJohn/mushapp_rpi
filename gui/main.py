@@ -113,7 +113,7 @@ class TabButtonLayout(QWidget):
         super().__init__()
         
         # INITIATION
-        self.bg = QPixmap("images/bg3.png")
+        self.bg = QPixmap("images/bg4.png")
 
         self.loading_overlay = LoadingOverlay(self)
         self.init = True
@@ -230,7 +230,7 @@ class TabButtonLayout(QWidget):
 
         self.button1.setStyleSheet("""
             QPushButton {
-                background-color: lightgray;
+                background-color: green;
                 color: black;
                 border: 1px solid #ccc;
                 padding: 5px;
@@ -247,7 +247,7 @@ class TabButtonLayout(QWidget):
 
         self.button2.setStyleSheet("""
             QPushButton {
-                background-color: lightgray;
+                background-color: green;
                 color: black;
                 border: 1px solid #ccc;
                 padding: 5px;
