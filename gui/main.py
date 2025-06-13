@@ -109,7 +109,7 @@ class TabButtonLayout(QWidget):
         super().__init__()
         
         # INITIATION
-        self.bg = QPixmap("images/bg.png")
+        self.bg = QPixmap("images/bg2.png")
 
         self.loading_overlay = LoadingOverlay(self)
         self.init = True
