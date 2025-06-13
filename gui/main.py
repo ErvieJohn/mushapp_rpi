@@ -1276,7 +1276,7 @@ class TabButtonLayout(QWidget):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
-        #self.loading_overlay.raise_()
+        self.loading_overlay.raise_()
         #self.loading_overlay.repaint()  # Force immediate repaint
 
         self.thread = WorkerThread(time)
