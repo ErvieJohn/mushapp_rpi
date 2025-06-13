@@ -322,6 +322,13 @@ class TabButtonLayout(QWidget):
         self.setWindowTitle("Mushapp")
         self.setMaximumWidth(480)
         self.setMinimumWidth(480)
+        self.setStyleSheet("""
+            QMainWindow {
+                background-image: url(images/bg.png);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        """)
         self.showFullScreen()
 
         for i in range(self.logLayout.count()):
