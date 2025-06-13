@@ -89,9 +89,11 @@ class LoadingOverlay(QFrame):
         # self.loading_overlay.show()
         self.raise_()
         self.repaint()  # Force immediate repaint
-
+        
         # Force event loop to catch up THEN start
         QTimer.singleShot(0, self._movie.start)
+        QTimer.singleShot(100, lambda: print("Running after delay:", self._movie.state() == QMovie.Running))
+
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
