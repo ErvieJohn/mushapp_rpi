@@ -143,7 +143,7 @@ class TabButtonLayout(QWidget):
         # self.loading.setAlignment(Qt.AlignCenter)
 
         self.label0.setFont(QFont("", 16))
-        self.label0.setAlignment(Qt.AlignCenter)
+        self.label0.setAlignment(Qt.AlignLeft)
 
         self.labels = [self.label1, self.label2, self.label4,  self.label3, self.label5]
         
