@@ -128,7 +128,7 @@ class TabButtonLayout(QWidget):
         # Create glow effect
         glow = QGraphicsDropShadowEffect(self)
         glow.setBlurRadius(20)
-        glow.setColor(QColor(0, 255, 0))  # Greenish glow; use QColor("white") for white
+        glow.setColor(QColor(255, 255, 255))  # Greenish glow; use QColor("white") for white
         glow.setOffset(0, 0)
 
         # Create labels
