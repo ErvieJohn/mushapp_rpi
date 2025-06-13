@@ -83,6 +83,9 @@ class LoadingOverlay(QFrame):
         self.movie.setScaledSize(QSize(64, 64))
         self.spinner_label.setMovie(self.movie)
         self._movie = self.movie
+        print("Frame count:", self._movie.frameCount())
+        print("Is valid:", self._movie.isValid())
+        print("Movie running:", self._movie.state() == QMovie.Running)
         self.movie.start()
         
         self.resize(self.size())  # Ensure overlay fits window
