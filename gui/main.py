@@ -51,6 +51,7 @@ class LoadingOverlay(QFrame):
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
+        self.spinner_label.clear()
         self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
         self.spinner_label.setStyleSheet("background-color: transparent;")
         self.spinner_label.setFixedSize(64, 64)  # Match your movie size
@@ -1268,7 +1269,7 @@ class TabButtonLayout(QWidget):
         for label in self.switchLabels + [self.label6]:
             label.hide()
     
-    def start_loading(self, time=3):
+    def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         self.loading_overlay.show()
         self.loading_overlay.raise_()
