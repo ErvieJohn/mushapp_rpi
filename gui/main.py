@@ -67,12 +67,13 @@ class LoadingOverlay(QFrame):
     def resizeEvent(self, event):
         self.resize(self.parent().size())
         # Center spinner_label explicitly
-        self.spinner_label.setGeometry(QRect(
-            int((self.width() - 64) / 2),
-            int((self.height() - 64) / 2),
-            64,
-            64
-        ))
+        # self.spinner_label.setGeometry(QRect(
+        #     int((self.width() - 64) / 2),
+        #     int((self.height() - 64) / 2),
+        #     64,
+        #     64
+        # ))
+        super().resizeEvent(event)
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -1267,7 +1268,7 @@ class TabButtonLayout(QWidget):
         for label in self.switchLabels + [self.label6]:
             label.hide()
     
-    def start_loading(self, time=2):
+    def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         self.loading_overlay.show()
         self.loading_overlay.raise_()
