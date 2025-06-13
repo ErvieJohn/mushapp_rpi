@@ -33,33 +33,6 @@ class WorkerThread(QThread):
         time.sleep(self.sleep_time)  # Simulate a long-running task
         self.finished.emit()
 
-class SpinnerWithCircle(QLabel):
-    def __init__(self, gif_path, size=64, parent=None):
-        super().__init__(parent)
-        self.size = size
-        self.setFixedSize(size, size)
-
-        self.movie = QMovie(gif_path)
-        self.movie.setScaledSize(QSize(size, size))
-        self.setMovie(self.movie)
-        self.setAlignment(Qt.AlignCenter)
-        self.movie.start()
-
-    def paintEvent(self, event):
-        super().paintEvent(event)
-
-        painter = QPainter(self)
-        pen_width = 2
-        pen = QPen(Qt.white, pen_width)
-        painter.setPen(pen)
-        painter.setRenderHint(QPainter.Antialiasing)
-
-        # Calculate bounding box for circle centered in widget
-        offset = pen_width / 2
-        diameter = self.size - pen_width
-        circle_rect = QRectF(offset, offset, diameter, diameter)
-        painter.drawEllipse(circle_rect)
-
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -76,7 +49,12 @@ class LoadingOverlay(QFrame):
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
-        self.spinner_label = SpinnerWithCircle("images/mushloading64.gif", 64)
+        self.spinner_label = QLabel()
+        movie = QMovie("images/mushloading64.gif")  # Replace with your gif
+        movie.setScaledSize(QSize(64, 64))
+        movie.start()
+
+        self.spinner_label.setMovie(movie)
         layout.addWidget(self.spinner_label)
 
         self.setLayout(layout)
