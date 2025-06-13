@@ -170,8 +170,8 @@ class TabButtonLayout(QWidget):
 
         self.labels = [self.label1, self.label2, self.label4,  self.label3, self.label5]
 
-        font11 = QFont()
-        font11.setPointSize(11)
+        font10 = QFont()
+        font10.setPointSize(10)
         
         # self.label7, self.label8, self.label9, self.label10, self.label11, self.label12
         for label in self.labels:
@@ -179,7 +179,7 @@ class TabButtonLayout(QWidget):
             #label.setAlignment(Qt.AlignLeft)
             #label.setMaximumWidth(130)
             #label.setMinimumWidth(130)
-            label.setFont(font11)
+            label.setFont(font10)
             label.hide()
 
         self.switchLabels = [self.label7, self.label8, self.label9, self.label10, self.label11, self.label12]
