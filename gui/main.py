@@ -42,20 +42,21 @@ class SpinnerWithCircle(QLabel):
         self.movie = QMovie(gif_path)
         self.movie.setScaledSize(QSize(size, size))
         self.setMovie(self.movie)
-        self.setAlignment(Qt.AlignCenter)  # Ensure it's centered inside
+        self.setAlignment(Qt.AlignCenter)
         self.movie.start()
 
     def paintEvent(self, event):
         super().paintEvent(event)
         painter = QPainter(self)
-        pen = QPen(Qt.white, 3)  # Border color and thickness
+        pen_width = 2
+        pen = QPen(Qt.white, pen_width)
         painter.setPen(pen)
         painter.setRenderHint(QPainter.Antialiasing)
 
-        # Draw circle slightly inset so it's inside the bounds
-        margin = 1.5  # Half of pen width
-        radius = self.size - 3  # Total size minus pen width
-        painter.drawEllipse(margin, margin, radius, radius)
+        # Draw circle exactly around the content (inset by half pen width)
+        offset = pen_width / 2
+        diameter = self.size - pen_width
+        painter.drawEllipse(offset, offset, diameter, diameter)
 
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
