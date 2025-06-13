@@ -1273,7 +1273,7 @@ class TabButtonLayout(QWidget):
             label.hide()
     
     def start_loading(self, time=1):
-        #self.loading_overlay.resize(self.size())  # Ensure overlay fits window
+        self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
         #self.loading_overlay.raise_()
