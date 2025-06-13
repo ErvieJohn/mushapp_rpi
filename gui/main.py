@@ -372,7 +372,7 @@ class TabButtonLayout(QWidget):
             for label in self.switchLabels:
                 label.show()
 
-        self.start_loading(4)
+        # self.start_loading(4)
         self.initializing()
         
         # if not self.init:
@@ -1272,7 +1272,7 @@ class TabButtonLayout(QWidget):
         for label in self.switchLabels + [self.label6]:
             label.hide()
     
-    def start_loading(self, time=5):
+    def start_loading(self, time=1):
         self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
