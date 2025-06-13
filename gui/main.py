@@ -74,31 +74,17 @@ class LoadingOverlay(QFrame):
         super().resizeEvent(event)
 
     def show_spinner(self):
-        if hasattr(self, 'spinner_label'):
-            self.layout().removeWidget(self.spinner_label)
-            self.spinner_label.deleteLater()
+        if self._movie:
+            self._movie.stop()
+            self.spinner_label.clear()
 
-        # Recreate QLabel
-        self.spinner_label = QLabel()
-        self.spinner_label.setFixedSize(64, 64)
-        self.spinner_label.setStyleSheet("background-color: transparent;")
-        self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
-
-        # Create a brand new QMovie
-        self._movie = QMovie("images/mushloading64.gif")
-        self._movie.setCacheMode(QMovie.CacheAll)
-        self._movie.setScaledSize(QSize(64, 64))
-        self.spinner_label.setMovie(self._movie)
-
-        # Add to layout and start
-        self.layout().addWidget(self.spinner_label)
-        self._movie.start()
-        
-        self.resize(self.size())  # Ensure overlay fits window
+        self.movie = QMovie("images/mushloading64.gif")
+        self.movie.setCacheMode(QMovie.CacheAll)
+        self.movie.setScaledSize(QSize(64, 64))
+        self.spinner_label.setMovie(self.movie)
+        self._movie = self.movie
+        self.movie.start()
         self.show()
-        # self.loading_overlay.show()
-        self.raise_()
-        self.repaint()  # Force immediate repaint
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
@@ -1294,11 +1280,11 @@ class TabButtonLayout(QWidget):
             label.hide()
     
     def start_loading(self, time=1):
-        #self.loading_overlay.resize(self.size())  # Ensure overlay fits window
+        self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
-        #self.loading_overlay.raise_()
-        #self.loading_overlay.repaint()  # Force immediate repaint
+        self.loading_overlay.raise_()
+        self.loading_overlay.repaint()  # Force immediate repaint
 
         self.thread = WorkerThread(time)
         self.thread.finished.connect(self.finish_loading)
