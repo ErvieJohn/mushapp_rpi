@@ -47,16 +47,18 @@ class SpinnerWithCircle(QLabel):
 
     def paintEvent(self, event):
         super().paintEvent(event)
+
         painter = QPainter(self)
         pen_width = 2
         pen = QPen(Qt.white, pen_width)
         painter.setPen(pen)
         painter.setRenderHint(QPainter.Antialiasing)
 
-        # Draw circle exactly around the content (inset by half pen width)
+        # Calculate bounding box for circle centered in widget
         offset = pen_width / 2
         diameter = self.size - pen_width
-        painter.drawEllipse(offset, offset, diameter, diameter)
+        circle_rect = QRectF(offset, offset, diameter, diameter)
+        painter.drawEllipse(circle_rect)
 
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
