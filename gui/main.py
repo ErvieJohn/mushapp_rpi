@@ -60,16 +60,6 @@ class LoadingOverlay(QFrame):
         self.setLayout(layout)
         self.hide()
 
-    def paintEvent(self, event):
-        super().paintEvent(event)
-        # Draw circle border
-        painter = QPainter(self)
-        pen = QPen(Qt.black, 3)  # Green border, 3px thick
-        painter.setPen(pen)
-        painter.setRenderHint(QPainter.Antialiasing)
-        radius = min(self.width(), self.height()) - 3
-        painter.drawEllipse(1, 1, radius, radius)
-
     def resizeEvent(self, event):
         self.resize(self.parent().size())
         # Center spinner_label explicitly
