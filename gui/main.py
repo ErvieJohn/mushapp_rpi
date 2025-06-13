@@ -833,11 +833,20 @@ class TabButtonLayout(QWidget):
                     logging.info(datetime.now().strftime('%m-%d-%Y %H:%M:%S Sending data to firebase realtime database...'))
                     print("Sending data to firebase realtime database...")
 
-                    self.label1.setText("Temperature: <b>{}°C</b>".format(self.jsonData["temperature"]))
-                    self.label2.setText("Humidity: <b>{}%</b>".format(self.jsonData["humidity"]))
-                    self.label3.setText("CO2: <b>{} PPM</b>".format(self.jsonData["co2ppm"]))
-                    self.label4.setText("Water Percentage: <b>{:.1f}%</b>".format(self.jsonData["waterLevel"]/19 * 100))
-                    self.label5.setText("Water Level: <b>{}</b>".format(self.jsonData["waterLevel"]))
+                    self.label1.setText('Temperature: <b><span style="color:{};">{}°C</span></b>'.format(
+                        "green" if self.jsonData["temperature"] >= 20 or self.jsonData["temperature"] <= 30 
+                        else "orange" if self.jsonData["temperature"] <= 19 else "red", self.jsonData["temperature"]))
+                    self.label2.setText('Humidity: <b><span style="color:{};">{} %</span></b>'.format(
+                        "green" if  self.jsonData["humidity"] >= 70 or self.jsonData["humidity"] <=85 
+                        else "red", self.jsonData["humidity"]))
+                    self.label3.setText('CO2: <b><span style="color:{};">{} PPM</span></b>'.format(
+                        "green" if self.jsonData["co2ppm"] >= 400 or self.jsonData["co2ppm"] <= 1000 
+                        else "red", self.jsonData["co2ppm"]))
+                    self.label4.setText("Water Percentage: <b>{:.1f}%</b>".format(
+                        self.jsonData["waterLevel"]/19 * 100))
+                    self.label5.setText('Water Level: <b><span style="color:{};">{}</span></b>'.format(
+                        "red" if self.jsonData["waterLevel"] == 0 or self.jsonData["waterLevel"] >= 20 
+                        else "green", self.jsonData["waterLevel"]))
 
                     if self.check_internet(): # if there is an internet connection
                         try:
