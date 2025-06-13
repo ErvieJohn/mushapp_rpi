@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout, QHBoxLayout, QGridLayout, 
     QSizePolicy, QPlainTextEdit, QDialog, QProgressBar, QFrame
 )
-from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen, QMovie
+from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen, QMovie, QPixmap
 from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal, QSize
 
 import serial
@@ -109,6 +109,8 @@ class TabButtonLayout(QWidget):
         super().__init__()
         
         # INITIATION
+        self.bg = QPixmap("images/bg.png")
+
         self.loading_overlay = LoadingOverlay(self)
         self.init = True
 
@@ -322,13 +324,6 @@ class TabButtonLayout(QWidget):
         self.setWindowTitle("Mushapp")
         self.setMaximumWidth(480)
         self.setMinimumWidth(480)
-        self.setStyleSheet("""
-            QWidget {
-                background-image: url(images/bg.png);
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-        """)
         self.showFullScreen()
 
         for i in range(self.logLayout.count()):
@@ -1271,6 +1266,10 @@ class TabButtonLayout(QWidget):
 
     def finish_loading(self):
         self.loading_overlay.hide()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.drawPixmap(self.rect(), self.bg)
 
     # Allow closing with ESC key
     def keyPressEvent(self, event):
