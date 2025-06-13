@@ -23,6 +23,8 @@ import serial.tools.list_ports
 ########### Database Connect #############
 import pymysql
 
+PRODJECTDIR = r'/home/admin/Desktop/main/gui/'
+
 # Background task executed in separate thread
 class WorkerThread(QThread):
     finished = pyqtSignal()
@@ -78,7 +80,7 @@ class LoadingOverlay(QFrame):
             self._movie.stop()
             self.spinner_label.clear()
 
-        self.movie = QMovie("images/mushloading64.gif")
+        self.movie = QMovie(PRODJECTDIR + "images/mushloading64.gif")
         self.movie.setCacheMode(QMovie.CacheAll)
         self.movie.setScaledSize(QSize(64, 64))
         self.spinner_label.setMovie(self.movie)
@@ -125,7 +127,7 @@ class TabButtonLayout(QWidget):
         super().__init__()
         
         # INITIATION
-        self.bg = QPixmap("images/bg3.png")
+        self.bg = QPixmap(PRODJECTDIR + "images/bg3.png")
 
         self.loading_overlay = LoadingOverlay(self)
         self.init = True
@@ -286,8 +288,8 @@ class TabButtonLayout(QWidget):
         self.button1.setFont(fontBtn)
         self.button2.setFont(fontBtn)
 
-        self.button1.setIcon(QIcon("images/home.png"))
-        self.button2.setIcon(QIcon("images/logs.png"))
+        self.button1.setIcon(QIcon(PRODJECTDIR + "images/home.png"))
+        self.button2.setIcon(QIcon(PRODJECTDIR + "images/logs.png"))
 
         self.button1.setMinimumHeight(50)
         self.button2.setMinimumHeight(50)
