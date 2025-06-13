@@ -33,6 +33,24 @@ class WorkerThread(QThread):
         time.sleep(self.sleep_time)  # Simulate a long-running task
         self.finished.emit()
 
+class SpinnerWithCircle(QLabel):
+    def __init__(self, gif_path, size=64, parent=None):
+        super().__init__(parent)
+        self.setFixedSize(size, size)
+        self.movie = QMovie(gif_path)
+        self.movie.setScaledSize(QSize(size, size))
+        self.setMovie(self.movie)
+        self.movie.start()
+
+    def paintEvent(self, event):
+        super().paintEvent(event)
+        painter = QPainter(self)
+        pen = QPen(Qt.white, 3)
+        painter.setPen(pen)
+        painter.setRenderHint(QPainter.Antialiasing)
+        diameter = min(self.width(), self.height()) - 3
+        painter.drawEllipse(1, 1, diameter, diameter)
+
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -49,12 +67,7 @@ class LoadingOverlay(QFrame):
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
-        self.spinner_label = QLabel()
-        movie = QMovie("images/mushloading64.gif")  # Replace with your gif
-        movie.setScaledSize(QSize(64, 64))
-        movie.start()
-
-        self.spinner_label.setMovie(movie)
+        self.spinner_label = SpinnerWithCircle("images/mushloading64.gif", 64)
         layout.addWidget(self.spinner_label)
 
         self.setLayout(layout)
@@ -64,7 +77,7 @@ class LoadingOverlay(QFrame):
         super().paintEvent(event)
         # Draw circle border
         painter = QPainter(self)
-        pen = QPen(Qt.green, 3)  # Green border, 3px thick
+        pen = QPen(Qt.black, 3)  # Green border, 3px thick
         painter.setPen(pen)
         painter.setRenderHint(QPainter.Antialiasing)
         radius = min(self.width(), self.height()) - 3
