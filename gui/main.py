@@ -78,21 +78,20 @@ class LoadingOverlay(QFrame):
             self._movie.stop()
             self.spinner_label.clear()
 
-        self.movie = QMovie("images/mushloading64.gif")
-        self.movie.setCacheMode(QMovie.CacheAll)
-        self.movie.setScaledSize(QSize(64, 64))
-        self.spinner_label.setMovie(self.movie)
-        self._movie = self.movie
-        print("Frame count:", self._movie.frameCount())
-        print("Is valid:", self._movie.isValid())
-        print("Movie running:", self._movie.state() == QMovie.Running)
-        self.movie.start()
+        # Create a new QMovie object each time
+        self._movie = QMovie("images/mushloading64.gif")
+        self._movie.setCacheMode(QMovie.CacheAll)
+        self._movie.setScaledSize(QSize(64, 64))
+        self.spinner_label.setMovie(self._movie)
         
         self.resize(self.size())  # Ensure overlay fits window
         self.show()
         # self.loading_overlay.show()
         self.raise_()
         self.repaint()  # Force immediate repaint
+
+        # Force event loop to catch up THEN start
+        QTimer.singleShot(0, self._movie.start)
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
