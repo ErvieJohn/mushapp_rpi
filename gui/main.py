@@ -74,26 +74,31 @@ class LoadingOverlay(QFrame):
         super().resizeEvent(event)
 
     def show_spinner(self):
-        if self._movie:
-            self._movie.stop()
-            self.spinner_label.clear()
+        if hasattr(self, 'spinner_label'):
+            self.layout().removeWidget(self.spinner_label)
+            self.spinner_label.deleteLater()
 
-        # Create a new QMovie object each time
+        # Recreate QLabel
+        self.spinner_label = QLabel()
+        self.spinner_label.setFixedSize(64, 64)
+        self.spinner_label.setStyleSheet("background-color: transparent;")
+        self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
+
+        # Create a brand new QMovie
         self._movie = QMovie("images/mushloading64.gif")
         self._movie.setCacheMode(QMovie.CacheAll)
         self._movie.setScaledSize(QSize(64, 64))
         self.spinner_label.setMovie(self._movie)
+
+        # Add to layout and start
+        self.layout().addWidget(self.spinner_label)
+        self._movie.start()
         
         self.resize(self.size())  # Ensure overlay fits window
         self.show()
         # self.loading_overlay.show()
         self.raise_()
         self.repaint()  # Force immediate repaint
-        
-        # Force event loop to catch up THEN start
-        QTimer.singleShot(0, self._movie.start)
-        QTimer.singleShot(100, lambda: print("Running after delay:", self._movie.state() == QMovie.Running))
-
 
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
