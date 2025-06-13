@@ -36,20 +36,26 @@ class WorkerThread(QThread):
 class SpinnerWithCircle(QLabel):
     def __init__(self, gif_path, size=64, parent=None):
         super().__init__(parent)
+        self.size = size
         self.setFixedSize(size, size)
+
         self.movie = QMovie(gif_path)
         self.movie.setScaledSize(QSize(size, size))
         self.setMovie(self.movie)
+        self.setAlignment(Qt.AlignCenter)  # Ensure it's centered inside
         self.movie.start()
 
     def paintEvent(self, event):
         super().paintEvent(event)
         painter = QPainter(self)
-        pen = QPen(Qt.white, 3)
+        pen = QPen(Qt.white, 3)  # Border color and thickness
         painter.setPen(pen)
         painter.setRenderHint(QPainter.Antialiasing)
-        diameter = min(self.width(), self.height()) - 3
-        painter.drawEllipse(1, 1, diameter, diameter)
+
+        # Draw circle slightly inset so it's inside the bounds
+        margin = 1.5  # Half of pen width
+        radius = self.size - 3  # Total size minus pen width
+        painter.drawEllipse(margin, margin, radius, radius)
 
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
