@@ -50,6 +50,9 @@ class LoadingOverlay(QFrame):
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
+        self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
+        self.spinner_label.setStyleSheet("background-color: transparent;")
+        self.spinner_label.setFixedSize(64, 64)  # Match your movie size
         movie = QMovie("images/mushloading64.gif")  # Replace with your gif
         movie.setScaledSize(QSize(64, 64))
         movie.start()
