@@ -323,7 +323,7 @@ class TabButtonLayout(QWidget):
         self.setMaximumWidth(480)
         self.setMinimumWidth(480)
         self.setStyleSheet("""
-            QMainWindow {
+            QWidget {
                 background-image: url(images/bg.png);
                 background-repeat: no-repeat;
                 background-position: center;
