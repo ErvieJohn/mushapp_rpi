@@ -77,6 +77,8 @@ class LoadingOverlay(QFrame):
         self.movie.setScaledSize(QSize(64, 64))
         self.spinner_label.setMovie(self.movie)
         self.movie.start()
+        print("Movie valid:", self.movie.isValid())
+        print("Movie running:", self.movie.state() == QMovie.Running)
         self.show()
 
 class MySwitch(QPushButton):
