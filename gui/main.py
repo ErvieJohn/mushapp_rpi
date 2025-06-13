@@ -126,19 +126,19 @@ class TabButtonLayout(QWidget):
 
         # Create labels
         self.label0 = QLabel("<b>HOME</b>")
-        self.label1 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128); border-radius: 12px;">Temperature: 0°C</span></b>')
-        self.label2 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Humidity: 0%</span></b>')
-        self.label3 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">CO2: 0 PPM</span></b>')
-        self.label4 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Water Percentage: 0%</span></b>')
-        self.label5 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Water Level: 0</span></b>')
+        self.label1 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Temperature: 0°C</span></b>')
+        self.label2 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Humidity: 0%</span></b>')
+        self.label3 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">CO2: 0 PPM</span></b>')
+        self.label4 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Water Percentage: 0%</span></b>')
+        self.label5 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Water Level: 0</span></b>')
 
-        self.label6 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Automatic: </span></b>')
-        self.label7 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Fan: </span></b>')
-        self.label8 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Fan2: </span></b>')
-        self.label9 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Heater: </span></b>')
-        self.label10 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Humidifier: </span></b>')
-        self.label11 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Peltier: </span></b>')
-        self.label12 = QLabel('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Water Pump: </span></b>')
+        self.label6 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Automatic: </span></b>')
+        self.label7 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Fan: </span></b>')
+        self.label8 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Fan2: </span></b>')
+        self.label9 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Heater: </span></b>')
+        self.label10 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Humidifier: </span></b>')
+        self.label11 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Peltier: </span></b>')
+        self.label12 = QLabel('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Water Pump: </span></b>')
 
         self.labelsALL = [self.label1, self.label2, self.label4,  self.label3, self.label5,
                           self.label6, self.label7, self.label8,  self.label9, self.label10, 
@@ -851,16 +851,16 @@ class TabButtonLayout(QWidget):
                     iWater = int(self.jsonData["waterLevel"])
                     fWater = self.jsonData["waterLevel"]/19 * 100
 
-                    self.label1.setText('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Temperature: <span style="color:{};">{}°C</span></span></b>'.format(
+                    self.label1.setText('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Temperature: <span style="color:{};">{}°C</span></span></b>'.format(
                         "green" if fTemp >= 20 and fTemp <= 30 
                         else "orange" if fTemp <= 19 else "red", self.jsonData["temperature"]))
-                    self.label2.setText('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Humidity: <span style="color:{};">{} %</span></span></b>'.format(
+                    self.label2.setText('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Humidity: <span style="color:{};">{} %</span></span></b>'.format(
                         "green" if  iHumid >= 70 and iHumid <=85 else "red", self.jsonData["humidity"]))
-                    self.label3.setText('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">CO2: <span style="color:{};">{} PPM</span></span></b>'.format(
+                    self.label3.setText('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">CO2: <span style="color:{};">{} PPM</span></span></b>'.format(
                         "green" if iCo2 >= 400 and iCo2 <= 1000 else "red", self.jsonData["co2ppm"]))
-                    self.label4.setText('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Water Percentage: <span style="color:{};">{:.1f} %</span></span></b>'.format(
+                    self.label4.setText('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Water Percentage: <span style="color:{};">{:.1f} %</span></span></b>'.format(
                         "red" if fWater < 1 or fWater > 100 else "green", fWater))
-                    self.label5.setText('<b><span style="color:white; background-color:rgba(0, 0, 0, 128);">Water Level: <span style="color:{};">{}</span></span></b>'.format(
+                    self.label5.setText('<b><span style="color:black; background-color:rgba(255, 255, 255, 100);">Water Level: <span style="color:{};">{}</span></span></b>'.format(
                         "red" if iWater == 0 or iWater >= 20 else "green", self.jsonData["waterLevel"]))
 
                     if self.check_internet(): # if there is an internet connection
