@@ -846,7 +846,7 @@ class TabButtonLayout(QWidget):
                         "green" if  iHumid >= 70 or iHumid <=85 else "red", self.jsonData["humidity"]))
                     self.label3.setText('CO2: <b><span style="color:{};">{} PPM</span></b>'.format(
                         "green" if iCo2 >= 400 or iCo2 <= 1000 else "red", self.jsonData["co2ppm"]))
-                    self.label4.setText("Water Percentage: <b>{:.1f}%</b>".format(
+                    self.label4.setText("Water Percentage: <b><span style="color:{};">{:.1f} %</span></b>".format(
                         "red" if fWater < 1 or fWater > 100 else "green", fWater))
                     self.label5.setText('Water Level: <b><span style="color:{};">{}</span></b>'.format(
                         "red" if iWater == 0 or iWater >= 20 else "green", self.jsonData["waterLevel"]))
