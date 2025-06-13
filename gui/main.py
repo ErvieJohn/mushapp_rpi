@@ -2,10 +2,10 @@ from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton,
     QVBoxLayout, QHBoxLayout, QGridLayout, 
     QSizePolicy, QPlainTextEdit, QDialog, QProgressBar, 
-    QFrame, QGraphicsDropShadowEffect
+    QFrame, QGraphicsDropShadowEffect, QGraphicsOpacityEffect
 )
 from PyQt5.QtGui import QFont, QIcon, QPainter, QColor, QBrush, QPen, QMovie, QPixmap
-from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal, QSize
+from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal, QRect, QThread, pyqtSignal, QSize, QPropertyAnimation, QEasingCurve
 
 import serial
 import time
@@ -37,55 +37,47 @@ class WorkerThread(QThread):
 class LoadingOverlay(QFrame):
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.setFrameShape(QFrame.NoFrame)
-        self.setAttribute(Qt.WA_TransparentForMouseEvents, False)
-
-        self.setStyleSheet("""
-            QFrame {
-                background-color: rgba(0, 0, 0, 128);
-            }
-        """)
+        self.setStyleSheet("background-color: rgba(0, 0, 0, 128);")
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
         self.spinner_label = QLabel()
-        self.spinner_label.setAttribute(Qt.WA_TranslucentBackground)
-        self.spinner_label.setStyleSheet("background-color: transparent;")
-        self.spinner_label.setFixedSize(64, 64)  # Match your movie size
-        
+        self.spinner_label.setFixedSize(64, 64)
+
+        # Apply fade effect
+        self.opacity_effect = QGraphicsOpacityEffect()
+        self.spinner_label.setGraphicsEffect(self.opacity_effect)
+
         layout.addWidget(self.spinner_label)
-
-        self._movie = None  # Keep ref
         self.setLayout(layout)
-        self.hide()
-        
 
-    def resizeEvent(self, event):
-        self.resize(self.parent().size())
-        # Center spinner_label explicitly
-        # self.spinner_label.setGeometry(QRect(
-        #     int((self.width() - 64) / 2),
-        #     int((self.height() - 64) / 2),
-        #     64,
-        #     64
-        # ))
-        super().resizeEvent(event)
-
-    def show_spinner(self):
-        if self._movie:
-            self._movie.stop()
-            self.spinner_label.clear()
-
+        # Load GIF
         self.movie = QMovie("images/mushloading64.gif")
-        self.movie.setCacheMode(QMovie.CacheAll)
         self.movie.setScaledSize(QSize(64, 64))
         self.spinner_label.setMovie(self.movie)
-        self._movie = self.movie
-        self.movie.start()
-        self.show()
 
+        # Animation
+        self.fade_anim = QPropertyAnimation(self.opacity_effect, b"opacity")
+        self.fade_anim.setDuration(1000)
+        self.fade_anim.setStartValue(0.4)
+        self.fade_anim.setEndValue(1.0)
+        self.fade_anim.setLoopCount(-1)
+        self.fade_anim.setEasingCurve(QEasingCurve.InOutQuad)
+
+        self.hide()
+
+    def show_spinner(self):
+        self.movie.start()
+        self.fade_anim.start()
+        self.show()
+        self.raise_()
+
+    def hideEvent(self, event):
+        self.movie.stop()
+        self.fade_anim.stop()
+        super().hideEvent(event)
+        
 class MySwitch(QPushButton):
     def __init__(self, parent = None):
         super().__init__(parent)
@@ -1280,11 +1272,11 @@ class TabButtonLayout(QWidget):
             label.hide()
     
     def start_loading(self, time=1):
-        self.loading_overlay.resize(self.size())  # Ensure overlay fits window
+        #self.loading_overlay.resize(self.size())  # Ensure overlay fits window
         # self.loading_overlay.show()
         self.loading_overlay.show_spinner()
-        self.loading_overlay.raise_()
-        self.loading_overlay.repaint()  # Force immediate repaint
+        #self.loading_overlay.raise_()
+        #self.loading_overlay.repaint()  # Force immediate repaint
 
         self.thread = WorkerThread(time)
         self.thread.finished.connect(self.finish_loading)
