@@ -23,7 +23,7 @@
 #define co2zero 55
 
 DHT dht(DHTPIN, DHTTYPE);
-
+NewPing ultrasonic(ULTRASONIC_TRIGGER_PIN, ULTRASONIC_ECHO_PIN);
 int waterLevel;
 
 //int fanPin = 7;
@@ -53,10 +53,6 @@ void setup()
   pinMode(HEATER_PIN, OUTPUT);
   //pinMode(fanPin, OUTPUT);
   //digitalWrite(fanPin, HIGH);
-  
-  // FOR ULTRASONIC
-  pinMode(ULTRASONIC_TRIGGER_PIN, OUTPUT);
-  pinMode(ULTRASONIC_ECHO_PIN, INPUT);
 
   pinMode(MQ135_PIN,INPUT);
 }
@@ -150,17 +146,7 @@ void loop(){
 
   //humidity += -5.0;
 
-  digitalWrite(ULTRASONIC_TRIGGER_PIN, LOW);
-  delayMicroseconds(5);
-
-  digitalWrite(ULTRASONIC_TRIGGER_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(ULTRASONIC_TRIGGER_PIN, LOW);
-
-  long duration = pulseIn(ULTRASONIC_ECHO_PIN, HIGH);
-  long distance = duration * 0.034 / 2;
-
-  waterLevel = 20 - distance;
+  waterLevel = 20 - ultrasonic.ping_cm();//waterLvlValue();
   if(waterLevel == 20) waterLevel = 0;
 
   // FOR MQ135
