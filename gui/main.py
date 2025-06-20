@@ -880,9 +880,9 @@ class TabButtonLayout(QWidget):
                     self.label3.setText('<b><span style="color:black;">CO2: <span style="color:{};">{} PPM</span></span></b>'.format(
                         "green" if iCo2 >= 400 and iCo2 <= 1000 else "red", self.jsonData["co2ppm"]))
                     self.label4.setText('<b><span style="color:black;">Water Percentage: <span style="color:{};">{:.1f} %</span></span></b>'.format(
-                        "red" if fWater < 1 or fWater > 100 else "green", fWater))
+                        "red" if iWater < 6 or iWater > 12 else "green", fWater))
                     self.label5.setText('<b><span style="color:black;">Water Level: <span style="color:{};">{}</span></span></b>'.format(
-                        "red" if iWater == 0 or iWater >= 20 else "green", self.jsonData["waterLevel"]))
+                        "red" if iWater < 6 or iWater > 12 else "green", self.jsonData["waterLevel"]))
 
                     if self.check_internet(): # if there is an internet connection
                         try:
@@ -947,23 +947,18 @@ class TabButtonLayout(QWidget):
                     self.last_pos = f.tell()
 
                 if new_data:
+                    # Append and limit to last MAX_LINES
                     current_text = self.log_display.toPlainText().splitlines()
                     new_lines = new_data.splitlines()
                     all_lines = current_text + new_lines
                     all_lines = all_lines[-self.MAX_LINES:]
 
-                    # Save scroll position before updating
-                    scrollbar = self.log_display.verticalScrollBar()
-                    at_bottom = scrollbar.value() == scrollbar.maximum()
-
                     self.log_display.setPlainText("\n".join(all_lines))
-
-                    # Restore scroll position based on previous state
-                    if at_bottom:
-                        scrollbar.setValue(scrollbar.maximum())
-                    # else: do nothing, user keeps current scroll position
-
+                    self.log_display.verticalScrollBar().setValue(
+                        self.log_display.verticalScrollBar().maximum()
+                    )
             except Exception as e:
+                # Optionally print/log the error, but don't crash the app
                 print(f"Error reading log file: {e}")
 
     def connectToFirebase(self):
