@@ -947,20 +947,24 @@ class TabButtonLayout(QWidget):
                     self.last_pos = f.tell()
 
                 if new_data:
-                    # Append and limit to last MAX_LINES
                     current_text = self.log_display.toPlainText().splitlines()
                     new_lines = new_data.splitlines()
                     all_lines = current_text + new_lines
                     all_lines = all_lines[-self.MAX_LINES:]
 
+                    # Save scroll position before updating
+                    scrollbar = self.log_display.verticalScrollBar()
+                    at_bottom = scrollbar.value() == scrollbar.maximum()
+
                     self.log_display.setPlainText("\n".join(all_lines))
-                    self.log_display.verticalScrollBar().setValue(
-                        self.log_display.verticalScrollBar().maximum()
-                    )
+
+                    # Restore scroll position based on previous state
+                    if at_bottom:
+                        scrollbar.setValue(scrollbar.maximum())
+                    # else: do nothing, user keeps current scroll position
+
             except Exception as e:
-                # Optionally print/log the error, but don't crash the app
                 print(f"Error reading log file: {e}")
-                return
 
     def connectToFirebase(self):
         ########## Checking Firebase ##############
