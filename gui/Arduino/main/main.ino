@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <DHT.h>
-//#include <NewPing.h>
+#include <NewPing.h>
 
 #define DHTPIN 2
 //#define DHTTYPE DHT11
